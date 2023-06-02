@@ -31,7 +31,7 @@ function initialUsers() {
     firstname: "Петр",
     lastname: "Петров",
     fathername: "Петрович",
-    loign: "OlennikovYV",
+    login: "OlennikovYV",
     password: bcrypt.hashSync("pass1", 8),
     supervisorid: null,
   });
@@ -40,7 +40,7 @@ function initialUsers() {
     firstname: "Сергей",
     lastname: "Соколов",
     fathername: "Петрович",
-    loign: "SokolovSP",
+    login: "SokolovSP",
     password: bcrypt.hashSync("pass2", 8),
     supervisorid: null,
   });
@@ -49,7 +49,7 @@ function initialUsers() {
     firstname: "Иван",
     lastname: "Иванов",
     fathername: "Иванович",
-    loign: "IvanovII",
+    login: "IvanovII",
     password: bcrypt.hashSync("pass3", 8),
     supervisorid: 1,
   });
@@ -58,7 +58,7 @@ function initialUsers() {
     firstname: "Дмитрий",
     lastname: "Николаев",
     fathername: "Юрьевич",
-    loign: "NikolaevDY",
+    login: "NikolaevDY",
     password: bcrypt.hashSync("pass4", 8),
     supervisorid: 1,
   });
@@ -67,7 +67,7 @@ function initialUsers() {
     firstname: "Павел",
     lastname: "Ефимов",
     fathername: "Павлович",
-    loign: "EfimofPP",
+    login: "EfimofPP",
     password: bcrypt.hashSync("pass5", 8),
     supervisorid: 2,
   });

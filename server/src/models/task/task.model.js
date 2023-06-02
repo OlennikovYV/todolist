@@ -1,6 +1,6 @@
 module.exports = (sequelize, Sequelize) => {
   const Task = sequelize.define(
-    "users",
+    "task",
     {
       id: {
         type: Sequelize.INTEGER,
@@ -16,7 +16,7 @@ module.exports = (sequelize, Sequelize) => {
         type: Sequelize.STRING,
         allowNull: false,
       },
-      finish_at: {
+      completion_at: {
         type: Sequelize.DATE,
         allowNull: true,
       },

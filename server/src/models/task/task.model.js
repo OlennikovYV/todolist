@@ -18,7 +18,7 @@ module.exports = (sequelize, Sequelize) => {
       },
       completion_at: {
         type: Sequelize.DATE,
-        allowNull: true,
+        allowNull: false,
       },
       create_at: {
         type: Sequelize.DATE,
@@ -36,6 +36,14 @@ module.exports = (sequelize, Sequelize) => {
       },
       status: {
         type: Sequelize.STRING,
+        allowNull: false,
+      },
+      creatorid: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+      },
+      responsibleid: {
+        type: Sequelize.INTEGER,
         allowNull: false,
       },
     },

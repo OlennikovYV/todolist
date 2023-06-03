@@ -11,7 +11,7 @@ exports.signin = (req, res) => {
   })
     .then((user) => {
       if (!user) {
-        return res.status(401).send({ message: "Пользователь не найден!" });
+        return res.status(404).send({ message: "Пользователь не найден!" });
       }
 
       var passwordIsValid = bcrypt.compareSync(

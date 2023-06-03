@@ -8,7 +8,7 @@ exports.allTaskList = (req, res) => {
         return res.status(404).send({ message: "Задач нет!" });
       }
 
-      res.status(200).send({ date: task });
+      res.status(200).send({ tasks: task });
     })
     .catch((err) => {
       res.status(500).send({ message: err.message });

@@ -1,8 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 
-function useFetch(uri) {
-  const [data, setData] = useState();
+function useFetch(uri, setContext = () => {}) {
   const [error, setError] = useState();
   const [loading, setLoading] = useState(true);
 
@@ -16,7 +15,7 @@ function useFetch(uri) {
             "Content-Type": "application/x-www-form-urlencoded",
           },
         });
-        setData(response?.data);
+        setContext(response?.data);
         setLoading(false);
       } catch (err) {
         setError(err);
@@ -24,11 +23,10 @@ function useFetch(uri) {
     };
 
     fetchData();
-  }, [uri]);
+  }, [uri, setContext]);
 
   return {
     loading,
-    data,
     error,
   };
 }

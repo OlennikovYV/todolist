@@ -1,18 +1,14 @@
 import React from "react";
 
-import useFetch from "../hooks/fetch";
+import { TaskProvider } from "../context/TaskProvider";
+import TaskList from "../components/TaskList/index";
 
 function Task() {
-  const { loading, data, error } = useFetch(
-    `http://localhost:3001/api/task/all`
+  return (
+    <TaskProvider>
+      <TaskList />
+    </TaskProvider>
   );
-
-  if (loading) return <h1>loading...</h1>;
-  if (error) return <pre>{JSON.stringify(error, null, 2)}</pre>;
-
-  console.log(data.tasks);
-
-  return <p>Task</p>;
 }
 
 export default Task;

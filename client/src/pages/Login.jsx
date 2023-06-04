@@ -26,7 +26,7 @@ function Login() {
     e.preventDefault();
 
     try {
-      await axios.post(
+      const response = await axios.post(
         "http://localhost:3001/api/auth",
         {
           login: user,
@@ -38,8 +38,10 @@ function Login() {
           },
         }
       );
+      const { id, firstname, lastname, fathername, login, supervisorid } =
+        response.data;
 
-      setAuth({ user, pwd });
+      setAuth({ id, firstname, lastname, fathername, login, supervisorid });
       setAuthenticated(true);
       setUser("");
       setPwd("");
@@ -61,34 +63,35 @@ function Login() {
       {success ? (
         <Navigate to='/task' replace={true} />
       ) : (
-        <section>
-          <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"}>
-            {errMsg}
-          </p>
-          <h1>Авторизация</h1>
-          <form onSubmit={handleSubmit}>
-            <label htmlFor='username'>Username:</label>
-            <input
-              type='text'
-              id='username'
-              ref={userRef}
-              autoComplete='off'
-              onChange={(e) => setUser(e.target.value)}
-              value={user}
-              required
-            />
+        <div className='container'>
+          <section>
+            <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"}>
+              {errMsg}
+            </p>
+            <form onSubmit={handleSubmit}>
+              <label htmlFor='username'>Пользователь:</label>
+              <input
+                type='text'
+                id='username'
+                ref={userRef}
+                autoComplete='off'
+                onChange={(e) => setUser(e.target.value)}
+                value={user}
+                required
+              />
 
-            <label htmlFor='password'>Password:</label>
-            <input
-              type='password'
-              id='password'
-              onChange={(e) => setPwd(e.target.value)}
-              value={pwd}
-              required
-            />
-            <button>Войти</button>
-          </form>
-        </section>
+              <label htmlFor='password'>Пароль:</label>
+              <input
+                type='password'
+                id='password'
+                onChange={(e) => setPwd(e.target.value)}
+                value={pwd}
+                required
+              />
+              <button>Войти</button>
+            </form>
+          </section>
+        </div>
       )}
     </>
   );

@@ -1,2 +1,4 @@
 @import "./Todo.css";
 @import "./pages/Login.css";
+@import "./components/TaskList/index.css";
+@import "./components/Modal/index.css";

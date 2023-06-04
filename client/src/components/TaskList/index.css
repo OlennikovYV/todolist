@@ -1,0 +1,28 @@
+.container-list {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: column;
+  margin: 0 auto;
+  min-height: 100vh;
+  background-color: rgb(202, 234, 255);
+}
+
+.list {
+  width: 90%;
+  margin-top: 22px;
+}
+
+.task {
+  display: flex;
+  justify-content: space-between;
+  border: 1px solid #666;
+  border-radius: 5px;
+  padding: 10px;
+  margin-bottom: 6px;
+  background-color: #fefefe;
+}
+
+.button-task-ok {
+  margin: 15px;
+}

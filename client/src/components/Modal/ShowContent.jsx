@@ -39,7 +39,6 @@ function ShowContent({ isNew, task }) {
   if (loading) return <></>;
   if (error) return <pre>{JSON.stringify(error, null, 2)}</pre>;
 
-  console.log(auth.id, auth.supervisorid, user, supervisor, responsibleList);
   return (
     <div className='modal-body'>
       <div className='modal-content'>

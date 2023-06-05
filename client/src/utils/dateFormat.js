@@ -40,7 +40,6 @@ function getDateTimeNow(dateTime, splitDate = "-", splitTime = ":") {
 function dateFormat(dateString) {
   const { date, time } = getDateTimeNow(new Date(dateString));
 
-  // console.log(dateString);
   return `${date} ${time}`;
 }
 

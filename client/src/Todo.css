@@ -20,11 +20,9 @@ html {
 }
 
 section {
-  min-width: 420px;
-  /* height: 400px; */
+  min-width: 600px;
   padding: 1rem;
   border-radius: 0.5rem;
-  background-color: rgba(170, 170, 190, 0.4);
 }
 
 form {

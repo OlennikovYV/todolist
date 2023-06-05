@@ -1,7 +1,11 @@
 import React from "react";
 
 function Error404() {
-  return <p>404 Страница не найдена</p>;
+  return (
+    <div className='container'>
+      <p>404 Страница не найдена</p>
+    </div>
+  );
 }
 
 export default Error404;

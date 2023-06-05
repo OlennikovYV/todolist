@@ -62,11 +62,15 @@
 }
 
 .modal-body {
+  height: calc(100vh - 190px);
+  background-color: rgb(216, 237, 252);
   overflow: auto;
 }
 
 .modal-content {
-  padding: 0.5rem;
+  display: flex;
+  align-items: center;
+  padding: 1.8rem;
   height: 100%;
 }
 
@@ -86,4 +90,24 @@
   to {
     transform: translateY(0);
   }
+}
+
+section {
+  margin-top: 15px;
+  border-radius: 10px;
+}
+
+input,
+select {
+  font-size: 0.9rem;
+  margin-left: 15px;
+  padding: 2px 5px;
+}
+
+.modal-content input {
+  font-size: 0.9rem;
+}
+
+.modal-content input {
+  margin-left: 15px;
 }

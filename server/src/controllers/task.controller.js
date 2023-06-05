@@ -13,7 +13,7 @@ exports.allTaskList = async (req, res) => {
     raw: true,
   }).then((user) => {
     if (!user) {
-      return res.status(404).send({ message: "Пользователь не найден!" });
+      return res.status(200).send({ message: "Пользователь не найден!" });
     }
 
     user.supervisorid ? (isSupervisor = false) : (isSupervisor = true);
@@ -25,7 +25,7 @@ exports.allTaskList = async (req, res) => {
     })
       .then((task) => {
         if (task && !task.length) {
-          return res.status(404).send({ message: "Задач нет!" });
+          return res.status(200).send({ listTask: [], message: "Задач нет!" });
         }
 
         res.status(200).send({ listTask: task });
@@ -42,7 +42,7 @@ exports.allTaskList = async (req, res) => {
     })
       .then((task) => {
         if (task && !task.length) {
-          return res.status(404).send({ message: "Задач нет!" });
+          return res.status(200).send({ listTask: [], message: "Задач нет!" });
         }
 
         res.status(200).send({ listTask: task });

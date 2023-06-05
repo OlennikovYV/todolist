@@ -10,32 +10,11 @@ html {
   color: #666;
 }
 
-form {
+.container-login {
   display: flex;
-  flex-direction: column;
-  justify-content: space-evenly;
-  flex-grow: 1;
-  padding-bottom: 1rem;
-}
-
-input[type="text"],
-input[type="password"],
-button,
-textarea {
-  font-family: sans-serif;
-  font-size: 22px;
-  margin-top: 0.25rem;
-  padding: 0.25rem;
-  padding-left: 0.6rem;
-  border-radius: 0.3rem;
-  border: none;
-}
-
-label,
-button {
-  margin-top: 1rem;
-}
-
-button {
-  padding: 0.5rem;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+  min-height: 100vh;
+  background-color: rgb(216, 237, 252);
 }

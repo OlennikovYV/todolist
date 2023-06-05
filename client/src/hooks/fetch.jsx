@@ -10,11 +10,21 @@ function useFetch(uri, setContext = () => {}) {
 
     const fetchData = async () => {
       try {
+        let dataLoaded;
+
         const response = await axios.get(uri, {
           headers: {
             "Content-Type": "application/x-www-form-urlencoded",
           },
         });
+
+        if (response?.data.listTask) {
+          dataLoaded = response?.data;
+          dataLoaded.listTask.sort(
+            (a, b) => new Date(a.update_at) - new Date(b.update_at)
+          );
+        }
+
         setContext(response?.data);
         setLoading(false);
       } catch (err) {

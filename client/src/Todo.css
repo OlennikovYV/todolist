@@ -19,12 +19,6 @@ html {
   background-color: rgb(216, 237, 252);
 }
 
-section {
-  min-width: 600px;
-  padding: 1rem;
-  border-radius: 0.5rem;
-}
-
 form {
   display: flex;
   flex-direction: column;
@@ -33,13 +27,11 @@ form {
   padding-bottom: 1rem;
 }
 
-input[type="text"],
-input[type="password"],
+input,
 button,
 textarea {
   font-family: sans-serif;
   font-size: 22px;
-  margin-top: 0.25rem;
   padding: 0.25rem;
   padding-left: 0.6rem;
   border-radius: 0.3rem;
@@ -47,10 +39,10 @@ textarea {
   border: none;
 }
 
-label,
+/* label,
 button {
   margin-top: 1rem;
-}
+} */
 
 button {
   padding: 0.5rem;

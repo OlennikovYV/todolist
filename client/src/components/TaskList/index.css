@@ -47,11 +47,11 @@
   flex-direction: column;
 }
 
-.filtred-column {
-  padding-left: 0.25rem;
+.filtred-date-at input {
+  margin: 0.25rem 0.25rem 0.5rem;
 }
 
-.group {
+.group:not(:last-child) {
   margin-right: 0.25rem;
 }
 
@@ -61,7 +61,7 @@
 
 .container-list {
   width: 90%;
-  margin-top: 1rem;
+  margin-top: 0.25rem;
 }
 
 .task {

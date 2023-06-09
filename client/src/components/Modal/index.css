@@ -18,11 +18,9 @@
   display: flex;
   flex-direction: column;
   position: relative;
-  width: 100%;
   width: 70%;
   background: white;
-  margin: 0 20px;
-  height: calc(100vh - 40px);
+  height: calc(100vh - 100px);
   text-align: left;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   overflow: hidden;
@@ -62,7 +60,7 @@
 }
 
 .modal-body {
-  height: calc(100vh - 190px);
+  height: calc(100vh - 250px);
   background-color: rgb(216, 237, 252);
   overflow: auto;
 }
@@ -71,18 +69,19 @@
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
-  align-items: start;
+  align-items: flex-start;
   margin-left: 1.5rem;
   margin-right: 1.5rem;
   height: 100%;
 }
 
-.modal-content input {
-  font-size: 0.9rem;
-}
-
-.modal-content input {
+.modal-content input,
+.modal-content select {
+  font-size: 22px;
   margin-left: 15px;
+  padding: 0.25rem;
+  padding-left: 0.4rem;
+  border-radius: 0;
 }
 
 @keyframes appear {
@@ -101,11 +100,4 @@
   to {
     transform: translateY(0);
   }
-}
-
-input,
-select {
-  font-size: 0.9rem;
-  margin-left: 15px;
-  padding: 2px 5px;
 }

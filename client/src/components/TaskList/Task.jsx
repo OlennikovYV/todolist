@@ -1,11 +1,12 @@
 import React, { useState } from "react";
+import moment from "moment";
 
 import useFetch from "../../hooks/fetch";
 
 import Modal from "../Modal/index";
 import dateFormat from "../../utils/dateFormat.js";
 
-function Task({ task, showExpired, selectedGroupDate }) {
+function Task({ task, selectedGroupDate }) {
   const [modal, setModal] = useState(false);
   const [responsible, setResponsible] = useState();
 
@@ -33,33 +34,48 @@ function Task({ task, showExpired, selectedGroupDate }) {
 
   function checkShow() {
     const classTask = "task";
-    const now = new Date();
-    const completeDate = new Date(task.completion_at);
-    const diff = new Date(completeDate - now).getDate();
-    const completeMoreNow = completeDate > now;
 
-    if (selectedGroupDate === "future") return `${classTask}`;
+    let endPeriod;
+    let isDateInPeriod;
 
-    if (completeMoreNow) {
-      switch (selectedGroupDate) {
-        case "week":
-          if (diff <= 7) {
-            return `${classTask}`;
-          } else {
-            return `${classTask} hidden`;
-          }
-        case "now":
-          if (diff <= 1) {
-            return `${classTask}`;
-          } else {
-            return `${classTask} hidden`;
-          }
-        default:
-          return `${classTask} hidden`;
+    const checkDate = moment(task.completion_at);
+    const startPeriod = moment().hour(0).minutes(0).seconds(0).milliseconds(0);
+    const periodOneDay = moment(startPeriod).add(1, "days");
+    const periodWeek = moment(startPeriod).add(7, "days");
+    const isExpired = checkDate.isBefore(startPeriod);
+
+    if (isExpired) {
+      if (task.status === "к выполнению" || task.status === "выполняется") {
+        return `${classTask}`;
+      } else {
+        return `${classTask} hidden`;
       }
     }
 
-    return `${classTask}`;
+    if (selectedGroupDate === "future") {
+      if (checkDate.isAfter(startPeriod)) {
+        return `${classTask}`;
+      }
+    }
+
+    switch (selectedGroupDate) {
+      case "week":
+        endPeriod = periodWeek;
+        break;
+      case "now":
+        endPeriod = periodOneDay;
+        break;
+      default:
+        throw error("Неверный период");
+    }
+
+    isDateInPeriod = checkDate.isBetween(startPeriod, endPeriod);
+
+    if (isDateInPeriod) {
+      return `${classTask}`;
+    } else {
+      return `${classTask} hidden`;
+    }
   }
 
   return (

@@ -77,7 +77,12 @@ function ShowContent({ isNew, task }) {
             </section>
             <section>
               <span>Статус:</span>
-              <input defaultValue='к выполнению' disabled></input>
+              <select defaultValue={"к выполнению"} onChange={() => {}}>
+                <option value='к выполнению'>к выполнению</option>
+                <option value='выполняется'>выполняется</option>
+                <option value='выполнена'>выполнена</option>
+                <option value='отменена'>отменена</option>
+              </select>
             </section>
           </>
         ) : (
@@ -129,7 +134,6 @@ function ShowContent({ isNew, task }) {
             </section>
             <section>
               <span>Статус:</span>
-              {/* <input defaultValue='к выполнению'></input> */}
               <select defaultValue={task.status} onChange={() => {}}>
                 <option value='к выполнению'>к выполнению</option>
                 <option value='выполняется'>выполняется</option>

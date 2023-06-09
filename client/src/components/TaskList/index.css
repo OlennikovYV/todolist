@@ -12,6 +12,7 @@
 .panel {
   display: flex;
   justify-content: space-between;
+  margin-top: 1rem;
   width: 80%;
 }
 
@@ -23,7 +24,9 @@
 .container-group {
   display: flex;
   flex-direction: row;
-  margin-top: 15px;
+  justify-content: space-between;
+  width: 80%;
+  margin-top: 1rem;
 }
 
 .container-group label {
@@ -37,8 +40,19 @@
   padding: 2px 5px;
 }
 
+.filtred-date-at {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.filtred-column {
+  padding-left: 0.25rem;
+}
+
 .group {
-  margin-left: 15px;
+  margin-right: 0.25rem;
 }
 
 .group.active {
@@ -47,7 +61,7 @@
 
 .container-list {
   width: 90%;
-  margin-top: 22px;
+  margin-top: 1rem;
 }
 
 .task {

@@ -11,12 +11,16 @@ import Task from "./Task";
 function TaskList() {
   const [selectedGroupDate, setSelectedGroupDate] = useState("future");
   const [modal, setModal] = useState(false);
+  const [checkedExpired, setCheckedExpired] = useState(true);
 
   const notGroupRef = useRef();
   const responsibleGroupRef = useRef();
 
   const { auth, setAuthenticated } = useContext(AuthContext);
   const { task, setTask } = useContext(TaskContext);
+
+  const changeExpired = () =>
+    setCheckedExpired((changeExpired) => !changeExpired);
 
   const { loading, error } = useFetch(
     `http://localhost:3001/api/task/${auth.id}`,
@@ -58,10 +62,8 @@ function TaskList() {
         />
       </div>
       <div className='container-group'>
-        <div>
-          <label htmlFor='complete'>По дате завершения:</label>
+        <div className='filtred-date-at'>
           <select
-            id='complete'
             defaultValue='all'
             onChange={(e) => setSelectedGroupDate(e.target.value)}
           >
@@ -69,6 +71,17 @@ function TaskList() {
             <option value='week'>На неделю</option>
             <option value='now'>На сегодня</option>
           </select>
+          <label>
+            <input
+              className='showExpired'
+              type='checkbox'
+              checked={checkedExpired}
+              onChange={changeExpired}
+            />
+            показывать просроченные
+          </label>
+        </div>
+        <div className='filtred-column'>
           {auth.supervisorid ? null : (
             <>
               <button
@@ -117,6 +130,7 @@ function TaskList() {
             <Task
               key={task.id}
               task={task}
+              showExpired={checkedExpired}
               selectedGroupDate={selectedGroupDate}
             />
           ))

@@ -18,3 +18,28 @@ html {
   min-height: 100vh;
   background-color: rgb(216, 237, 252);
 }
+
+.form-login {
+  width: 420px;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  background-color: rgba(170, 170, 190, 0.4);
+}
+
+input[type="text"],
+input[type="password"] {
+  font-family: sans-serif;
+  font-size: 22px;
+  margin-top: 0.25rem;
+  padding: 0.25rem;
+  padding-left: 0.6rem;
+  border-radius: 0.3rem;
+  border-color: #fefefe;
+  border: none;
+}
+
+.login-user,
+.login-password,
+.login-button {
+  margin-top: 1rem;
+}

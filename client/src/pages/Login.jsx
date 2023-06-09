@@ -64,12 +64,14 @@ function Login() {
         <Navigate to='/task' replace={true} />
       ) : (
         <div className='container-login'>
-          <section>
+          <section className='form-login'>
             <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"}>
               {errMsg}
             </p>
             <form onSubmit={handleSubmit}>
-              <label htmlFor='username'>Пользователь:</label>
+              <label className='login-user' htmlFor='username'>
+                Пользователь:
+              </label>
               <input
                 type='text'
                 id='username'
@@ -80,7 +82,9 @@ function Login() {
                 required
               />
 
-              <label htmlFor='password'>Пароль:</label>
+              <label className='login-password' htmlFor='password'>
+                Пароль:
+              </label>
               <input
                 type='password'
                 id='password'
@@ -88,7 +92,7 @@ function Login() {
                 value={pwd}
                 required
               />
-              <button>Войти</button>
+              <button className='login-button'>Войти</button>
             </form>
           </section>
         </div>

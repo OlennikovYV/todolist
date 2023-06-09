@@ -5,7 +5,7 @@ import useFetch from "../../hooks/fetch";
 import Modal from "../Modal/index";
 import dateFormat from "../../utils/dateFormat.js";
 
-function Task({ task, selectedGroupDate }) {
+function Task({ task, showExpired, selectedGroupDate }) {
   const [modal, setModal] = useState(false);
   const [responsible, setResponsible] = useState();
 
@@ -38,7 +38,7 @@ function Task({ task, selectedGroupDate }) {
     const diff = new Date(completeDate - now).getDate();
     const completeMoreNow = completeDate > now;
 
-    if (selectedGroupDate === "future") return `${classTask} ${diff}`;
+    if (selectedGroupDate === "future") return `${classTask}`;
 
     if (completeMoreNow) {
       switch (selectedGroupDate) {

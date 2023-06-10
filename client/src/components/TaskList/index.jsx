@@ -1,4 +1,5 @@
 import React, { useState, useContext, useRef } from "react";
+import { useLocalStorage } from "react-use";
 
 import useFetch from "../../hooks/fetch";
 
@@ -17,6 +18,8 @@ function TaskList() {
 
   const { auth, setAuthenticated } = useContext(AuthContext);
   const { task, setTask } = useContext(TaskContext);
+
+  const [, , removeStorage] = useLocalStorage("user", "{}");
 
   const { loading, error } = useFetch(
     `http://localhost:3001/api/task/${auth.id}`,
@@ -38,6 +41,7 @@ function TaskList() {
         <button
           className='log-out'
           onClick={() => {
+            removeStorage();
             setAuthenticated(false);
           }}
         >

@@ -1,11 +1,14 @@
 import React, { useRef, useState, useEffect, useContext } from "react";
 import { Navigate } from "react-router-dom";
 import axios from "axios";
+import { useLocalStorage } from "react-use";
 
 import AuthContext from "../context/AuthProvider";
 
 function Login() {
   const { setAuth, setAuthenticated } = useContext(AuthContext);
+  const [valueStrorage, setValueStorage] = useLocalStorage("user", "{}");
+
   const userRef = useRef();
   const errRef = useRef();
 
@@ -17,6 +20,14 @@ function Login() {
   useEffect(() => {
     userRef.current.focus();
   }, []);
+
+  useEffect(() => {
+    if (valueStrorage.id) {
+      setAuth(valueStrorage);
+      setAuthenticated(true);
+      setSuccess(true);
+    }
+  }, [valueStrorage.id, setAuth, setAuthenticated, valueStrorage]);
 
   useEffect(() => {
     setErrMsg("");
@@ -41,10 +52,22 @@ function Login() {
       const { id, firstname, lastname, fathername, login, supervisorid } =
         response.data;
 
-      setAuth({ id, firstname, lastname, fathername, login, supervisorid });
-      setAuthenticated(true);
+      const userData = {
+        id,
+        firstname,
+        lastname,
+        fathername,
+        login,
+        supervisorid,
+      };
+
+      setAuth(userData);
+      setValueStorage(userData);
+
       setUser("");
       setPwd("");
+
+      setAuthenticated(true);
       setSuccess(true);
     } catch (err) {
       if (err.response?.status === 404) {

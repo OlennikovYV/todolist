@@ -8,6 +8,9 @@ exports.getResponsible = async (req, res) => {
     where: {
       id: id,
     },
+    attributes: {
+      exclude: ["password"],
+    },
     raw: true,
   }).then((user) => {
     if (!user) {
@@ -15,67 +18,42 @@ exports.getResponsible = async (req, res) => {
     }
 
     res.status(200).send({
-      id: user.id,
-      firstname: user.firstname,
-      lastname: user.lastname,
-      fathername: user.fathername,
-      login: user.login,
-      supervisorid: user.supervisorid,
+      ...user,
     });
   });
 };
 
 exports.getResponsibleList = async (req, res) => {
-  const userid = req.params.user;
-  const supervisorid = req.params.supervisor;
+  const id = req.params.id;
 
-  if (supervisorid > 0) {
+  User.findOne({
+    where: {
+      id: id,
+    },
+    raw: true,
+  }).then((user) => {
+    let supervisorid;
+
+    if (!user) {
+      return res.status(404).send({ message: "Пользователь не найден!" });
+    }
+
+    supervisorid = user.supervisorid ? user.supervisorid : user.id;
+
     User.findAll({
       where: {
         supervisorid: supervisorid,
       },
-      raw: true,
-    }).then((user) => {
-      if (!user) {
-        return res
-          .status(200)
-          .send({ list: [], message: "Пользователь не найден!" });
-      }
-
-      res.status(200).send({
-        user,
-      });
-    });
-  } else {
-    let newId;
-
-    await User.findOne({
-      where: {
-        id: userid,
+      attributes: {
+        exclude: ["password"],
       },
       raw: true,
     }).then((user) => {
       if (!user) {
-        return res.status(200).send({ message: "Пользователь не найден!" });
-      }
-      newId = user.supervisorid;
-    });
-
-    User.findAll({
-      where: {
-        supervisorid: newId,
-      },
-      raw: true,
-    }).then((user) => {
-      if (!user) {
-        return res
-          .status(200)
-          .send({ list: [], message: "Пользователь не найден!" });
+        return res.status(200).send({ list: [], message: "Список пуст!" });
       }
 
-      res.status(200).send({
-        user,
-      });
+      res.status(200).send([...user]);
     });
-  }
+  });
 };

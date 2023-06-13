@@ -11,7 +11,7 @@ function Task({ task, selectedGroupDate }) {
   const [responsible, setResponsible] = useState();
 
   const { loading, error } = useFetch(
-    `http://localhost:3001/api/user/${task.responsibleid}`,
+    `http://localhost:3001/api/user/${task.responsibleid}/responsible`,
     setResponsible
   );
 

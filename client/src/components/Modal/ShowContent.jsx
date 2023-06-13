@@ -11,28 +11,8 @@ function ShowContent({ isNew, task }) {
 
   const { auth } = useContext(AuthContext);
 
-  let user, supervisor;
-
-  if (isNew) {
-    if (auth.supervisorid) {
-      user = auth.id;
-      supervisor = 0;
-    } else {
-      user = 0;
-      supervisor = auth.id;
-    }
-  } else {
-    if (auth.supervisorid) {
-      user = task.responsibleid;
-      supervisor = 0;
-    } else {
-      user = task.responsibleid;
-      supervisor = 0;
-    }
-  }
-
   const { loading, error } = useFetch(
-    `http://localhost:3001/api/user/${user}/supervisor/${supervisor}`,
+    `http://localhost:3001/api/user/${auth.id}/responsible/list`,
     setResponsibleList
   );
 
@@ -62,8 +42,8 @@ function ShowContent({ isNew, task }) {
             </section>
             <section className='container-responsible'>
               <span>Ответственный:</span>
-              <select defaultValue={responsibleList.user[0].id}>
-                {responsibleList.user.map((data) => (
+              <select defaultValue={responsibleList[0].id}>
+                {responsibleList.map((data) => (
                   <option value={data.id} key={data.id}>
                     {data.lastname +
                       " " +
@@ -120,7 +100,7 @@ function ShowContent({ isNew, task }) {
                 onChange={() => {}}
                 disabled={auth.supervisorid ? "true" : ""}
               >
-                {responsibleList.user.map((data) => (
+                {responsibleList.map((data) => (
                   <option value={data.id} key={data.id}>
                     {data.lastname +
                       " " +

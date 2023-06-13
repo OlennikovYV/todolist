@@ -22,7 +22,7 @@ function Modal({ isVisible = false, isNew, title, content, footer, onClose }) {
   return !isVisible ? null : (
     <div className='modal' onClick={onClose}>
       <div className='modal-dialog' onClick={(e) => e.stopPropagation()}>
-        <ShowHeader title={title} onClose={onClose} />
+        <ShowHeader title={title} numTask={content?.id} onClose={onClose} />
         <ShowContent isNew={isNew} task={content} />
         <ShowFooter footer={footer} />
       </div>

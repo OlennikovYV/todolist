@@ -25,11 +25,19 @@ function ShowContent({ isNew, task }) {
         {isNew ? (
           <>
             <section>
-              <span>Заголовок:</span>
-              <input placeholder='Заголовок'></input>
+              <div className='title'>Заголовок:</div>
+              <input className='caption' placeholder='Заголовок'></input>
             </section>
             <section>
-              <span>Приоритет:</span>
+              <div className='title'>Описание:</div>
+              <textarea
+                className='desription'
+                placeholder='Описание'
+                rows='5'
+              ></textarea>
+            </section>
+            <section>
+              <div className='title'>Приоритет:</div>
               <select defaultValue='low' onChange={() => {}}>
                 <option value='low'>низкий</option>
                 <option value='middle'>средний</option>
@@ -37,11 +45,11 @@ function ShowContent({ isNew, task }) {
               </select>
             </section>
             <section>
-              <span>Дата</span>
+              <div className='title'>Дата:</div>
               <input defaultValue={dateFormat(new Date())}></input>
             </section>
             <section className='container-responsible'>
-              <span>Ответственный:</span>
+              <div className='title'>Ответственный:</div>
               <select defaultValue={responsibleList[0].id}>
                 {responsibleList.map((data) => (
                   <option value={data.id} key={data.id}>
@@ -56,7 +64,7 @@ function ShowContent({ isNew, task }) {
               </select>
             </section>
             <section>
-              <span>Статус:</span>
+              <div className='title'>Статус:</div>
               <select defaultValue={"к выполнению"} onChange={() => {}}>
                 <option value='к выполнению'>к выполнению</option>
                 <option value='выполняется'>выполняется</option>
@@ -68,14 +76,18 @@ function ShowContent({ isNew, task }) {
         ) : (
           <>
             <section>
-              <span>Заголовок:</span>
+              <div className='title'>Заголовок:</div>
               <input
                 defaultValue={task.caption}
                 disabled={auth.supervisorid ? true : false}
               ></input>
             </section>
             <section>
-              <span>Приоритет:</span>
+              <div className='title'>Описание:</div>
+              <textarea rows='5' value={task.description}></textarea>
+            </section>
+            <section>
+              <div className='title'>Приоритет:</div>
               <select
                 defaultValue={task.priority}
                 onChange={() => {}}
@@ -87,14 +99,14 @@ function ShowContent({ isNew, task }) {
               </select>
             </section>
             <section>
-              <span>Дата</span>
+              <div className='title'>Дата:</div>
               <input
                 defaultValue={dateFormat(task.completion_at)}
                 disabled={auth.supervisorid ? "true" : ""}
               ></input>
             </section>
             <section className='container-responsible'>
-              <span>Ответственный:</span>
+              <div className='title'>Ответственный:</div>
               <select
                 defaultValue={task.responsibleid}
                 onChange={() => {}}
@@ -113,7 +125,7 @@ function ShowContent({ isNew, task }) {
               </select>
             </section>
             <section>
-              <span>Статус:</span>
+              <div className='title'>Статус:</div>
               <select defaultValue={task.status} onChange={() => {}}>
                 <option value='к выполнению'>к выполнению</option>
                 <option value='выполняется'>выполняется</option>

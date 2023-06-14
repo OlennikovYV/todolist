@@ -49,17 +49,8 @@ function Login() {
           },
         }
       );
-      const { id, firstname, lastname, fathername, login, supervisorid } =
-        response.data;
 
-      const userData = {
-        id,
-        firstname,
-        lastname,
-        fathername,
-        login,
-        supervisorid,
-      };
+      const { ...userData } = response.data;
 
       setAuth(userData);
       setValueStorage(userData);

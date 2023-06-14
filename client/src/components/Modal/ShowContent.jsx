@@ -1,10 +1,12 @@
 import React, { useState, useContext } from "react";
+// import moment from "moment";
 
 import useFetch from "../../hooks/fetch";
 
 import AuthContext from "../../context/AuthProvider";
 
 import dateFormat from "../../utils/dateFormat.js";
+import fioFormat from "../../utils/fioFormat.js";
 
 function ShowContent({ isNew, task }) {
   const [responsibleList, setResponsibleList] = useState(null);
@@ -46,19 +48,20 @@ function ShowContent({ isNew, task }) {
             </section>
             <section>
               <div className='title'>Дата:</div>
-              <input defaultValue={dateFormat(new Date())}></input>
+              <input
+                disabled='true'
+                defaultValue={dateFormat(new Date())}
+                // defaultValue={moment()
+                // .add(1, "days")
+                // .format("DD/MM/YYYY HH:mm:ss")}
+              ></input>
             </section>
             <section className='container-responsible'>
               <div className='title'>Ответственный:</div>
               <select defaultValue={responsibleList[0].id}>
                 {responsibleList.map((data) => (
                   <option value={data.id} key={data.id}>
-                    {data.lastname +
-                      " " +
-                      data.firstname[0] +
-                      ". " +
-                      data.fathername[0] +
-                      "."}
+                    {fioFormat(data.lastname, data.firstname, data.fathername)}
                   </option>
                 ))}
               </select>
@@ -84,7 +87,7 @@ function ShowContent({ isNew, task }) {
             </section>
             <section>
               <div className='title'>Описание:</div>
-              <textarea rows='5' value={task.description}></textarea>
+              <textarea rows='5' defaultValue={task.description}></textarea>
             </section>
             <section>
               <div className='title'>Приоритет:</div>
@@ -102,7 +105,7 @@ function ShowContent({ isNew, task }) {
               <div className='title'>Дата:</div>
               <input
                 defaultValue={dateFormat(task.completion_at)}
-                disabled={auth.supervisorid ? "true" : ""}
+                disabled='true'
               ></input>
             </section>
             <section className='container-responsible'>
@@ -114,12 +117,7 @@ function ShowContent({ isNew, task }) {
               >
                 {responsibleList.map((data) => (
                   <option value={data.id} key={data.id}>
-                    {data.lastname +
-                      " " +
-                      data.firstname[0] +
-                      ". " +
-                      data.fathername[0] +
-                      "."}
+                    {fioFormat(data.lastname, data.firstname, data.fathername)}
                   </option>
                 ))}
               </select>

@@ -5,6 +5,7 @@ import useFetch from "../../hooks/fetch";
 
 import Modal from "../Modal/index";
 import dateFormat from "../../utils/dateFormat.js";
+import fioFormat from "../../utils/fioFormat";
 
 function Task({ task, selectedGroupDate }) {
   const [modal, setModal] = useState(false);
@@ -80,11 +81,21 @@ function Task({ task, selectedGroupDate }) {
 
   return (
     <>
-      <div className={checkShow()} onClick={() => setModal(true)}>
+      <div className={checkShow()} onDoubleClick={() => setModal(true)}>
         <div className={setCaptionColor()}>{task.caption}</div>
+        <div className='border-inset'></div>
         <div className='priority'>{task.priority}</div>
+        <div className='border-inset'></div>
         <div className='date-complete'>{dateFormat(task.completion_at)}</div>
-        <div className='fio'>{`${responsible.lastname} ${responsible.firstname[0]}. ${responsible.fathername[0]}.`}</div>
+        <div className='border-inset'></div>
+        <div className='fio'>
+          {fioFormat(
+            responsible.lastname,
+            responsible.firstname,
+            responsible.fathername
+          )}
+        </div>
+        <div className='border-inset'></div>
         <span className='status'>{task.status}</span>
 
         {/* Для проверки */}

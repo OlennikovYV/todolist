@@ -9,19 +9,24 @@
   background-color: rgb(202, 234, 255);
 }
 
-.panel {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 1rem;
+.panel-header {
   width: 80%;
+  margin-top: 1rem;
+  text-align: right;
 }
 
-.panel.log-out {
+.panel-header .account-name {
+  margin-right: 1rem;
+  color: rgb(151, 171, 185);
+}
+
+.panel-header.log-out {
+  margin-top: 0;
   margin-right: 0;
-  margin-left: auto;
+  /* margin-left: auto; */
 }
 
-.container-group {
+.container-control {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -29,13 +34,13 @@
   margin-top: 1rem;
 }
 
-.container-group label {
+.container-control label {
   font-family: sans-serif;
   font-size: 1rem;
   padding-right: 5px;
 }
 
-.container-group select {
+.container-control select {
   font-size: 0.9rem;
   padding: 2px 5px;
 }
@@ -70,12 +75,29 @@
   border: 1px solid #666;
   border-radius: 5px;
   padding: 10px;
-  margin-bottom: 6px;
+  margin-top: 0.25rem;
   background-color: #fefefe;
   overflow: hidden;
 }
 
-.task.hidden {
+.task .notask {
+  width: 100%;
+  color: #74af74;
+  text-align: center;
+}
+
+.task.header {
+  text-align: center;
+  background-color: #e3e3e3;
+}
+
+.border-inset {
+  width: 0px;
+  margin-right: 5px;
+  border-left: 1px #eee solid;
+}
+
+.hidden {
   display: none;
 }
 
@@ -100,8 +122,7 @@
 }
 
 .priority {
-  min-width: 86px;
-  text-align: left;
+  min-width: 110px;
 }
 
 .date-complete {
@@ -114,5 +135,4 @@
 
 .status {
   min-width: 150px;
-  text-align: left;
 }

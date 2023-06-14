@@ -9,6 +9,8 @@ import AuthContext from "../../context/AuthProvider";
 import Modal from "../Modal/index";
 import Task from "./Task";
 
+import fioFormat from "../../utils/fioFormat.js";
+
 function TaskList() {
   const [selectedGroupDate, setSelectedGroupDate] = useState("future");
   const [modal, setModal] = useState(false);
@@ -31,13 +33,13 @@ function TaskList() {
 
   return (
     <div className='container'>
-      <div className='panel'>
-        <button
-          onClick={() => setModal(true)}
-          disabled={auth.supervisorid ? "true" : ""}
-        >
-          Создать задачу
-        </button>
+      <div className='panel-header'>
+        <span className='account-name'>
+          {auth.supervisorid ? "сотрудник" : "руководитель"}
+        </span>
+        <span className='account-name'>
+          {fioFormat(auth.lastname, auth.firstname, auth.fathername)}
+        </span>
         <button
           className='log-out'
           onClick={() => {
@@ -47,21 +49,14 @@ function TaskList() {
         >
           Выйти
         </button>
-        <Modal
-          isVisible={modal}
-          isNew={true}
-          title={"Новая заявка"}
-          content={null}
-          footer={
-            <button className='button-task-ok' onClick={() => setModal(false)}>
-              Готово
-            </button>
-          }
-          // Функция внесения данных для новой задачи
-          onClose={() => setModal(false)}
-        />
       </div>
-      <div className='container-group'>
+      <div className='container-control'>
+        <button
+          onClick={() => setModal(true)}
+          disabled={auth.supervisorid ? "true" : ""}
+        >
+          Создать задачу
+        </button>
         <div className='filtred-date-at'>
           <select
             defaultValue='all'
@@ -114,8 +109,33 @@ function TaskList() {
             </>
           )}
         </div>
+        <Modal
+          isVisible={modal}
+          isNew={true}
+          title={"Новая заявка"}
+          content={null}
+          footer={
+            <button className='button-task-ok' onClick={() => setModal(false)}>
+              Готово
+            </button>
+          }
+          // Функция внесения данных для новой задачи
+          onClose={() => setModal(false)}
+        />
       </div>
       <div className='container-list'>
+        <div className='task header'>
+          <div className='caption'>Заголовок</div>
+          <div className='border-inset'></div>
+          <div className='priority'>Приоритет</div>
+          <div className='border-inset'></div>
+          <div className='date-complete'>Дата завершения</div>
+          <div className='border-inset'></div>
+          <div className='fio'>Ф.И.О.</div>
+          <div className='border-inset'></div>
+          <div className='status'>Статус</div>
+        </div>
+
         {task.listTask.length ? (
           task.listTask.map((task) => (
             <Task
@@ -125,7 +145,9 @@ function TaskList() {
             />
           ))
         ) : (
-          <p align={"center"}>Задач нет</p>
+          <div className='task' align={"center"}>
+            <span className='notask'>Нет задач для выполнения</span>
+          </div>
         )}
       </div>
     </div>

@@ -23,7 +23,6 @@
 .panel-header.log-out {
   margin-top: 0;
   margin-right: 0;
-  /* margin-left: auto; */
 }
 
 .container-control {
@@ -40,7 +39,7 @@
   padding-right: 5px;
 }
 
-.container-control select {
+.container-control .filtred-date-at select {
   font-size: 0.9rem;
   padding: 2px 5px;
 }
@@ -50,10 +49,6 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
-}
-
-.filtred-date-at input {
-  margin: 0.25rem 0.25rem 0.5rem;
 }
 
 .group:not(:last-child) {
@@ -80,12 +75,6 @@
   overflow: hidden;
 }
 
-.task .notask {
-  width: 100%;
-  color: #74af74;
-  text-align: center;
-}
-
 .task.header {
   text-align: center;
   background-color: #e3e3e3;
@@ -95,30 +84,6 @@
   width: 0px;
   margin-right: 5px;
   border-left: 1px #eee solid;
-}
-
-.hidden {
-  display: none;
-}
-
-.button-task-ok {
-  margin: 15px;
-}
-
-.caption {
-  min-width: 150px;
-}
-
-.caption.green {
-  color: green;
-}
-
-.caption.red {
-  color: red;
-}
-
-.caption.gray {
-  color: gray;
 }
 
 .priority {
@@ -135,4 +100,10 @@
 
 .status {
   min-width: 150px;
+}
+
+.task .notask {
+  width: 100%;
+  color: #74af74;
+  text-align: center;
 }

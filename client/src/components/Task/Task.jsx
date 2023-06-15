@@ -3,7 +3,9 @@ import moment from "moment";
 
 import useFetch from "../../hooks/fetch";
 
-import Modal from "../Modal/index";
+import Modal from "../Modal/Modal";
+import EditTask from "../EditTask/EditTask";
+
 import dateFormat from "../../utils/dateFormat.js";
 import fioFormat from "../../utils/fioFormat";
 
@@ -102,19 +104,10 @@ function Task({ task, selectedGroupDate }) {
         {/* <span>{task.responsibleid}</span> */}
         {/* <span>{dateFormat(task.update_at)}</span> */}
       </div>
-      <Modal
-        isVisible={modal}
-        isNew={false}
-        title={"Редактирование заявки"}
-        content={task}
-        footer={
-          <button className='button-task-ok' onClick={() => setModal(false)}>
-            Готово
-          </button>
-        }
-        // Функция обновление данных для вывранной задачи
-        onClose={() => setModal(false)}
-      />
+
+      <Modal isVisible={modal} onClose={() => setModal(false)}>
+        <EditTask task={task} onClose={() => setModal(false)} />
+      </Modal>
     </>
   );
 }

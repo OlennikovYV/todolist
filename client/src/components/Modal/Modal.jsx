@@ -1,10 +1,6 @@
 import React, { useEffect } from "react";
 
-import ShowContent from "./ShowContent";
-import ShowHeader from "./ShowHeader";
-import ShowFooter from "./ShowFooter";
-
-function Modal({ isVisible = false, isNew, title, content, footer, onClose }) {
+function Modal({ children, isVisible = false, onClose }) {
   const keydownHandler = ({ key }) => {
     switch (key) {
       case "Escape":
@@ -22,9 +18,7 @@ function Modal({ isVisible = false, isNew, title, content, footer, onClose }) {
   return !isVisible ? null : (
     <div className='modal' onClick={onClose}>
       <div className='modal-dialog' onClick={(e) => e.stopPropagation()}>
-        <ShowHeader title={title} numTask={content?.id} onClose={onClose} />
-        <ShowContent isNew={isNew} task={content} />
-        <ShowFooter footer={footer} />
+        {children}
       </div>
     </div>
   );

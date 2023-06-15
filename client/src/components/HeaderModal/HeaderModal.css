@@ -1,0 +1,13 @@
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #dbdbdb;
+  padding: 0.5rem;
+}
+
+.modal-close {
+  cursor: pointer;
+  padding: 0.5rem;
+  margin-left: auto;
+}

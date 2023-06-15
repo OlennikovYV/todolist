@@ -6,8 +6,9 @@ import useFetch from "../../hooks/fetch";
 import TaskContext from "../../context/TaskProvider";
 import AuthContext from "../../context/AuthProvider";
 
-import Modal from "../Modal/index";
-import Task from "./Task";
+import Modal from "../Modal/Modal";
+import NewTask from "../NewTask/NewTask";
+import Task from "../Task/Task";
 
 import fioFormat from "../../utils/fioFormat.js";
 
@@ -109,19 +110,10 @@ function TaskList() {
             </>
           )}
         </div>
-        <Modal
-          isVisible={modal}
-          isNew={true}
-          title={"Новая заявка"}
-          content={null}
-          footer={
-            <button className='button-task-ok' onClick={() => setModal(false)}>
-              Готово
-            </button>
-          }
-          // Функция внесения данных для новой задачи
-          onClose={() => setModal(false)}
-        />
+
+        <Modal isVisible={modal} onClose={() => setModal(false)}>
+          <NewTask onClose={() => setModal(false)} />
+        </Modal>
       </div>
       <div className='container-list'>
         <div className='task header'>

@@ -1,0 +1,19 @@
+.task.hidden {
+  display: none;
+}
+
+.caption {
+  min-width: 150px;
+}
+
+.caption.green {
+  color: green;
+}
+
+.caption.red {
+  color: red;
+}
+
+.caption.gray {
+  color: gray;
+}

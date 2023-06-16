@@ -82,9 +82,9 @@ exports.taskList = async (req, res) => {
 };
 
 exports.addTask = async (req, res) => {
-  const trasaction = req.params.trasaction;
+  const transaction = req.body.transaction;
 
-  Task.create(trasaction)
+  Task.create(JSON.parse(transaction))
     .then((record) => {
       return res.status(200).send({
         success: true,
@@ -103,14 +103,21 @@ exports.addTask = async (req, res) => {
 
 exports.updateTask = async (req, res) => {
   const id = req.params.id;
-  const trasaction = req.params.trasaction;
+  const transaction = req.body.transaction;
 
-  Task.update(trasaction, {
+  Task.update(JSON.parse(transaction), {
     where: {
       id: id,
     },
+    returning: true,
   })
     .then((record) => {
+      if (!record[0]) {
+        return res.status(200).send({
+          success: false,
+          message: "Запись не найдена",
+        });
+      }
       return res.status(200).send({
         success: true,
         record: record,

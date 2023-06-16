@@ -11,7 +11,7 @@ exports.signin = (req, res) => {
   })
     .then((user) => {
       if (!user) {
-        return res.status(404).send({
+        return res.status(401).send({
           success: true,
           message: "Пользователь не найден!",
         });

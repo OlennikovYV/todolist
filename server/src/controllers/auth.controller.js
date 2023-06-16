@@ -11,7 +11,10 @@ exports.signin = (req, res) => {
   })
     .then((user) => {
       if (!user) {
-        return res.status(404).send({ message: "Пользователь не найден!" });
+        return res.status(404).send({
+          success: true,
+          message: "Пользователь не найден!",
+        });
       }
 
       var passwordIsValid = bcrypt.compareSync(
@@ -20,9 +23,13 @@ exports.signin = (req, res) => {
       );
 
       if (!passwordIsValid) {
-        return res.status(401).send({ message: "Неверный пароль!" });
+        return res.status(401).send({
+          success: true,
+          message: "Неверный пароль!",
+        });
       }
 
+      // TODO! вернуть объект {success, user, message}
       res.status(200).send({
         id: user.id,
         firstname: user.firstname,
@@ -33,6 +40,10 @@ exports.signin = (req, res) => {
       });
     })
     .catch((err) => {
-      res.status(500).send({ message: err.message });
+      res.status(500).send({
+        success: false,
+        error: err.message,
+        message: "Ошибка сервера при входе",
+      });
     });
 };

@@ -138,7 +138,7 @@ function TaskList() {
           ))
         ) : (
           <div className='task' align={"center"}>
-            <span className='notask'>Нет задач для выполнения</span>
+            <span className='notask'>{task.message}</span>
           </div>
         )}
       </div>

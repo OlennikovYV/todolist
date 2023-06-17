@@ -18,9 +18,9 @@ function useFetch(uri, setContext = () => {}) {
           },
         });
 
-        if (response?.data.listTask) {
+        if (response?.data.taskList) {
           dataLoaded = response?.data;
-          dataLoaded.listTask.sort(
+          dataLoaded.taskList.sort(
             (a, b) => new Date(a.update_at) - new Date(b.update_at)
           );
         }

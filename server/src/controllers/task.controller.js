@@ -15,7 +15,7 @@ exports.taskList = async (req, res) => {
     if (!user) {
       return res.status(200).send({
         success: false,
-        listTask: [],
+        taskList: [],
         message: "Пользователь не найден!",
       });
     }
@@ -31,14 +31,14 @@ exports.taskList = async (req, res) => {
         if (task && !task.length) {
           return res.status(200).send({
             success: true,
-            listTask: [],
+            taskList: [],
             message: "Нет задач для выполнения",
           });
         }
 
         res.status(200).send({
           success: true,
-          listTask: task,
+          taskList: task,
           message: "Список задач успешно получен",
         });
       })
@@ -60,14 +60,14 @@ exports.taskList = async (req, res) => {
         if (task && !task.length) {
           return res.status(200).send({
             success: true,
-            listTask: [],
+            taskList: [],
             message: "Нет задач для выполнения",
           });
         }
 
         res.status(200).send({
           success: true,
-          listTask: task,
+          taskList: task,
           message: "Список задач успешно получен",
         });
       })

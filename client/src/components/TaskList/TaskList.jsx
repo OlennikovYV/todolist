@@ -1,8 +1,9 @@
-import React, { useState, useContext, useRef } from "react";
+import React, { useState, useContext, useRef, useEffect } from "react";
 import { useLocalStorage } from "react-use";
 
 import useFetch from "../../hooks/fetch";
 
+import GlobalTaskContext from "../../context/GlobalTaskProvider";
 import TaskContext from "../../context/TaskProvider";
 import AuthContext from "../../context/AuthProvider";
 
@@ -19,6 +20,7 @@ function TaskList() {
   const notGroupRef = useRef();
   const responsibleGroupRef = useRef();
 
+  const { taskList, getAllTasks } = useContext(GlobalTaskContext);
   const { auth, setAuthenticated } = useContext(AuthContext);
   const { task, setTask } = useContext(TaskContext);
 
@@ -28,6 +30,10 @@ function TaskList() {
     `http://localhost:3001/api/task/${auth.id}`,
     setTask
   );
+
+  useEffect(() => {
+    getAllTasks(auth.id);
+  }, []);
 
   if (loading) return <></>;
   if (error) return <pre>{JSON.stringify(error, null, 2)}</pre>;
@@ -77,14 +83,14 @@ function TaskList() {
                 onClick={() => {
                   let dataLoaded;
                   if (task) {
-                    dataLoaded = task.listTask;
+                    dataLoaded = task.taskList;
                     dataLoaded.sort(
                       (a, b) => new Date(a.update_at) - new Date(b.update_at)
                     );
                   }
                   notGroupRef.current.classList.add("active");
                   responsibleGroupRef.current.classList.remove("active");
-                  setTask({ listTask: dataLoaded });
+                  setTask({ taskList: dataLoaded });
                 }}
               >
                 без группировки
@@ -95,14 +101,14 @@ function TaskList() {
                 onClick={() => {
                   let dataLoaded;
                   if (task) {
-                    dataLoaded = task.listTask;
+                    dataLoaded = task.taskList;
                     dataLoaded.sort(
                       (a, b) => a.responsibleid - b.responsibleid
                     );
                   }
                   notGroupRef.current.classList.remove("active");
                   responsibleGroupRef.current.classList.add("active");
-                  setTask({ listTask: dataLoaded });
+                  setTask({ taskList: dataLoaded });
                 }}
               >
                 по ответственным
@@ -128,8 +134,8 @@ function TaskList() {
           <div className='status'>Статус</div>
         </div>
 
-        {task.listTask.length ? (
-          task.listTask.map((task) => (
+        {taskList.length ? (
+          taskList.map((task) => (
             <Task
               key={task.id}
               task={task}

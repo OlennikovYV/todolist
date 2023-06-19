@@ -1,17 +1,14 @@
 import React, { useState, useContext, useRef, useEffect } from "react";
 import { useLocalStorage } from "react-use";
 
-import useFetch from "../../hooks/fetch";
-
 import GlobalTaskContext from "../../context/GlobalTaskProvider";
-import TaskContext from "../../context/TaskProvider";
 import AuthContext from "../../context/AuthProvider";
 
 import Modal from "../Modal/Modal";
 import NewTask from "../NewTask/NewTask";
 import Task from "../Task/Task";
 
-import fioFormat from "../../utils/fioFormat.js";
+import { fioFormat } from "../../utils/formatField/formatField.js";
 
 function TaskList() {
   const [selectedGroupDate, setSelectedGroupDate] = useState("future");
@@ -20,23 +17,16 @@ function TaskList() {
   const notGroupRef = useRef();
   const responsibleGroupRef = useRef();
 
-  const { taskList, getAllTasks } = useContext(GlobalTaskContext);
+  const { message, taskList, getAllTasks, sortUpdateAt, sortResponsibleId } =
+    useContext(GlobalTaskContext);
   const { auth, setAuthenticated } = useContext(AuthContext);
-  const { task, setTask } = useContext(TaskContext);
 
   const [, , removeStorage] = useLocalStorage("user", "{}");
 
-  const { loading, error } = useFetch(
-    `http://localhost:3001/api/task/${auth.id}`,
-    setTask
-  );
-
   useEffect(() => {
     getAllTasks(auth.id);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
-  if (loading) return <></>;
-  if (error) return <pre>{JSON.stringify(error, null, 2)}</pre>;
 
   return (
     <div className='container'>
@@ -58,12 +48,22 @@ function TaskList() {
         </button>
       </div>
       <div className='container-control'>
-        <button
-          onClick={() => setModal(true)}
-          disabled={auth.supervisorid ? "true" : ""}
-        >
-          Создать задачу
-        </button>
+        <div>
+          <button
+            className='button-control'
+            onClick={() => setModal(true)}
+            disabled={auth.supervisorid ? true : false}
+          >
+            Создать задачу
+          </button>
+          <button
+            onClick={() => {
+              getAllTasks(auth.id);
+            }}
+          >
+            Обновить
+          </button>
+        </div>
         <div className='filtred-date-at'>
           <select
             defaultValue='all'
@@ -81,37 +81,23 @@ function TaskList() {
                 className='group active'
                 ref={notGroupRef}
                 onClick={() => {
-                  let dataLoaded;
-                  if (task) {
-                    dataLoaded = task.taskList;
-                    dataLoaded.sort(
-                      (a, b) => new Date(a.update_at) - new Date(b.update_at)
-                    );
-                  }
+                  sortUpdateAt();
                   notGroupRef.current.classList.add("active");
                   responsibleGroupRef.current.classList.remove("active");
-                  setTask({ taskList: dataLoaded });
                 }}
               >
-                без группировки
+                Без группировки
               </button>
               <button
                 className='group'
                 ref={responsibleGroupRef}
                 onClick={() => {
-                  let dataLoaded;
-                  if (task) {
-                    dataLoaded = task.taskList;
-                    dataLoaded.sort(
-                      (a, b) => a.responsibleid - b.responsibleid
-                    );
-                  }
+                  sortResponsibleId();
                   notGroupRef.current.classList.remove("active");
                   responsibleGroupRef.current.classList.add("active");
-                  setTask({ taskList: dataLoaded });
                 }}
               >
-                по ответственным
+                По ответственным
               </button>
             </>
           )}
@@ -127,7 +113,7 @@ function TaskList() {
           <div className='border-inset'></div>
           <div className='priority'>Приоритет</div>
           <div className='border-inset'></div>
-          <div className='date-complete'>Дата завершения</div>
+          <div className='date-complete'>Дата окончания</div>
           <div className='border-inset'></div>
           <div className='fio'>Ф.И.О.</div>
           <div className='border-inset'></div>
@@ -144,7 +130,7 @@ function TaskList() {
           ))
         ) : (
           <div className='task' align={"center"}>
-            <span className='notask'>{task.message}</span>
+            <span className='notask'>{message}</span>
           </div>
         )}
       </div>

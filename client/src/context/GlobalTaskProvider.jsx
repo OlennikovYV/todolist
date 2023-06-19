@@ -5,10 +5,28 @@ import ReducerTask from "../reducers/ReducerTask";
 const GlobalTaskContext = createContext({});
 
 export const GlobalTaskProvider = ({ children }) => {
-  const { taskList, getAllTasks } = ReducerTask();
+  const {
+    success,
+    error,
+    message,
+    taskList,
+    getAllTasks,
+    sortUpdateAt,
+    sortResponsibleId,
+  } = ReducerTask();
 
   return (
-    <GlobalTaskContext.Provider value={{ taskList, getAllTasks }}>
+    <GlobalTaskContext.Provider
+      value={{
+        success,
+        error,
+        message,
+        taskList,
+        getAllTasks,
+        sortUpdateAt,
+        sortResponsibleId,
+      }}
+    >
       {children}
     </GlobalTaskContext.Provider>
   );

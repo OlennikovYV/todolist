@@ -9,6 +9,18 @@ export const ActionTask = (state, action) => {
     case "GET_ALL_TASKS":
       return {
         ...state,
+        success: action.payload.success,
+        tasks: action.payload.taskList,
+        message: action.payload.message,
+      };
+    case "SORT_UPDATE-AT":
+      return {
+        ...state,
+        tasks: action.payload,
+      };
+    case "SORT_RESPONSIBLEID":
+      return {
+        ...state,
         tasks: action.payload,
       };
     case "TASK_ERROR":

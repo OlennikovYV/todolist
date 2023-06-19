@@ -8,8 +8,7 @@ import AuthContext from "../../context/AuthProvider";
 import HeaderModal from "../HeaderModal/HeaderModal";
 import FooterModal from "../FooterModal/FooterModal";
 
-import dateFormat from "../../utils/dateFormat.js";
-import fioFormat from "../../utils/fioFormat.js";
+import { dateFormat, fioFormat } from "../../utils/formatField/formatField.js";
 
 import "./NewTask.css";
 
@@ -52,7 +51,7 @@ function NewTask({ onClose }) {
             </select>
           </section>
           <section>
-            <div className='title'>Дата:</div>
+            <div className='title'>Дата создания:</div>
             <input
               disabled={true}
               defaultValue={dateFormat(new Date())}

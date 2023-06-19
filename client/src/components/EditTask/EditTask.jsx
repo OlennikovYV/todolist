@@ -8,8 +8,7 @@ import AuthContext from "../../context/AuthProvider";
 import HeaderModal from "../HeaderModal/HeaderModal";
 import FooterModal from "../FooterModal/FooterModal";
 
-import dateFormat from "../../utils/dateFormat.js";
-import fioFormat from "../../utils/fioFormat.js";
+import { dateFormat, fioFormat } from "../../utils/formatField/formatField.js";
 
 function EditTask({ task, onClose }) {
   const [responsibleList, setResponsibleList] = useState(null);
@@ -53,7 +52,7 @@ function EditTask({ task, onClose }) {
             <select
               defaultValue={task.priority}
               onChange={() => {}}
-              disabled={auth.supervisorid ? "true" : ""}
+              disabled={auth.supervisorid ? true : false}
             >
               <option value='низкий'>низкий</option>
               <option value='средний'>средний</option>
@@ -61,7 +60,7 @@ function EditTask({ task, onClose }) {
             </select>
           </section>
           <section>
-            <div className='title'>Дата:</div>
+            <div className='title'>Дата окончания:</div>
             <input
               disabled={true}
               defaultValue={dateFormat(task.completion_at)}
@@ -72,7 +71,7 @@ function EditTask({ task, onClose }) {
             <select
               defaultValue={task.responsibleid}
               onChange={() => {}}
-              disabled={auth.supervisorid ? "true" : ""}
+              disabled={auth.supervisorid ? true : false}
             >
               {responsibleList.map((data) => (
                 <option value={data.id} key={data.id}>

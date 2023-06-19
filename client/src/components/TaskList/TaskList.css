@@ -11,7 +11,7 @@
 
 .panel-header {
   width: 80%;
-  margin-top: 1rem;
+  margin-top: 0.5rem;
   text-align: right;
 }
 
@@ -30,7 +30,7 @@
   flex-direction: row;
   justify-content: space-between;
   width: 80%;
-  margin-top: 1rem;
+  margin-top: 0.5rem;
 }
 
 .container-control label {
@@ -42,6 +42,10 @@
 .container-control .filtred-date-at select {
   font-size: 0.9rem;
   padding: 2px 5px;
+}
+
+.button-control {
+  margin-right: 0.25rem;
 }
 
 .filtred-date-at {
@@ -61,7 +65,7 @@
 
 .container-list {
   width: 90%;
-  margin-top: 0.25rem;
+  margin-top: 0.5rem;
 }
 
 .task {
@@ -78,6 +82,7 @@
 .task.header {
   text-align: center;
   background-color: #e3e3e3;
+  margin-top: 0;
 }
 
 .border-inset {

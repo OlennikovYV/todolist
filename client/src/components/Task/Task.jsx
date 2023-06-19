@@ -6,8 +6,7 @@ import useFetch from "../../hooks/fetch";
 import Modal from "../Modal/Modal";
 import EditTask from "../EditTask/EditTask";
 
-import dateFormat from "../../utils/dateFormat.js";
-import fioFormat from "../../utils/fioFormat";
+import { dateFormat, fioFormat } from "../../utils/formatField/formatField.js";
 
 function Task({ task, selectedGroupDate }) {
   const [modal, setModal] = useState(false);

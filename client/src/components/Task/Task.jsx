@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import moment from "moment";
 
-import useFetch from "../../hooks/fetch";
+import useAxiosGet from "../../hooks/fetch";
 
 import Modal from "../Modal/Modal";
 import EditTask from "../EditTask/EditTask";
@@ -10,11 +10,13 @@ import { dateFormat, fioFormat } from "../../utils/formatField/formatField.js";
 
 function Task({ task, selectedGroupDate }) {
   const [modal, setModal] = useState(false);
-  const [responsible, setResponsible] = useState();
 
-  const { loading, error } = useFetch(
-    `http://localhost:3001/api/user/${task.responsibleid}/responsible`,
-    setResponsible
+  const {
+    data: responsible,
+    loading,
+    error,
+  } = useAxiosGet(
+    `http://localhost:3001/api/user/${task.responsibleid}/responsible`
   );
 
   if (loading) return <></>;
@@ -68,7 +70,7 @@ function Task({ task, selectedGroupDate }) {
         endPeriod = periodOneDay;
         break;
       default:
-        throw error("Неверный период");
+        throw new Error("Неверный период");
     }
 
     isDateInPeriod = checkDate.isBetween(startPeriod, endPeriod);

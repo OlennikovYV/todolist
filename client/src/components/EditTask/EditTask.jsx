@@ -1,7 +1,7 @@
-import React, { useState, useContext } from "react";
+import React, { useContext } from "react";
 // import moment from "moment";
 
-import useFetch from "../../hooks/fetch";
+import useAxiosGet from "../../hooks/fetch";
 
 import AuthContext from "../../context/AuthProvider";
 
@@ -11,13 +11,17 @@ import FooterModal from "../FooterModal/FooterModal";
 import { dateFormat, fioFormat } from "../../utils/formatField/formatField.js";
 
 function EditTask({ task, onClose }) {
-  const [responsibleList, setResponsibleList] = useState(null);
+  // const [responsibleList, setResponsibleList] = useState(null);
 
   const { auth } = useContext(AuthContext);
 
-  const { loading, error } = useFetch(
-    `http://localhost:3001/api/user/${auth.id}/responsible/list`,
-    setResponsibleList
+  const {
+    data: responsibleList,
+    loading,
+    error,
+  } = useAxiosGet(
+    `http://localhost:3001/api/user/${auth.id}/responsible/list`
+    // setResponsibleList
   );
 
   if (loading) return <></>;

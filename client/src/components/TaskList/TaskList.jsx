@@ -48,9 +48,8 @@ function TaskList() {
         </button>
       </div>
       <div className='container-control'>
-        <div>
+        <div className='button-control'>
           <button
-            className='button-control'
             onClick={() => setModal(true)}
             disabled={auth.supervisorid ? true : false}
           >

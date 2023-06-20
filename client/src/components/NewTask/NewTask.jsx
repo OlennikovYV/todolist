@@ -1,7 +1,7 @@
-import React, { useState, useContext } from "react";
+import React, { useContext } from "react";
 // import moment from "moment";
 
-import useFetch from "../../hooks/fetch";
+import useAxiosGet from "../../hooks/fetch";
 
 import AuthContext from "../../context/AuthProvider";
 
@@ -13,13 +13,17 @@ import { dateFormat, fioFormat } from "../../utils/formatField/formatField.js";
 import "./NewTask.css";
 
 function NewTask({ onClose }) {
-  const [responsibleList, setResponsibleList] = useState(null);
+  // const [responsibleList, setResponsibleList] = useState(null);
 
   const { auth } = useContext(AuthContext);
 
-  const { loading, error } = useFetch(
-    `http://localhost:3001/api/user/${auth.id}/responsible/list`,
-    setResponsibleList
+  const {
+    data: responsibleList,
+    loading,
+    error,
+  } = useAxiosGet(
+    `http://localhost:3001/api/user/${auth.id}/responsible/list`
+    // setResponsibleList
   );
 
   if (loading) return <></>;
@@ -55,9 +59,6 @@ function NewTask({ onClose }) {
             <input
               disabled={true}
               defaultValue={dateFormat(new Date())}
-              // defaultValue={moment()
-              // .add(1, "days")
-              // .format("DD/MM/YYYY HH:mm:ss")}
             ></input>
           </section>
           <section className='container-responsible'>

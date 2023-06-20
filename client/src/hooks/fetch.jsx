@@ -1,44 +1,36 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 
-function useFetch(uri, setContext = () => {}) {
-  const [error, setError] = useState();
+function useAxiosGet(url) {
+  const [data, setData] = useState(null);
+  const [error, setError] = useState("");
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    if (!uri) return;
-
-    const fetchData = async () => {
+    (async () => {
       try {
-        let dataLoaded;
-
-        const response = await axios.get(uri, {
+        const response = await axios.get(url, {
           headers: {
             "Content-Type": "application/x-www-form-urlencoded",
           },
         });
 
-        if (response?.data.taskList) {
-          dataLoaded = response?.data;
-          dataLoaded.taskList.sort(
-            (a, b) => new Date(a.update_at) - new Date(b.update_at)
-          );
-        }
-
-        setContext(response?.data);
-        setLoading(false);
+        setData(response?.data);
       } catch (err) {
         setError(err);
+      } finally {
+        setLoading(false);
       }
-    };
+    })();
 
-    fetchData();
-  }, [uri, setContext]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return {
     loading,
     error,
+    data,
   };
 }
 
-export default useFetch;
+export default useAxiosGet;

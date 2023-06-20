@@ -44,15 +44,8 @@
   padding: 2px 5px;
 }
 
-.button-control {
+.button-control button {
   margin-right: 0.25rem;
-}
-
-.filtred-date-at {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
 }
 
 .group:not(:last-child) {

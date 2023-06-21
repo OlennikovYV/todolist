@@ -11,6 +11,7 @@ export const GlobalTaskProvider = ({ children }) => {
     message,
     taskList,
     getAllTasks,
+    addTask,
     sortUpdateAt,
     sortResponsibleId,
   } = ReducerTask();
@@ -23,6 +24,7 @@ export const GlobalTaskProvider = ({ children }) => {
         message,
         taskList,
         getAllTasks,
+        addTask,
         sortUpdateAt,
         sortResponsibleId,
       }}

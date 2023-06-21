@@ -1,15 +1,10 @@
 .modal-body {
-  flex: 1 0 auto;
+  flex: 1 1 auto;
   background-color: rgb(216, 237, 252);
   overflow: auto;
 }
 
 .modal-content {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-evenly;
-  align-items: flex-start;
-  height: 100%;
   margin-left: 1.5rem;
   margin-right: 1.5rem;
 }
@@ -17,11 +12,13 @@
 .modal-content section {
   display: flex;
   flex-direction: row;
+  margin-top: 0.5rem;
 }
 
 .modal-content section .title {
   text-align: end;
   padding-right: 0.5rem;
+  font-size: 0.8rem;
   width: 9rem;
 }
 
@@ -35,11 +32,15 @@
   width: 11rem;
   padding: 0.25rem;
   padding-left: 0.4rem;
-  font-size: 22px;
+  font-size: 0.8rem;
   border-radius: 0;
 }
 
 .modal-content .caption,
 .modal-content .desription {
   width: 18rem;
+}
+
+.modal-content .create-at {
+  background-color: #eee;
 }

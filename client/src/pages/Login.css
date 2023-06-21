@@ -7,7 +7,7 @@
 html {
   font-family: "Nunito", sans-serif;
   font-size: 22px;
-  color: #666;
+  color: #555;
 }
 
 .container-login {
@@ -30,14 +30,14 @@ form {
   flex-direction: column;
   justify-content: space-evenly;
   flex-grow: 1;
-  padding-bottom: 1rem;
+  padding-bottom: 0.5rem;
 }
 
 input[type="text"],
 input[type="password"] {
   font-family: sans-serif;
-  font-size: 22px;
-  margin-top: 0.25rem;
+  font-size: 0.8rem;
+  margin-top: 0.5rem;
   padding: 0.25rem;
   padding-left: 0.3rem;
   border-color: #fefefe;
@@ -48,4 +48,5 @@ input[type="password"] {
 .login-password,
 .login-button {
   margin-top: 1rem;
+  font-size: 0.8rem;
 }

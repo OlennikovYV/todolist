@@ -1,5 +1,5 @@
 .modal-body {
-  flex: 1 0 auto;
+  flex: 1 1 auto;
   background-color: rgb(216, 237, 252);
   overflow: auto;
 }
@@ -17,6 +17,7 @@
 .modal-content section {
   display: flex;
   flex-direction: row;
+  margin-top: 0.5rem;
 }
 
 .modal-content section .title {

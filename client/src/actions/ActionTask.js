@@ -10,7 +10,14 @@ export const ActionTask = (state, action) => {
       return {
         ...state,
         success: action.payload.success,
-        tasks: action.payload.taskList,
+        tasks: action.payload,
+        message: action.payload.message,
+      };
+    case "ADD_TASK":
+      return {
+        ...state,
+        success: action.payload.success,
+        tasks: [...state.tasks, action.payload],
         message: action.payload.message,
       };
     case "SORT_UPDATE-AT":

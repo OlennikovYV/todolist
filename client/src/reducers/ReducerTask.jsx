@@ -21,7 +21,25 @@ const ReducerTask = () => {
 
       dispatch({
         type: "GET_ALL_TASKS",
-        payload: response.data,
+        payload: response.data.taskList,
+      });
+    } catch (err) {
+      dispatch({
+        type: "TASK_ERROR",
+        payload: err.response.data.error,
+      });
+    }
+  }
+
+  async function addTask(task) {
+    try {
+      const response = await axios.post(`http://localhost:3001/api/task/add`, {
+        transaction: task,
+      });
+
+      dispatch({
+        type: "ADD_TASK",
+        payload: response.data.record,
       });
     } catch (err) {
       dispatch({
@@ -59,6 +77,7 @@ const ReducerTask = () => {
     message: state.message,
     taskList: state.tasks,
     getAllTasks,
+    addTask,
     sortUpdateAt,
     sortResponsibleId,
   };

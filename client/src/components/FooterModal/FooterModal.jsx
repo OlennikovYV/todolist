@@ -1,10 +1,10 @@
 import React from "react";
 
-function FooterModal({ isShow, onOk, onCancel }) {
+function FooterModal({ isShow, onOk, onCancel, id = "" }) {
   return isShow ? (
     <footer className='modal-footer'>
       {!onOk ? null : (
-        <button className='button-ok' onClick={onOk}>
+        <button className='button-ok' onClick={onOk} type='submit' form={id}>
           Готово
         </button>
       )}

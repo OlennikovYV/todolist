@@ -84,7 +84,7 @@ exports.taskList = async (req, res) => {
 exports.addTask = async (req, res) => {
   const transaction = req.body.transaction;
 
-  Task.create(JSON.parse(transaction))
+  Task.create(transaction)
     .then((record) => {
       return res.status(200).send({
         success: true,

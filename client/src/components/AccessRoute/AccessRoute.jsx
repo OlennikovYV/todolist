@@ -1,13 +1,11 @@
-import React, { useContext } from "react";
-import { Outlet } from "react-router-dom";
+import React from "react";
+import { Navigate, Outlet } from "react-router-dom";
 
-import AuthContext from "../../context/AuthProvider";
-import Login from "../../pages/Login";
-
-function AccessRouter() {
-  const { authenticated } = useContext(AuthContext);
-
-  return authenticated ? <Outlet /> : <Login />;
+function AccessRouter({ authenticated, redirectPath = "/signin", children }) {
+  if (!authenticated) {
+    return <Navigate to={redirectPath} replace />;
+  }
+  return children ? children : <Outlet />;
 }
 
 export default AccessRouter;

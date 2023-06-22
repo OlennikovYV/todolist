@@ -4,12 +4,6 @@
   box-sizing: border-box;
 }
 
-html {
-  font-family: "Nunito", sans-serif;
-  font-size: 22px;
-  color: #555;
-}
-
 .container-login {
   display: flex;
   justify-content: center;
@@ -17,10 +11,11 @@ html {
   margin: 0 auto;
   min-height: 100vh;
   background-color: rgb(216, 237, 252);
+  color: #444;
 }
 
 .form-login {
-  width: 420px;
+  width: 300px;
   padding: 1rem;
   background-color: rgba(170, 170, 190, 0.4);
 }
@@ -35,9 +30,7 @@ form {
 
 input[type="text"],
 input[type="password"] {
-  font-family: sans-serif;
-  font-size: 0.8rem;
-  margin-top: 0.5rem;
+  margin-top: $margin-top-0_5rem;
   padding: 0.25rem;
   padding-left: 0.3rem;
   border-color: #fefefe;
@@ -48,5 +41,4 @@ input[type="password"] {
 .login-password,
 .login-button {
   margin-top: 1rem;
-  font-size: 0.8rem;
 }

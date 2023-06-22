@@ -17,7 +17,7 @@
 .modal-content section {
   display: flex;
   flex-direction: row;
-  margin-top: 0.5rem;
+  margin-top: $margin-top-0_5rem;
 }
 
 .modal-content section .title {
@@ -36,7 +36,6 @@
   width: 11rem;
   padding: 0.25rem;
   padding-left: 0.4rem;
-  font-size: 22px;
   border-radius: 0;
 }
 

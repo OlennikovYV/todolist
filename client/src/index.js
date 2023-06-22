@@ -2,14 +2,18 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import { BrowserRouter as Router } from "react-router-dom";
 
-import "./index.css";
-import Todo from "./Todo";
+import { AuthProvider } from "./context/AuthProvider";
+import RoutesApp from "./routes/RoutesApp";
+
+import "./index.scss";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     <Router>
-      <Todo />
+      <AuthProvider>
+        <RoutesApp />
+      </AuthProvider>
     </Router>
   </React.StrictMode>
 );

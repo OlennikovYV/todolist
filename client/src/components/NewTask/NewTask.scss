@@ -12,13 +12,12 @@
 .modal-content section {
   display: flex;
   flex-direction: row;
-  margin-top: 0.5rem;
+  margin-top: $margin-top-0_5rem;
 }
 
 .modal-content section .title {
   text-align: end;
   padding-right: 0.5rem;
-  font-size: 0.8rem;
   width: 9rem;
 }
 
@@ -32,7 +31,6 @@
   width: 11rem;
   padding: 0.25rem;
   padding-left: 0.4rem;
-  font-size: 0.8rem;
   border-radius: 0;
 }
 
@@ -43,4 +41,8 @@
 
 .modal-content .create-at {
   background-color: #eee;
+}
+
+#create-task {
+  padding-bottom: 0.5rem;
 }

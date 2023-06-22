@@ -7,6 +7,7 @@ import AuthContext from "../../context/AuthProvider";
 import Modal from "../Modal/Modal";
 import NewTask from "../NewTask/NewTask";
 import Task from "../Task/Task";
+import TaskListHeader from "../TaskListHeader/TaskListHeader";
 
 import { fioFormat } from "../../utils/formatField/formatField.js";
 
@@ -19,7 +20,7 @@ function TaskList() {
 
   const { message, taskList, getAllTasks, sortUpdateAt, sortResponsibleId } =
     useContext(GlobalTaskContext);
-  const { auth, setAuthenticated } = useContext(AuthContext);
+  const { auth, setAuth, setAuthenticated } = useContext(AuthContext);
 
   const [, , removeStorage] = useLocalStorage("user", "{}");
 
@@ -29,7 +30,7 @@ function TaskList() {
   }, []);
 
   return (
-    <div className='container'>
+    <div className='container-task-list'>
       <div className='panel-header'>
         <span className='account-name'>
           {auth.supervisorid ? "сотрудник" : "руководитель"}
@@ -42,6 +43,7 @@ function TaskList() {
           onClick={() => {
             removeStorage();
             setAuthenticated(false);
+            setAuth(null);
           }}
         >
           Выйти
@@ -107,17 +109,7 @@ function TaskList() {
         </Modal>
       </div>
       <div className='container-list'>
-        <div className='task header'>
-          <div className='caption'>Заголовок</div>
-          <div className='border-inset'></div>
-          <div className='priority'>Приоритет</div>
-          <div className='border-inset'></div>
-          <div className='date-complete'>Дата окончания</div>
-          <div className='border-inset'></div>
-          <div className='fio'>Ф.И.О.</div>
-          <div className='border-inset'></div>
-          <div className='status'>Статус</div>
-        </div>
+        <TaskListHeader />
 
         {taskList.length ? (
           taskList.map((task) => (

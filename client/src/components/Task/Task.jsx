@@ -22,8 +22,8 @@ function Task({ task, selectedGroupDate }) {
   if (loading) return <></>;
   if (error) return <pre>{JSON.stringify(error, null, 2)}</pre>;
 
-  function setCaptionColor() {
-    const className = "caption";
+  function setColorTask() {
+    const className = "task";
     if (task.status === "выполнена") {
       return `${className} green`;
     } else if (
@@ -52,7 +52,7 @@ function Task({ task, selectedGroupDate }) {
       if (task.status === "к выполнению" || task.status === "выполняется") {
         return `${classTask}`;
       } else {
-        return `${classTask} hidden`;
+        return `hidden`;
       }
     }
 
@@ -78,14 +78,26 @@ function Task({ task, selectedGroupDate }) {
     if (isDateInPeriod) {
       return `${classTask}`;
     } else {
-      return `${classTask} hidden`;
+      return `hidden`;
     }
+  }
+
+  function checkTask() {
+    let totalClass = "hidden";
+
+    const showClass = checkShow();
+
+    if (showClass !== "hidden") {
+      totalClass = `${showClass} ${setColorTask()}`;
+    }
+
+    return totalClass;
   }
 
   return (
     <>
-      <div className={checkShow()} onDoubleClick={() => setModal(true)}>
-        <div className={setCaptionColor()}>{task.caption}</div>
+      <div className={checkTask()} onDoubleClick={() => setModal(true)}>
+        <div className='caption'>{task.caption}</div>
         <div className='border-inset'></div>
         <div className='priority'>{task.priority}</div>
         <div className='border-inset'></div>

@@ -11,8 +11,6 @@ import FooterModal from "../FooterModal/FooterModal";
 
 import { dateFormat, fioFormat } from "../../utils/formatField/formatField.js";
 
-import "./NewTask.css";
-
 function NewTask({ onClose }) {
   const captionRef = useRef();
   const descriptionRef = useRef();

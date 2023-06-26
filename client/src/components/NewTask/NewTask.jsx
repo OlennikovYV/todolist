@@ -8,10 +8,13 @@ import globalTaskContext from "../../context/GlobalTaskProvider";
 
 import HeaderModal from "../HeaderModal/HeaderModal";
 import FooterModal from "../FooterModal/FooterModal";
+import FormWrapper from "../../UI/FormWrapper/FormWrapper";
 
 import { dateFormat, fioFormat } from "../../utils/formatField/formatField.js";
 
 function NewTask({ onClose }) {
+  const formId = "create-task";
+
   const captionRef = useRef();
   const descriptionRef = useRef();
   const priorityRef = useRef();
@@ -31,6 +34,8 @@ function NewTask({ onClose }) {
   function handleSubmit(event) {
     let newTask, newPriority, newCompletion_at;
     const createDataTime = moment(create_atRef.current.value)._d;
+
+    event.preventDefault();
 
     switch (priorityRef.current.value) {
       case "low":
@@ -61,8 +66,6 @@ function NewTask({ onClose }) {
       responsibleid: responsibleidRef.current.value,
     };
 
-    event.preventDefault();
-
     addTask(newTask);
     onClose();
   }
@@ -75,7 +78,11 @@ function NewTask({ onClose }) {
       <HeaderModal title={"Новая заявка"} onClose={onClose} />
       <div className='modal-body'>
         <div className='modal-content'>
-          <form id='create-task' onSubmit={handleSubmit}>
+          <FormWrapper
+            className='padding-bottom_05rem'
+            id={formId}
+            onSubmit={handleSubmit}
+          >
             <section>
               <div className='title'>Заголовок:</div>
               <input
@@ -104,7 +111,7 @@ function NewTask({ onClose }) {
             <section>
               <div className='title'>Дата создания:</div>
               <input
-                className='create-at'
+                className='bg-color_disabled-input'
                 defaultValue={dateFormat(new Date())}
                 readOnly
                 ref={create_atRef}
@@ -136,14 +143,14 @@ function NewTask({ onClose }) {
                 <option value='отменена'>отменена</option>
               </select>
             </section>
-          </form>
+          </FormWrapper>
         </div>
       </div>
       <FooterModal
         isShow={true}
         onOk={handleSubmit}
         onCancel={onClose}
-        id='create-task'
+        id={formId}
       />
     </>
   );

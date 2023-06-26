@@ -6,11 +6,20 @@ import AuthContext from "../../context/AuthProvider";
 
 import HeaderModal from "../HeaderModal/HeaderModal";
 import FooterModal from "../FooterModal/FooterModal";
+import FormWrapper from "../../UI/FormWrapper/FormWrapper";
 
 import { dateFormat, fioFormat } from "../../utils/formatField/formatField.js";
 
 function EditTask({ task, onClose }) {
+  const formId = "edit-task";
+
   const { auth } = useContext(AuthContext);
+
+  function handleSubmit(event) {
+    event.preventDefault();
+
+    onClose();
+  }
 
   const {
     data: responsibleList,
@@ -29,7 +38,11 @@ function EditTask({ task, onClose }) {
       />
       <div className='modal-body'>
         <div className='modal-content'>
-          <form>
+          <FormWrapper
+            className='padding-bottom_05rem'
+            id={formId}
+            onSubmit={handleSubmit}
+          >
             <section>
               <div className='title'>Заголовок:</div>
               <input
@@ -88,10 +101,15 @@ function EditTask({ task, onClose }) {
                 <option value='отменена'>отменена</option>
               </select>
             </section>
-          </form>
+          </FormWrapper>
         </div>
       </div>
-      <FooterModal isShow={true} onOk={onClose} onCancel={onClose} />
+      <FooterModal
+        isShow={true}
+        onOk={handleSubmit}
+        onCancel={onClose}
+        id={formId}
+      />
     </>
   );
 }

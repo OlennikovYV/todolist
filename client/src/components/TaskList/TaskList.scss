@@ -70,6 +70,7 @@
   background-color: #fefefe;
   color: #444;
   overflow: hidden;
+  user-select: none;
 
   &:first-child {
     border: 1px solid #999;

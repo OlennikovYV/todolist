@@ -5,6 +5,8 @@ import { useLocalStorage } from "react-use";
 
 import AuthContext from "../context/AuthProvider";
 
+import FormWrapper from "../UI/FormWrapper/FormWrapper";
+
 function Login() {
   const { setAuth, setAuthenticated } = useContext(AuthContext);
   const [valueStrorage, setValueStorage] = useLocalStorage("user", "{}");
@@ -82,7 +84,11 @@ function Login() {
             <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"}>
               {errMsg}
             </p>
-            <form onSubmit={handleSubmit}>
+            <FormWrapper
+              className='bg-color_dark width_300px padding_1rem'
+              id='sign-in'
+              onSubmit={handleSubmit}
+            >
               <label className='login-user' htmlFor='username'>
                 Пользователь:
               </label>
@@ -107,7 +113,7 @@ function Login() {
                 required
               />
               <button className='login-button'>Войти</button>
-            </form>
+            </FormWrapper>
           </section>
         </div>
       )}

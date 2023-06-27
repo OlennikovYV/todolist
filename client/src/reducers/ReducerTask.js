@@ -4,7 +4,7 @@ export const initialStateTask = {
   success: null,
 };
 
-export const ActionTask = (state, action) => {
+export const ReducerTask = (state, action) => {
   switch (action.type) {
     case "GET_ALL_TASKS":
       return {

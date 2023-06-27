@@ -4,9 +4,9 @@ import useAxiosGet from "../../hooks/fetch";
 
 import AuthContext from "../../context/AuthProvider";
 
-import HeaderModal from "../HeaderModal/HeaderModal";
-import FooterModal from "../FooterModal/FooterModal";
-import FormWrapper from "../../UI/FormWrapper/FormWrapper";
+import HeaderModal from "../../components/HeaderModal";
+import FooterModal from "../../components/FooterModal";
+import FormWrapper from "../../components/FormWrapper";
 
 import { dateFormat, fioFormat } from "../../utils/formatField/formatField.js";
 

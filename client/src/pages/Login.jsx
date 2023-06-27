@@ -5,7 +5,7 @@ import { useLocalStorage } from "react-use";
 
 import AuthContext from "../context/AuthProvider";
 
-import FormWrapper from "../UI/FormWrapper/FormWrapper";
+import FormWrapper from "../components/FormWrapper";
 
 function Login() {
   const { setAuth, setAuthenticated } = useContext(AuthContext);

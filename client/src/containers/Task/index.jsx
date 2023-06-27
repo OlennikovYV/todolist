@@ -3,8 +3,8 @@ import moment from "moment";
 
 import useAxiosGet from "../../hooks/fetch";
 
-import Modal from "../Modal/Modal";
-import EditTask from "../EditTask/EditTask";
+import Modal from "../Modal";
+import EditTask from "../EditTask";
 
 import { dateFormat, fioFormat } from "../../utils/formatField/formatField.js";
 

@@ -4,10 +4,10 @@ import { useLocalStorage } from "react-use";
 import GlobalTaskContext from "../../context/GlobalTaskProvider";
 import AuthContext from "../../context/AuthProvider";
 
-import Modal from "../Modal/Modal";
-import NewTask from "../NewTask/NewTask";
-import Task from "../Task/Task";
-import TaskListHeader from "../TaskListHeader/TaskListHeader";
+import Modal from "../../containers/Modal";
+import NewTask from "../NewTask";
+import Task from "../Task";
+import TaskListHeader from "../../components/TaskListHeader";
 
 import { fioFormat } from "../../utils/formatField/formatField.js";
 

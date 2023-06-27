@@ -1,15 +1,15 @@
 import { useReducer } from "react";
 import axios from "axios";
 
-import { initialStateTask, ActionTask } from "../actions/ActionTask";
+import { initialStateTask, ReducerTask } from "../reducers/ReducerTask.js";
 
 import {
   sortByFieldDate,
   sortByFieldNumber,
 } from "../utils/sortByField/sortByField.js";
 
-const ReducerTask = () => {
-  const [state, dispatch] = useReducer(ActionTask, initialStateTask);
+const ActionTask = () => {
+  const [state, dispatch] = useReducer(ReducerTask, initialStateTask);
 
   async function getAllTasks(authenticationID) {
     try {
@@ -83,4 +83,4 @@ const ReducerTask = () => {
   };
 };
 
-export default ReducerTask;
+export default ActionTask;

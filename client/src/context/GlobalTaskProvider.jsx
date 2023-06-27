@@ -1,6 +1,6 @@
 import { createContext } from "react";
 
-import ReducerTask from "../reducers/ReducerTask";
+import ActionTask from "../actions/ActionTask";
 
 const GlobalTaskContext = createContext({});
 
@@ -14,7 +14,7 @@ export const GlobalTaskProvider = ({ children }) => {
     addTask,
     sortUpdateAt,
     sortResponsibleId,
-  } = ReducerTask();
+  } = ActionTask();
 
   return (
     <GlobalTaskContext.Provider

@@ -37,22 +37,6 @@
   }
 }
 
-.button-control {
-  & button {
-    margin-right: 0.25rem;
-  }
-}
-
-.group {
-  &:not(:last-child) {
-    margin-right: 0.25rem;
-  }
-
-  &.active {
-    background-color: rgb(212, 212, 222);
-  }
-}
-
 .container-list {
   width: 90%;
   margin-top: $margin-top-0_5rem;

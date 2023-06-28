@@ -1,20 +1,30 @@
 import React from "react";
 
-function FooterModal({ isShow, onOk, onCancel, id = "" }) {
-  return isShow ? (
-    <footer className='modal-footer'>
-      {!onOk ? null : (
-        <button className='button-ok' onClick={onOk} type='submit' form={id}>
-          Готово
-        </button>
-      )}
-      {!onCancel ? null : (
-        <button className='button-cancel' onClick={onCancel}>
-          Отмена
-        </button>
-      )}
-    </footer>
-  ) : null;
+import Button from "../Button";
+
+function FooterModal({ isShow, onOk, onCancel, formId = "" }) {
+  return (
+    isShow && (
+      <footer className='modal-footer'>
+        {onOk && (
+          <Button
+            className='modal-button-footer'
+            onClick={onOk}
+            type='submit'
+            form={formId}
+            text='Готово'
+          />
+        )}
+        {onCancel && (
+          <Button
+            className='modal-button-footer'
+            onClick={onCancel}
+            text='Отмена'
+          />
+        )}
+      </footer>
+    )
+  );
 }
 
 export default FooterModal;

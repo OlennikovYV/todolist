@@ -3,7 +3,6 @@ html {
 }
 
 input,
-button,
 select,
 textarea {
   font-family: "Roboto";
@@ -11,14 +10,6 @@ textarea {
   border: 1px solid rgb(181, 198, 211);
   color: #444;
   outline: none;
-}
-
-button {
-  padding: 0.5rem;
-}
-
-button:hover {
-  background-color: #fefefe;
 }
 
 .margin-top-1rem {

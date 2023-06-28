@@ -6,6 +6,7 @@ import { useLocalStorage } from "react-use";
 import AuthContext from "../context/AuthProvider";
 
 import FormWrapper from "../components/FormWrapper";
+import Button from "../components/Button";
 
 function Login() {
   const { setAuth, setAuthenticated } = useContext(AuthContext);
@@ -112,7 +113,7 @@ function Login() {
                 value={pwd}
                 required
               />
-              <button className='login-button'>Войти</button>
+              <Button className='login' text='Войти' />
             </FormWrapper>
           </section>
         </div>

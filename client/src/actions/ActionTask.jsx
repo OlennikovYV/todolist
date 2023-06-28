@@ -19,8 +19,6 @@ const ActionTask = () => {
 
       sortByFieldDate(response.data.taskList, "update_at");
 
-      console.log(response);
-
       dispatch({
         type: "GET_ALL_TASKS",
         payload: response.data,

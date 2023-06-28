@@ -82,11 +82,8 @@ function Login() {
       ) : (
         <div className='container-login'>
           <section className='form-login'>
-            <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"}>
-              {errMsg}
-            </p>
             <FormWrapper
-              className='bg-color_dark width_300px padding_1rem'
+              className='form-login'
               id='sign-in'
               onSubmit={handleSubmit}
             >
@@ -115,6 +112,11 @@ function Login() {
               />
               <Button className='login' text='Войти' />
             </FormWrapper>
+            <div className='error'>
+              <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"}>
+                {errMsg}
+              </p>{" "}
+            </div>
           </section>
         </div>
       )}

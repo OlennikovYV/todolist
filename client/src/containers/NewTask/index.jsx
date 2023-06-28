@@ -79,7 +79,7 @@ function NewTask({ onClose }) {
       <div className='modal-body'>
         <div className='modal-content'>
           <FormWrapper
-            className='padding-bottom_05rem'
+            className='form-task'
             id={formId}
             onSubmit={handleSubmit}
           >

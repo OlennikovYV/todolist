@@ -10,7 +10,7 @@ export const ReducerTask = (state, action) => {
       return {
         ...state,
         success: action.payload.success,
-        tasks: action.payload,
+        tasks: action.payload.taskList,
         message: action.payload.message,
       };
     case "ADD_TASK":

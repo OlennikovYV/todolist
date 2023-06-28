@@ -16,7 +16,7 @@ function Task({ task, selectedGroupDate }) {
     loading,
     error,
   } = useAxiosGet(
-    `http://localhost:3001/api/user/${task.responsibleid}/responsible`
+    `http://localhost:3001/api/user/responsible/${task.responsibleid}`
   );
 
   if (loading) return <></>;
@@ -105,9 +105,9 @@ function Task({ task, selectedGroupDate }) {
         <div className='border-inset'></div>
         <div className='fio'>
           {fioFormat(
-            responsible.lastname,
-            responsible.firstname,
-            responsible.fathername
+            responsible.user.lastname,
+            responsible.user.firstname,
+            responsible.user.fathername
           )}
         </div>
         <div className='border-inset'></div>

@@ -22,10 +22,10 @@ function EditTask({ task, onClose }) {
   }
 
   const {
-    data: responsibleList,
+    data: responsible,
     loading,
     error,
-  } = useAxiosGet(`http://localhost:3001/api/user/${auth.id}/responsible/list`);
+  } = useAxiosGet(`http://localhost:3001/api/user/responsible`);
 
   if (loading) return <></>;
   if (error) return <pre>{JSON.stringify(error, null, 2)}</pre>;
@@ -80,12 +80,8 @@ function EditTask({ task, onClose }) {
             </section>
             <section className='container-responsible'>
               <div className='title'>Ответственный:</div>
-              <select
-                defaultValue={task.responsibleid}
-                onChange={() => {}}
-                disabled={auth.supervisorid ? true : false}
-              >
-                {responsibleList.map((data) => (
+              <select defaultValue={task.responsibleid} onChange={() => {}}>
+                {responsible.list.map((data) => (
                   <option value={data.id} key={data.id}>
                     {fioFormat(data.lastname, data.firstname, data.fathername)}
                   </option>

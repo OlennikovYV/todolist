@@ -26,10 +26,10 @@ function NewTask({ onClose }) {
   const { addTask } = useContext(globalTaskContext);
 
   const {
-    data: responsibleList,
+    data: responsible,
     loading,
     error,
-  } = useAxiosGet(`http://localhost:3001/api/user/${auth.id}/responsible/list`);
+  } = useAxiosGet(`http://localhost:3001/api/user/responsible`);
 
   function handleSubmit(event) {
     let newTask, newPriority, newCompletion_at;
@@ -120,10 +120,10 @@ function NewTask({ onClose }) {
             <section className='container-responsible'>
               <div className='title'>Ответственный:</div>
               <select
-                defaultValue={responsibleList[0].id}
+                defaultValue={responsible.list[0].id}
                 ref={responsibleidRef}
               >
-                {responsibleList.map((data) => (
+                {responsible.list.map((data) => (
                   <option value={data.id} key={data.id}>
                     {fioFormat(data.lastname, data.firstname, data.fathername)}
                   </option>

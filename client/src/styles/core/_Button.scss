@@ -1,12 +1,9 @@
-$gray: rgb(240, 240, 240);
-$dark: rgb(68, 68, 68);
-
 button {
   margin: 0 10px;
   padding: 8px;
-  border: 1px solid darken($gray, 9%);
+  border: 1px solid darken($gray-light, 9%);
   border-radius: 3px;
-  background-color: $gray;
+  background-color: $gray-light;
   font-size: 16px;
   font-family: "Roboto";
   outline: none;
@@ -14,27 +11,26 @@ button {
 
   &:active {
     transform: translateY(1px);
+    background-color: darken($gray-light, 12%);
   }
-
-  color: $dark;
 
   &:hover {
-    background-color: darken($gray, 3%);
-    color: $dark;
-  }
+    background-color: darken($gray-light, 3%);
+    color: $black-light;
 
-  &.active {
-    background-color: darken($gray, 12%);
+    &:disabled {
+      color: $black-alpha;
+    }
   }
 
   &.login {
-    margin-top: 24px;
+    margin-top: 20px;
   }
 
   &.modal-button-footer {
     width: 100px;
     margin-right: 0.6rem;
-    margin-top: $margin-top-0_5rem;
+    margin-top: 0.5rem;
     margin-bottom: 0.5rem;
   }
 

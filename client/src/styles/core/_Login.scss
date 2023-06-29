@@ -4,23 +4,61 @@
   align-items: center;
   margin: 0 auto;
   min-height: 100vh;
-  background-color: rgb(216, 237, 252);
+  background-color: $blue-light;
   color: #444;
 }
 
-input[type="text"],
-input[type="password"] {
-  margin-top: $margin-top-0_5rem;
-  padding: 0.25rem;
-  padding-left: 0.3rem;
-  border-color: #fefefe;
-  border: none;
+// input[type="text"],
+// input[type="password"] {
+//   width: 100%;
+//   margin-top: 10px;
+//   padding: 5px;
+//   border-color: #fefefe;
+//   border: none;
+// }
+
+.input-login {
+  position: relative;
 }
 
-.login-user,
-.login-password {
-  margin-top: 1rem;
+.input-login input {
+  display: block;
+  width: 100%;
+  margin-top: 30px;
+  padding: 5px;
+  border: 1px solid darken($gray-light, 9%);
+  background: #fff;
+  color: $black-light;
+  font-size: 16px;
+  font-family: inherit;
+  outline: none;
+  cursor: pointer;
 }
+
+.input-login label {
+  cursor: pointer;
+  display: block;
+  position: absolute;
+  left: 5px;
+  top: 33px;
+  color: $black-alpha;
+  font-size: 20px;
+  -webkit-transition: 0.2s;
+  transition: 0.2s;
+}
+
+.input-login input:valid + label,
+.input-login input:focus + label,
+.input-login input:autofill + label {
+  top: 10px;
+  color: $black;
+  font-size: 12px;
+}
+
+// .login-user,
+// .login-password {
+//   margin-top: 1rem;
+// }
 
 .errmsg {
   text-align: center;

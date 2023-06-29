@@ -92,21 +92,19 @@ function TaskList() {
           </select>
         </div>
         <div className='filtred-column'>
-          {auth.supervisorid ? null : (
-            <>
-              <Button
-                id='sort-update-at'
-                className='active'
-                onClick={handleSort}
-                text='Без группировки'
-              />
-              <Button
-                id='sort-responsible'
-                onClick={handleSort}
-                text='По ответственным'
-              />
-            </>
-          )}
+          <Button
+            id='sort-update-at'
+            className='active'
+            disabled={auth.supervisorid}
+            onClick={handleSort}
+            text='Без группировки'
+          />
+          <Button
+            id='sort-responsible'
+            disabled={auth.supervisorid}
+            onClick={handleSort}
+            text='По ответственным'
+          />
         </div>
 
         <Modal isVisible={modal} onClose={() => setModal(false)}>

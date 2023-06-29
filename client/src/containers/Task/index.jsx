@@ -6,6 +6,8 @@ import useAxiosGet from "../../hooks/fetch";
 import Modal from "../Modal";
 import EditTask from "../EditTask";
 
+import BorderInset from "../../components/BorderInset";
+
 import { dateFormat, fioFormat } from "../../utils/formatField/formatField.js";
 
 function Task({ task, selectedGroupDate }) {
@@ -23,22 +25,19 @@ function Task({ task, selectedGroupDate }) {
   if (error) return <pre>{JSON.stringify(error, null, 2)}</pre>;
 
   function setColorTask() {
-    const className = "task";
     if (task.status === "выполнена") {
-      return `${className} green`;
+      return "green";
     } else if (
       (task.status === "к выполнению" || task.status === "выполняется") &&
       new Date() - new Date(task.completion_at) > 0
     ) {
-      return `${className} red`;
+      return "red";
     } else {
-      return `${className} gray`;
+      return "gray";
     }
   }
 
-  function checkShow() {
-    const classTask = "task";
-
+  function isShow() {
     let endPeriod;
     let isDateInPeriod;
 
@@ -50,15 +49,15 @@ function Task({ task, selectedGroupDate }) {
 
     if (isExpired) {
       if (task.status === "к выполнению" || task.status === "выполняется") {
-        return `${classTask}`;
+        return true;
       } else {
-        return `hidden`;
+        return false;
       }
     }
 
     if (selectedGroupDate === "future") {
       if (checkDate.isAfter(startPeriod)) {
-        return `${classTask}`;
+        return true;
       }
     }
 
@@ -76,19 +75,17 @@ function Task({ task, selectedGroupDate }) {
     isDateInPeriod = checkDate.isBetween(startPeriod, endPeriod);
 
     if (isDateInPeriod) {
-      return `${classTask}`;
+      return true;
     } else {
-      return `hidden`;
+      return false;
     }
   }
 
   function checkTask() {
     let totalClass = "hidden";
 
-    const showClass = checkShow();
-
-    if (showClass !== "hidden") {
-      totalClass = `${showClass} ${setColorTask()}`;
+    if (isShow()) {
+      totalClass = `task ${setColorTask()}`;
     }
 
     return totalClass;
@@ -97,21 +94,25 @@ function Task({ task, selectedGroupDate }) {
   return (
     <>
       <div className={checkTask()} onDoubleClick={() => setModal(true)}>
-        <div className='caption'>{task.caption}</div>
-        <div className='border-inset'></div>
-        <div className='priority'>{task.priority}</div>
-        <div className='border-inset'></div>
-        <div className='date-complete'>{dateFormat(task.completion_at)}</div>
-        <div className='border-inset'></div>
-        <div className='fio'>
+        <div className='field-id'>{task.id}</div>
+        <BorderInset />
+        <div className='field-caption'>{task.caption}</div>
+        <BorderInset />
+        <div className='field-priority'>{task.priority}</div>
+        <BorderInset />
+        <div className='field-date-complete'>
+          {dateFormat(task.completion_at)}
+        </div>
+        <BorderInset />
+        <div className='field-fio'>
           {fioFormat(
             responsible.user.lastname,
             responsible.user.firstname,
             responsible.user.fathername
           )}
         </div>
-        <div className='border-inset'></div>
-        <span className='status'>{task.status}</span>
+        <BorderInset />
+        <span className='field-status'>{task.status}</span>
 
         {/* Для проверки */}
         {/* <span>{task.responsibleid}</span> */}

@@ -6,12 +6,12 @@
   margin: 0 auto;
   width: 100vw;
   min-height: 100vh;
-  background-color: rgb(202, 234, 255);
+  background-color: $blue-light;
 }
 
 .panel-header {
   width: 80%;
-  margin-top: $margin-top-0_5rem;
+  margin-top: 0.5rem;
   text-align: right;
 
   & .account-name {
@@ -30,7 +30,7 @@
   flex-direction: row;
   justify-content: space-between;
   width: 80%;
-  margin-top: $margin-top-0_5rem;
+  margin-top: 0.5rem;
 
   & .filtred-date-at select {
     padding: 0.5rem;
@@ -39,7 +39,7 @@
 
 .container-list {
   width: 90%;
-  margin-top: $margin-top-0_5rem;
+  margin-top: 0.5rem;
 }
 
 .task {
@@ -48,7 +48,7 @@
   padding: 0.3rem;
   padding-left: 0.8rem;
   padding-right: 0.8rem;
-  border: 1px solid #999;
+  border: 1px solid darken($gray-light, 27%);
   border-top: none;
   border-radius: 0.2rem;
   background-color: #fefefe;
@@ -57,7 +57,7 @@
   user-select: none;
 
   &:first-child {
-    border: 1px solid #999;
+    border: 1px solid darken($gray-light, 27%);
   }
 
   & .notask {
@@ -67,40 +67,41 @@
   }
 
   &.green {
-    color: green;
+    color: $black-light;
+    background: $green-light;
   }
 
   &.red {
-    color: red;
+    color: $black-light;
+    background: $red-light;
   }
 
   &.gray {
-    color: gray;
+    color: $black-light;
+    background: $gray-light;
   }
 }
 
-.border-inset {
-  width: 0px;
-  margin-right: 5px;
-  border-left: 1px #eee solid;
+.field-id {
+  min-width: 35px;
 }
 
-.caption {
+.field-caption {
   min-width: 150px;
 }
 
-.priority {
+.field-priority {
   min-width: 110px;
 }
 
-.date-complete {
+.field-date-complete {
   min-width: 210px;
 }
 
-.fio {
+.field-fio {
   min-width: 200px;
 }
 
-.status {
+.field-status {
   min-width: 150px;
 }

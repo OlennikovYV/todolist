@@ -1,6 +1,6 @@
-import React from "react";
+import React, { forwardRef } from "react";
 
-function Button(props) {
+const Button = forwardRef(function Button(props, ref) {
   const { className, disabled, form, id, tabIndex, text, type, onClick } =
     props;
   const classNames = `${className}`;
@@ -11,6 +11,7 @@ function Button(props) {
       disabled={disabled}
       form={form}
       id={id}
+      ref={ref}
       onClick={onClick}
       tabIndex={tabIndex}
       type={type}
@@ -18,6 +19,6 @@ function Button(props) {
       {text}
     </button>
   );
-}
+});
 
 export default Button;

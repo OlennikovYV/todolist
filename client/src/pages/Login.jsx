@@ -87,29 +87,34 @@ function Login() {
               id='sign-in'
               onSubmit={handleSubmit}
             >
-              <label className='login-user' htmlFor='username'>
-                Пользователь:
-              </label>
-              <input
-                type='text'
-                id='username'
-                ref={userRef}
-                autoComplete='off'
-                onChange={(e) => setUser(e.target.value)}
-                value={user}
-                required
-              />
+              <div className='input-login'>
+                <input
+                  type='text'
+                  id='username'
+                  ref={userRef}
+                  autoComplete='off'
+                  onChange={(e) => setUser(e.target.value)}
+                  value={user}
+                  required
+                />
+                <label className='login-user' htmlFor='username'>
+                  Логин
+                </label>
+              </div>
 
-              <label className='login-password' htmlFor='password'>
-                Пароль:
-              </label>
-              <input
-                type='password'
-                id='password'
-                onChange={(e) => setPwd(e.target.value)}
-                value={pwd}
-                required
-              />
+              <div className='input-login'>
+                <input
+                  type='password'
+                  id='password'
+                  onChange={(e) => setPwd(e.target.value)}
+                  value={pwd}
+                  required
+                />
+                <label className='login-password' htmlFor='password'>
+                  Пароль
+                </label>
+              </div>
+
               <Button className='login' text='Войти' />
             </FormWrapper>
             <div className='error'>

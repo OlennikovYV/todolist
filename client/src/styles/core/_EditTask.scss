@@ -1,6 +1,6 @@
 .modal-body {
   flex: 1 1 auto;
-  background-color: rgb(216, 237, 252);
+  background-color: $blue-light;
   overflow: auto;
 }
 
@@ -15,7 +15,7 @@
 .modal-content section {
   display: flex;
   flex-direction: row;
-  margin-top: $margin-top-0_5rem;
+  margin-top: 0.5rem;
 }
 
 .modal-content section .title {
@@ -35,6 +35,12 @@
   padding: 0.25rem;
   padding-left: 0.4rem;
   border-radius: 0;
+}
+
+.modal-content textarea:focus,
+.modal-content input:focus,
+.modal-content select:focus {
+  border: 1px solid $black-light;
 }
 
 .modal-content .caption,

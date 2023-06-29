@@ -1,17 +1,22 @@
 import React from "react";
 
+import BorderInset from "../BorderInset";
+import Caption from "../Caption";
+
 function TaskListHeader() {
   return (
     <div className='task header'>
-      <div className='caption'>Заголовок</div>
-      <div className='border-inset'></div>
-      <div className='priority'>Приоритет</div>
-      <div className='border-inset'></div>
-      <div className='date-complete'>Дата окончания</div>
-      <div className='border-inset'></div>
-      <div className='fio'>Ф.И.О.</div>
-      <div className='border-inset'></div>
-      <div className='status'>Статус</div>
+      <Caption className='field-id' text='№№' />
+      <BorderInset />
+      <Caption className='field-caption' text='Заголовок' />
+      <BorderInset />
+      <Caption className='field-priority' text='Приоритет' />
+      <BorderInset />
+      <Caption className='field-date-complete' text='Дата окончания' />
+      <BorderInset />
+      <Caption className='field-fio' text='Ф.И.О.' />
+      <BorderInset />
+      <Caption className='field-status' text='Статус' />
     </div>
   );
 }

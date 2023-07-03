@@ -1,5 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import moment from "moment";
+
+import GlobalTaskContext from "../../context/GlobalTaskProvider";
 
 import useAxiosGet from "../../hooks/fetch";
 
@@ -12,6 +14,8 @@ import { dateFormat, fioFormat } from "../../utils/formatField/formatField.js";
 
 function Task({ task, selectedGroupDate }) {
   const [modal, setModal] = useState(false);
+
+  const { priorities } = useContext(GlobalTaskContext);
 
   const {
     data: responsible,
@@ -98,7 +102,13 @@ function Task({ task, selectedGroupDate }) {
         <BorderInset />
         <div className='field-caption'>{task.caption}</div>
         <BorderInset />
-        <div className='field-priority'>{task.priority}</div>
+        <div className='field-priority'>
+          {
+            priorities.filter(
+              (priority) => priority.id === task["priorityId"]
+            )[0].caption
+          }
+        </div>
         <BorderInset />
         <div className='field-date-complete'>
           {dateFormat(task.completion_at)}

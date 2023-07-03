@@ -19,11 +19,12 @@ function NewTask({ onClose }) {
   const descriptionRef = useRef();
   const priorityRef = useRef();
   const create_atRef = useRef();
+  const completion_at = useRef();
   const responsibleidRef = useRef();
   const statusRef = useRef();
 
   const { auth } = useContext(AuthContext);
-  const { addTask } = useContext(globalTaskContext);
+  const { priorities, addTask } = useContext(globalTaskContext);
 
   const {
     data: responsible,
@@ -32,42 +33,40 @@ function NewTask({ onClose }) {
   } = useAxiosGet(`http://localhost:3001/api/user/responsible`);
 
   function handleSubmit(event) {
-    let newTask, newPriority, newCompletion_at;
+    let newTask;
     const createDataTime = moment(create_atRef.current.value)._d;
+    const { id, period } = priorities.filter(
+      (priority) => priority.caption === priorityRef.current.value
+    )[0];
 
     event.preventDefault();
-
-    switch (priorityRef.current.value) {
-      case "low":
-        newPriority = "низкий";
-        newCompletion_at = moment(createDataTime).add(1, "days")._d;
-        break;
-      case "middle":
-        newPriority = "средний";
-        newCompletion_at = moment(createDataTime).add(6, "days")._d;
-        break;
-      case "high":
-        newPriority = "высокий";
-        newCompletion_at = moment(createDataTime).add(15, "days")._d;
-        break;
-      default:
-        newPriority = "";
-    }
 
     newTask = {
       caption: captionRef.current.value,
       description: descriptionRef.current.value,
       create_at: createDataTime,
       update_at: createDataTime,
-      completion_at: newCompletion_at,
-      priority: newPriority,
+      completion_at: moment(createDataTime).add(period, "days")._d,
+      priorityId: id,
       status: statusRef.current.value,
       creatorid: auth.id,
       responsibleid: responsibleidRef.current.value,
     };
 
     addTask(newTask);
+
     onClose();
+  }
+
+  function handleChangePriority() {
+    const createDataTime = moment(create_atRef.current.value)._d;
+    const { period } = priorities.filter(
+      (priority) => priority.caption === priorityRef.current.value
+    )[0];
+
+    completion_at.current.value = dateFormat(
+      moment(createDataTime).add(period, "days")._d
+    );
   }
 
   if (loading) return <></>;
@@ -102,10 +101,16 @@ function NewTask({ onClose }) {
             </section>
             <section>
               <div className='title'>Приоритет:</div>
-              <select defaultValue='low' onChange={() => {}} ref={priorityRef}>
-                <option value='low'>низкий</option>
-                <option value='middle'>средний</option>
-                <option value='high'>высокий</option>
+              <select
+                defaultValue={priorities[0].caption}
+                onChange={handleChangePriority}
+                ref={priorityRef}
+              >
+                {priorities.map((priority) => (
+                  <option key={priority.id} value={priority.caption}>
+                    {priority.caption}
+                  </option>
+                ))}
               </select>
             </section>
             <section>
@@ -115,6 +120,15 @@ function NewTask({ onClose }) {
                 defaultValue={dateFormat(new Date())}
                 readOnly
                 ref={create_atRef}
+              ></input>
+            </section>
+            <section>
+              <div className='title'>Дата завершения:</div>
+              <input
+                className='bg-color_disabled-input'
+                defaultValue={dateFormat(moment(new Date()).add(1, "days")._d)}
+                readOnly
+                ref={completion_at}
               ></input>
             </section>
             <section className='container-responsible'>

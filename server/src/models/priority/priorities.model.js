@@ -1,6 +1,6 @@
 module.exports = (sequelize, Sequelize) => {
-  const Task = sequelize.define(
-    "task",
+  const Priorities = sequelize.define(
+    "priorities",
     {
       id: {
         type: Sequelize.INTEGER,
@@ -11,13 +11,10 @@ module.exports = (sequelize, Sequelize) => {
       caption: {
         type: Sequelize.STRING,
         allowNull: false,
+        unique: true,
       },
       description: {
         type: Sequelize.STRING,
-        allowNull: false,
-      },
-      completion_at: {
-        type: Sequelize.DATE,
         allowNull: false,
       },
       create_at: {
@@ -30,15 +27,7 @@ module.exports = (sequelize, Sequelize) => {
         allowNull: false,
         defaultValue: Sequelize.NOW,
       },
-      status: {
-        type: Sequelize.STRING,
-        allowNull: false,
-      },
-      creatorid: {
-        type: Sequelize.INTEGER,
-        allowNull: false,
-      },
-      responsibleid: {
+      period: {
         type: Sequelize.INTEGER,
         allowNull: false,
       },
@@ -48,5 +37,5 @@ module.exports = (sequelize, Sequelize) => {
     }
   );
 
-  return Task;
+  return Priorities;
 };

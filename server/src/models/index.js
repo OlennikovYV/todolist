@@ -1,5 +1,5 @@
 const config = require("../config/db.config.js");
-const { Sequelize } = require("sequelize");
+const { Sequelize, DataTypes } = require("sequelize");
 
 const sequelize = new Sequelize(config.DB, config.USER, config.PASSWORD, {
   host: config.HOST,
@@ -20,5 +20,12 @@ db.sequelize = sequelize;
 
 db.user = require("./user/user.model.js")(sequelize, Sequelize);
 db.task = require("./task/task.model.js")(sequelize, Sequelize);
+db.priorities = require("./priority/priorities.model.js")(sequelize, Sequelize);
+
+db.priorities.hasMany(db.task, {
+  foreignKey: "priorityId",
+  as: "priority",
+});
+db.task.belongsTo(db.priorities);
 
 module.exports = db;

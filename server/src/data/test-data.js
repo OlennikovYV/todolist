@@ -1,5 +1,29 @@
 const bcrypt = require("bcryptjs");
 
+const priorityList = [
+  {
+    caption: "низкий",
+    description: "низкий",
+    create_at: Date.now(),
+    update_at: Date.now(),
+    period: 1,
+  },
+  {
+    caption: "средний",
+    description: "средний",
+    create_at: Date.now(),
+    update_at: Date.now(),
+    period: 6,
+  },
+  {
+    caption: "высокий",
+    description: "высокий",
+    create_at: Date.now(),
+    update_at: Date.now(),
+    period: 15,
+  },
+];
+
 const userList = [
   {
     firstname: "Юрий",
@@ -58,7 +82,7 @@ const taskList = [
     completion_at: "2023-06-11 16:01:12.347+05",
     create_at: Date.now(),
     update_at: "2023-06-05 17:31:34.271+05",
-    priority: "высокий",
+    priorityId: 3,
     status: "к выполнению",
     creatorid: 1,
     responsibleid: 3,
@@ -69,7 +93,7 @@ const taskList = [
     completion_at: "2023-06-15 12:12:33.002+05",
     create_at: Date.now(),
     update_at: "2023-06-05 21:12:41.371+05",
-    priority: "средний",
+    priorityId: 2,
     status: "к выполнению",
     creatorid: 1,
     responsibleid: 4,
@@ -80,7 +104,7 @@ const taskList = [
     completion_at: "2023-05-02 15:31:42.907+05",
     create_at: Date.now(),
     update_at: "2023-06-05 10:11:12.853+05",
-    priority: "низкий",
+    priorityId: 1,
     status: "выполняется",
     creatorid: 1,
     responsibleid: 3,
@@ -91,7 +115,7 @@ const taskList = [
     completion_at: "2023-05-02 15:31:42.907+05",
     create_at: Date.now(),
     update_at: "2023-06-05 09:31:34.271+05",
-    priority: "низкий",
+    priorityId: 1,
     status: "отменена",
     creatorid: 2,
     responsibleid: 6,
@@ -102,7 +126,7 @@ const taskList = [
     completion_at: "2023-06-09 14:44:23.654+05",
     create_at: Date.now(),
     update_at: "2023-06-04 09:09:09.271+05",
-    priority: "высокий",
+    priorityId: 3,
     status: "выполнена",
     creatorid: 1,
     responsibleid: 3,
@@ -113,7 +137,7 @@ const taskList = [
     completion_at: "2023-06-08 14:44:23.654+05",
     create_at: Date.now(),
     update_at: "2023-06-05 19:09:09.271+05",
-    priority: "высокий",
+    priorityId: 3,
     status: "выполняется",
     creatorid: 1,
     responsibleid: 3,
@@ -124,7 +148,7 @@ const taskList = [
     completion_at: "2023-06-17 14:44:23.654+05",
     create_at: Date.now(),
     update_at: "2023-06-01 19:09:09.271+05",
-    priority: "высокий",
+    priorityId: 3,
     status: "к выполнению",
     creatorid: 1,
     responsibleid: 4,
@@ -135,7 +159,7 @@ const taskList = [
     completion_at: "2023-06-09 14:44:23.654+05",
     create_at: Date.now(),
     update_at: "2023-06-05 09:59:29.271+05",
-    priority: "высокий",
+    priorityId: 3,
     status: "выполняется",
     creatorid: 1,
     responsibleid: 3,
@@ -146,7 +170,7 @@ const taskList = [
     completion_at: "2023-06-21 14:44:23.654+05",
     create_at: Date.now(),
     update_at: "2023-06-06 09:59:29.271+05",
-    priority: "низкий",
+    priorityId: 1,
     status: "выполняется",
     creatorid: 1,
     responsibleid: 3,
@@ -156,4 +180,5 @@ const taskList = [
 module.exports = {
   userList: userList,
   taskList: taskList,
+  priorityList: priorityList,
 };

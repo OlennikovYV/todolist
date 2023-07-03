@@ -10,8 +10,10 @@ export const GlobalTaskProvider = ({ children }) => {
     error,
     message,
     taskList,
+    priorities,
     getAllTasks,
     addTask,
+    getPriorities,
     sortUpdateAt,
     sortResponsibleId,
   } = ActionTask();
@@ -23,8 +25,10 @@ export const GlobalTaskProvider = ({ children }) => {
         error,
         message,
         taskList,
+        priorities,
         getAllTasks,
         addTask,
+        getPriorities,
         sortUpdateAt,
         sortResponsibleId,
       }}

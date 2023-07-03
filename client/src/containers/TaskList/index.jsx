@@ -17,14 +17,22 @@ function TaskList() {
   const [selectedGroupDate, setSelectedGroupDate] = useState("future");
   const [modal, setModal] = useState(false);
 
-  const { message, taskList, getAllTasks, sortUpdateAt, sortResponsibleId } =
-    useContext(GlobalTaskContext);
+  const {
+    message,
+    taskList,
+    getAllTasks,
+    getPriorities,
+    sortUpdateAt,
+    sortResponsibleId,
+  } = useContext(GlobalTaskContext);
+
   const { auth, setAuth, setAuthenticated } = useContext(AuthContext);
 
   const [, , removeStorage] = useLocalStorage("user", "{}");
 
   useEffect(() => {
     getAllTasks(auth.id);
+    getPriorities();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -77,6 +85,7 @@ function TaskList() {
           <Button
             onClick={() => {
               getAllTasks(auth.id);
+              getPriorities();
             }}
             text='Обновить'
           />

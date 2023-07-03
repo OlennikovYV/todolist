@@ -49,6 +49,24 @@ const ActionTask = () => {
     }
   }
 
+  async function getPriorities() {
+    try {
+      const response = await axios.get(
+        `http://localhost:3001/api/reference/priorities`
+      );
+
+      dispatch({
+        type: "GET_PRIORITIES",
+        payload: response.data,
+      });
+    } catch (err) {
+      dispatch({
+        type: "TASK_ERROR",
+        payload: err.response.data.error,
+      });
+    }
+  }
+
   function sortUpdateAt() {
     const tasks = state.tasks.slice(0);
 
@@ -76,8 +94,10 @@ const ActionTask = () => {
     error: state.error,
     message: state.message,
     taskList: state.tasks,
+    priorities: state.priorities,
     getAllTasks,
     addTask,
+    getPriorities,
     sortUpdateAt,
     sortResponsibleId,
   };

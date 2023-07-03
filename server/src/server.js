@@ -14,8 +14,10 @@ app.use(bodyParser.urlencoded({ extended: true }));
 const db = require("./models");
 const User = db.user;
 const Task = db.task;
+const Priorities = db.priorities;
 
 db.sequelize.sync({ force: true }).then(() => {
+  fillTestPriorities();
   fillTestUsers();
   fillTestTasks();
 });
@@ -31,6 +33,10 @@ require("./routes/user.routes")(app);
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}.`);
 });
+
+function fillTestPriorities() {
+  Priorities.bulkCreate(dataList.priorityList, { returning: true });
+}
 
 function fillTestUsers() {
   User.bulkCreate(dataList.userList, { returning: true });

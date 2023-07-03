@@ -1,6 +1,7 @@
 const db = require("../models");
 const Task = db.task;
 const User = db.user;
+const Priorities = db.priorities;
 
 exports.taskList = async (req, res) => {
   const id = req.params.id;
@@ -25,6 +26,12 @@ exports.taskList = async (req, res) => {
 
   if (isSupervisor) {
     Task.findAll({
+      include: [
+        {
+          model: Priorities,
+          as: "priority",
+        },
+      ],
       raw: true,
     })
       .then((task) => {
@@ -54,6 +61,12 @@ exports.taskList = async (req, res) => {
       where: {
         responsibleid: id,
       },
+      include: [
+        {
+          model: Priorities,
+          as: "priority",
+        },
+      ],
       raw: true,
     })
       .then((task) => {
@@ -129,6 +142,34 @@ exports.updateTask = async (req, res) => {
         success: false,
         error: err.message,
         message: "Невозможно обновить запись в базе данных",
+      });
+    });
+};
+
+exports.prioritiesList = async (req, res) => {
+  await Priorities.findAll({
+    raw: true,
+  })
+    .then((list) => {
+      if (!list) {
+        return res.status(200).send({
+          success: false,
+          prioritiesList: [],
+          message: "Справочник приоритетов пуст!",
+        });
+      }
+
+      res.status(200).send({
+        success: true,
+        prioritiesList: list,
+        message: "Справочник приоритетов успешно получен.",
+      });
+    })
+    .catch((err) => {
+      res.status(500).send({
+        success: false,
+        error: err.message,
+        message: "Ошибка сервера при получении справочника приоритетов",
       });
     });
 };

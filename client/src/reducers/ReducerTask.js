@@ -1,5 +1,6 @@
 export const initialStateTask = {
   tasks: [],
+  priorities: [],
   error: null,
   success: null,
 };
@@ -24,6 +25,13 @@ export const ReducerTask = (state, action) => {
       return {
         ...state,
         tasks: action.payload,
+      };
+    case "GET_PRIORITIES":
+      return {
+        ...state,
+        success: action.payload.success,
+        priorities: action.payload.prioritiesList,
+        message: action.payload.message,
       };
     case "SORT_RESPONSIBLEID":
       return {

@@ -1,6 +1,5 @@
 import React from "react";
 
-import { TaskProvider } from "../context/TaskProvider";
 import { GlobalTaskProvider } from "../context/GlobalTaskProvider";
 
 import TaskList from "../containers/TaskList";
@@ -8,9 +7,7 @@ import TaskList from "../containers/TaskList";
 function Task() {
   return (
     <GlobalTaskProvider>
-      <TaskProvider>
-        <TaskList />
-      </TaskProvider>
+      <TaskList />
     </GlobalTaskProvider>
   );
 }

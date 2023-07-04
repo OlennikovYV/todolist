@@ -110,6 +110,7 @@ function TaskList() {
           />
           <Button
             id='sort-responsible'
+            className=''
             disabled={auth.supervisorid}
             onClick={handleSort}
             text='По ответственным'

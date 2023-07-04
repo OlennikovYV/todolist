@@ -23,6 +23,11 @@ button {
     }
   }
 
+  &.active {
+    border: none;
+    background: darken($gray-light, 9%);
+  }
+
   &.login {
     margin-top: 20px;
   }

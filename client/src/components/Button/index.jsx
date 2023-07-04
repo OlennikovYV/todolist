@@ -3,7 +3,7 @@ import React, { forwardRef } from "react";
 const Button = forwardRef(function Button(props, ref) {
   const { className, disabled, form, id, tabIndex, text, type, onClick } =
     props;
-  const classNames = `${className}`;
+  const classNames = `button ${className}`.trim();
 
   return (
     <button

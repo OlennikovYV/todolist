@@ -3,10 +3,7 @@ import axios from "axios";
 
 import { initialStateTask, ReducerTask } from "../reducers/ReducerTask.js";
 
-import {
-  sortByFieldDate,
-  sortByFieldNumber,
-} from "../utils/sortByField/sortByField.js";
+import { sortByFieldDate, sortByFieldNumber } from "../utils/sortByField";
 
 const ActionTask = () => {
   const [state, dispatch] = useReducer(ReducerTask, initialStateTask);

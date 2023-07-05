@@ -1,4 +1,5 @@
 import React, { useContext } from "react";
+import moment from "moment";
 
 import useAxiosGet from "../../hooks/fetch";
 
@@ -8,7 +9,8 @@ import HeaderModal from "../../components/HeaderModal";
 import FooterModal from "../../components/FooterModal";
 import FormWrapper from "../../components/FormWrapper";
 
-import { dateFormat, fioFormat } from "../../utils/formatField/formatField.js";
+import { fioFormat } from "../../utils/formatField";
+import { DATE_FORMAT } from "../../utils/common/constants";
 
 function EditTask({ task, onClose }) {
   const formId = "edit-task";
@@ -75,7 +77,7 @@ function EditTask({ task, onClose }) {
               <div className='title'>Дата окончания:</div>
               <input
                 disabled={true}
-                defaultValue={dateFormat(task.completion_at)}
+                defaultValue={moment(task.completion_at).format(DATE_FORMAT)}
               ></input>
             </section>
             <section className='container-responsible'>

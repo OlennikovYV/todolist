@@ -10,7 +10,8 @@ import EditTask from "../EditTask";
 
 import BorderInset from "../../components/BorderInset";
 
-import { dateFormat, fioFormat } from "../../utils/formatField/formatField.js";
+import { fioFormat } from "../../utils/formatField";
+import { DATE_FORMAT } from "../../utils/common/constants";
 
 function Task({ task, selectedGroupDate }) {
   const [modal, setModal] = useState(false);
@@ -98,7 +99,7 @@ function Task({ task, selectedGroupDate }) {
   return (
     <>
       <div className={checkTask()} onDoubleClick={() => setModal(true)}>
-        <div className='field-id'>{task.id}</div>
+        <label className='field-id'>{task.id}</label>
         <BorderInset />
         <div className='field-caption'>{task.caption}</div>
         <BorderInset />
@@ -111,7 +112,7 @@ function Task({ task, selectedGroupDate }) {
         </div>
         <BorderInset />
         <div className='field-date-complete'>
-          {dateFormat(task.completion_at)}
+          {moment(task.completion_at).format(DATE_FORMAT)}
         </div>
         <BorderInset />
         <div className='field-fio'>
@@ -123,10 +124,6 @@ function Task({ task, selectedGroupDate }) {
         </div>
         <BorderInset />
         <span className='field-status'>{task.status}</span>
-
-        {/* Для проверки */}
-        {/* <span>{task.responsibleid}</span> */}
-        {/* <span>{dateFormat(task.update_at)}</span> */}
       </div>
 
       <Modal isVisible={modal} onClose={() => setModal(false)}>

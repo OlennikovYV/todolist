@@ -11,7 +11,7 @@ import Task from "../Task";
 import Button from "../../components/Button";
 import TaskListHeader from "../../components/TaskListHeader";
 
-import { fioFormat } from "../../utils/formatField/formatField.js";
+import { fioFormat } from "../../utils/formatField";
 
 function TaskList() {
   const [selectedGroupDate, setSelectedGroupDate] = useState("future");

@@ -10,7 +10,8 @@ import HeaderModal from "../../components/HeaderModal";
 import FooterModal from "../../components/FooterModal";
 import FormWrapper from "../../components/FormWrapper";
 
-import { dateFormat, fioFormat } from "../../utils/formatField/formatField.js";
+import { fioFormat } from "../../utils/formatField";
+import { DATE_FORMAT } from "../../utils/common/constants";
 
 function NewTask({ onClose }) {
   const formId = "create-task";
@@ -59,14 +60,14 @@ function NewTask({ onClose }) {
   }
 
   function handleChangePriority() {
-    const createDataTime = moment(create_atRef.current.value)._d;
+    const createDataTime = moment(create_atRef.current.value).format();
     const { period } = priorities.filter(
       (priority) => priority.caption === priorityRef.current.value
     )[0];
 
-    completion_at.current.value = dateFormat(
-      moment(createDataTime).add(period, "days")._d
-    );
+    completion_at.current.value = moment(createDataTime)
+      .add(period, "days")
+      .format("YYYY-MM-DD HH:mm:ss");
   }
 
   if (loading) return <></>;
@@ -117,7 +118,7 @@ function NewTask({ onClose }) {
               <div className='title'>Дата создания:</div>
               <input
                 className='bg-color_disabled-input'
-                defaultValue={dateFormat(new Date())}
+                defaultValue={moment().format(DATE_FORMAT)}
                 readOnly
                 ref={create_atRef}
               ></input>
@@ -126,7 +127,7 @@ function NewTask({ onClose }) {
               <div className='title'>Дата завершения:</div>
               <input
                 className='bg-color_disabled-input'
-                defaultValue={dateFormat(moment(new Date()).add(1, "days")._d)}
+                defaultValue={moment().add(1, "days").format(DATE_FORMAT)}
                 readOnly
                 ref={completion_at}
               ></input>

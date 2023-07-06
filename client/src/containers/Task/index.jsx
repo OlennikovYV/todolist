@@ -99,11 +99,11 @@ function Task({ task, selectedGroupDate }) {
   return (
     <>
       <div className={checkTask()} onDoubleClick={() => setModal(true)}>
-        <label className='field-id'>{task.id}</label>
+        <label className='task__id'>{task.id}</label>
         <BorderInset />
-        <div className='field-caption'>{task.caption}</div>
+        <div className='task__caption'>{task.caption}</div>
         <BorderInset />
-        <div className='field-priority'>
+        <div className='task__priority'>
           {
             priorities.filter(
               (priority) => priority.id === task["priorityId"]
@@ -111,11 +111,11 @@ function Task({ task, selectedGroupDate }) {
           }
         </div>
         <BorderInset />
-        <div className='field-date-complete'>
+        <div className='task__date-complete'>
           {moment(task.completion_at).format(DATE_FORMAT)}
         </div>
         <BorderInset />
-        <div className='field-fio'>
+        <div className='task__fio'>
           {fioFormat(
             responsible.user.lastname,
             responsible.user.firstname,
@@ -123,7 +123,7 @@ function Task({ task, selectedGroupDate }) {
           )}
         </div>
         <BorderInset />
-        <span className='field-status'>{task.status}</span>
+        <span className='task__status'>{task.status}</span>
       </div>
 
       <Modal isVisible={modal} onClose={() => setModal(false)}>

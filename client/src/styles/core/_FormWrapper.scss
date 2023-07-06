@@ -1,6 +1,5 @@
 .formWrapper {
-  display: flex;
-  flex-direction: column;
+  @include flex-column;
   justify-content: space-evenly;
   padding-left: 24px;
   padding-right: 24px;

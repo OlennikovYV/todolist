@@ -1,7 +1,5 @@
 .modal-footer {
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
+  @include flex-end;
   width: 100%;
   border-top: 1px solid #dbdbdb;
 }

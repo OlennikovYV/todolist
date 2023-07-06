@@ -6,12 +6,12 @@ input,
 select,
 textarea {
   font-family: "Roboto";
-  border-color: #fefefe;
-  border: 1px solid rgb(181, 198, 211);
-  color: #444;
+  border-color: $gray-light;
+  border: 1px solid $blue-dark;
+  color: $black-light;
   outline: none;
 }
 
 .bg-color_disabled-input {
-  background-color: #eee;
+  background-color: $gray-dark;
 }

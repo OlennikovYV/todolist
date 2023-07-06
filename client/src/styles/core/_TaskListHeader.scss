@@ -1,8 +1,39 @@
-.task {
-  &.header {
-    text-align: left;
-    font-size: 16px;
-    background-color: rgb(230, 230, 230);
-    margin-top: 0;
+.header {
+  @include flex-row;
+  justify-content: space-between;
+  padding: 6px;
+  padding-left: 12px;
+  padding-right: 12px;
+  border: 1px solid darken($gray-light, 27%);
+  color: $black-light;
+  background-color: darken($gray-light, 9%);
+  text-align: left;
+  font-size: 16px;
+  overflow: hidden;
+  user-select: none;
+
+  &__id {
+    min-width: 36px;
+    text-align: end;
+  }
+
+  &__caption {
+    min-width: 150px;
+  }
+
+  &__priority {
+    min-width: 110px;
+  }
+
+  &__date-complete {
+    min-width: 210px;
+  }
+
+  &__fio {
+    min-width: 200px;
+  }
+
+  &__status {
+    min-width: 150px;
   }
 }

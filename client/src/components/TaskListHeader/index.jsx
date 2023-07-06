@@ -5,18 +5,18 @@ import Caption from "../Caption";
 
 function TaskListHeader() {
   return (
-    <div className='task header'>
-      <Caption className='field-id' text='№№' />
+    <div className='header'>
+      <Caption className='header__id' text='№' />
       <BorderInset />
-      <Caption className='field-caption' text='Заголовок' />
+      <Caption className='header__caption' text='Заголовок' />
       <BorderInset />
-      <Caption className='field-priority' text='Приоритет' />
+      <Caption className='header__priority' text='Приоритет' />
       <BorderInset />
-      <Caption className='field-date-complete' text='Дата окончания' />
+      <Caption className='header__date-complete' text='Дата окончания' />
       <BorderInset />
-      <Caption className='field-fio' text='Ф.И.О.' />
+      <Caption className='header__fio' text='Ф.И.О.' />
       <BorderInset />
-      <Caption className='field-status' text='Статус' />
+      <Caption className='header__status' text='Статус' />
     </div>
   );
 }

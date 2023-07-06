@@ -1,7 +1,5 @@
 .modal {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  @include flex-center;
   position: fixed;
   top: 0;
   bottom: 0;
@@ -15,12 +13,10 @@
 }
 
 .modal-dialog {
-  display: flex;
-  flex-direction: column;
+  @include flex-column;
   position: relative;
   background: white;
   text-align: left;
-  border-radius: 5px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   -webkit-animation-name: animatetop;
   -webkit-animation-duration: 0.4s;

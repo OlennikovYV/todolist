@@ -42,6 +42,7 @@
 .input-login input:focus + label,
 .input-login input:autofill + label {
   top: 10px;
+  left: 0;
   color: $black;
   font-size: 12px;
 }

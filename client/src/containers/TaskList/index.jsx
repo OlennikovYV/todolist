@@ -75,8 +75,8 @@ function TaskList() {
           text='Выйти'
         />
       </div>
-      <div className='container-control'>
-        <div className='button-control'>
+      <div className='menu'>
+        <div className='control'>
           <Button
             onClick={() => setModal(true)}
             disabled={auth.supervisorid ? true : false}
@@ -90,7 +90,7 @@ function TaskList() {
             text='Обновить'
           />
         </div>
-        <div className='filtred-date-at'>
+        <div className='menu__filter'>
           <select
             defaultValue='all'
             onChange={(event) => setSelectedGroupDate(event.target.value)}
@@ -100,7 +100,7 @@ function TaskList() {
             <option value='now'>На сегодня</option>
           </select>
         </div>
-        <div className='filtred-column'>
+        <div className='menu__sort'>
           <Button
             id='sort-update-at'
             className='active'
@@ -121,22 +121,24 @@ function TaskList() {
           <NewTask onClose={() => setModal(false)} />
         </Modal>
       </div>
-      <div className='container-list'>
+      <div className='task-list'>
         <TaskListHeader />
 
-        {taskList.length ? (
-          taskList.map((task) => (
-            <Task
-              key={task.id}
-              task={task}
-              selectedGroupDate={selectedGroupDate}
-            />
-          ))
-        ) : (
-          <div className='task' align={"center"}>
-            <span className='notask'>{message}</span>
-          </div>
-        )}
+        <div className='list'>
+          {taskList.length ? (
+            taskList.map((task) => (
+              <Task
+                key={task.id}
+                task={task}
+                selectedGroupDate={selectedGroupDate}
+              />
+            ))
+          ) : (
+            <div className='task' align={"center"}>
+              <span className='notask'>{message}</span>
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );

@@ -1,0 +1,28 @@
+@mixin flex() {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+}
+
+@mixin flex-center() {
+  @include flex();
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin flex-column() {
+  @include flex();
+  flex-direction: column;
+}
+
+@mixin flex-row() {
+  @include flex();
+  flex-direction: row;
+}
+
+@mixin flex-end() {
+  @include flex();
+  justify-content: flex-end;
+}

@@ -28,15 +28,41 @@ const ActionTask = () => {
     }
   }
 
-  async function addTask(task) {
+  async function addTask(data) {
     try {
       const response = await axios.post(`http://localhost:3001/api/task/add`, {
-        transaction: task,
+        transaction: data,
       });
 
       dispatch({
         type: "ADD_TASK",
         payload: response.data.record,
+      });
+    } catch (err) {
+      dispatch({
+        type: "TASK_ERROR",
+        payload: err.response.data.error,
+      });
+    }
+  }
+
+  async function updateTask(id, data) {
+    const taskList = state.tasks.slice(0);
+    const index = taskList.findIndex((task) => task.id === id);
+
+    try {
+      const response = await axios.put(
+        `http://localhost:3001/api/task/update/${id}`,
+        {
+          transaction: data,
+        }
+      );
+
+      taskList[index] = response.data.record;
+
+      dispatch({
+        type: "UPDATE_TASK",
+        payload: taskList,
       });
     } catch (err) {
       dispatch({
@@ -94,6 +120,7 @@ const ActionTask = () => {
     priorities: state.priorities,
     getAllTasks,
     addTask,
+    updateTask,
     getPriorities,
     sortUpdateAt,
     sortResponsibleId,

@@ -2,8 +2,9 @@ const bcrypt = require("bcryptjs");
 const moment = require("moment");
 
 const currentDate = moment().format();
-const addDaysToСurrentDate = (day) => moment().add(day, "days")._d;
-const substractDaysFromСurrentDate = (day) => moment().subtract(day, "days")._d;
+const addDaysToСurrentDate = (day) => moment().add(day, "days").format();
+const substractDaysFromСurrentDate = (day) =>
+  moment().subtract(day, "days").format();
 
 const priorityList = [
   {
@@ -132,7 +133,7 @@ const taskList = [
     create_at: substractDaysFromСurrentDate(16),
     update_at: substractDaysFromСurrentDate(1),
     priorityId: 3,
-    status: "выполнена",
+    status: "выполняется",
     creatorid: 1,
     responsibleid: 3,
   },

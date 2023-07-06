@@ -21,6 +21,13 @@ export const ReducerTask = (state, action) => {
         tasks: [...state.tasks, action.payload],
         message: action.payload.message,
       };
+    case "UPDATE_TASK":
+      return {
+        ...state,
+        success: action.payload.success,
+        tasks: [...action.payload],
+        message: action.payload.message,
+      };
     case "SORT_UPDATE-AT":
       return {
         ...state,

@@ -118,22 +118,28 @@ exports.updateTask = async (req, res) => {
   const id = req.params.id;
   const transaction = req.body.transaction;
 
-  Task.update(JSON.parse(transaction), {
+  Task.update(transaction, {
     where: {
       id: id,
     },
     returning: true,
   })
-    .then((record) => {
-      if (!record[0]) {
+    .then((entry) => {
+      const countUpdateRecord = entry[0];
+      let updatedEntry;
+
+      if (!countUpdateRecord) {
         return res.status(200).send({
           success: false,
           message: "Запись не найдена",
         });
       }
+
+      updatedEntry = entry[1][0];
+
       return res.status(200).send({
         success: true,
-        record: record,
+        record: updatedEntry,
         message: "Запись успешно обновлена",
       });
     })

@@ -20,7 +20,7 @@ function NewTask({ onClose }) {
   const descriptionRef = useRef();
   const priorityRef = useRef();
   const create_atRef = useRef();
-  const completion_at = useRef();
+  const completion_atRef = useRef();
   const responsibleidRef = useRef();
   const statusRef = useRef();
 
@@ -34,15 +34,15 @@ function NewTask({ onClose }) {
   } = useAxiosGet(`http://localhost:3001/api/user/responsible`);
 
   function handleSubmit(event) {
-    let newTask;
+    event.preventDefault();
+
+    let data;
     const createDataTime = moment(create_atRef.current.value)._d;
     const { id, period } = priorities.filter(
       (priority) => priority.caption === priorityRef.current.value
     )[0];
 
-    event.preventDefault();
-
-    newTask = {
+    data = {
       caption: captionRef.current.value,
       description: descriptionRef.current.value,
       create_at: createDataTime,
@@ -54,7 +54,7 @@ function NewTask({ onClose }) {
       responsibleid: responsibleidRef.current.value,
     };
 
-    addTask(newTask);
+    addTask(data);
 
     onClose();
   }
@@ -65,7 +65,7 @@ function NewTask({ onClose }) {
       (priority) => priority.caption === priorityRef.current.value
     )[0];
 
-    completion_at.current.value = moment(createDataTime)
+    completion_atRef.current.value = moment(createDataTime)
       .add(period, "days")
       .format("YYYY-MM-DD HH:mm:ss");
   }
@@ -129,7 +129,7 @@ function NewTask({ onClose }) {
                 className='bg-color_disabled-input'
                 defaultValue={moment().add(1, "days").format(DATE_FORMAT)}
                 readOnly
-                ref={completion_at}
+                ref={completion_atRef}
               ></input>
             </section>
             <section className='container-responsible'>

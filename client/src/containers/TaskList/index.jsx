@@ -31,8 +31,8 @@ function TaskList() {
   const [, , removeStorage] = useLocalStorage("user", "{}");
 
   useEffect(() => {
-    getAllTasks(auth.id);
     getPriorities();
+    getAllTasks(auth.id);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -77,15 +77,11 @@ function TaskList() {
       </div>
       <div className='menu'>
         <div className='control'>
-          <Button
-            onClick={() => setModal(true)}
-            disabled={auth.supervisorid ? true : false}
-            text='Создать задачу'
-          />
+          <Button onClick={() => setModal(true)} text='Создать задачу' />
           <Button
             onClick={() => {
-              getAllTasks(auth.id);
               getPriorities();
+              getAllTasks(auth.id);
             }}
             text='Обновить'
           />

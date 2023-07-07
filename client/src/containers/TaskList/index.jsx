@@ -1,5 +1,4 @@
 import React, { useState, useContext, useEffect } from "react";
-import { useLocalStorage } from "react-use";
 
 import GlobalTaskContext from "../../context/GlobalTaskProvider";
 import AuthContext from "../../context/AuthProvider";
@@ -26,30 +25,28 @@ function TaskList() {
     sortResponsibleId,
   } = useContext(GlobalTaskContext);
 
-  const { auth, setAuth, setAuthenticated } = useContext(AuthContext);
-
-  const [, , removeStorage] = useLocalStorage("user", "{}");
+  const { authenticatedUser, logout } = useContext(AuthContext);
 
   useEffect(() => {
     getPriorities();
-    getAllTasks(auth.id);
+    getAllTasks(authenticatedUser.id);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   function handleSort(event) {
-    const UpdateAt = document.getElementById("sort-update-at");
-    const Responsible = document.getElementById("sort-responsible");
+    const buttonUpdateAt = document.getElementById("sort-update-at");
+    const buttonResponsible = document.getElementById("sort-responsible");
 
     switch (event.target.id) {
       case "sort-update-at":
         sortUpdateAt();
-        UpdateAt.classList.add("active");
-        Responsible.classList.remove("active");
+        buttonUpdateAt.classList.add("active");
+        buttonResponsible.classList.remove("active");
         break;
       case "sort-responsible":
         sortResponsibleId();
-        UpdateAt.classList.remove("active");
-        Responsible.classList.add("active");
+        buttonUpdateAt.classList.remove("active");
+        buttonResponsible.classList.add("active");
         break;
       default:
         return;
@@ -60,17 +57,20 @@ function TaskList() {
     <div className='container-task-list'>
       <div className='panel-header'>
         <span className='account-name'>
-          {auth.supervisorid ? "сотрудник" : "руководитель"}
+          {authenticatedUser.supervisorid ? "сотрудник" : "руководитель"}
         </span>
         <span className='account-name'>
-          {fioFormat(auth.lastname, auth.firstname, auth.fathername)}
+          {fioFormat(
+            authenticatedUser.lastname,
+            authenticatedUser.firstname,
+            authenticatedUser.fathername
+          )}
         </span>
         <Button
           className='log-out'
           onClick={() => {
-            removeStorage();
-            setAuthenticated(false);
-            setAuth(null);
+            localStorage.clear();
+            logout();
           }}
           text='Выйти'
         />
@@ -81,7 +81,7 @@ function TaskList() {
           <Button
             onClick={() => {
               getPriorities();
-              getAllTasks(auth.id);
+              getAllTasks(authenticatedUser.id);
             }}
             text='Обновить'
           />
@@ -100,14 +100,14 @@ function TaskList() {
           <Button
             id='sort-update-at'
             className='active'
-            disabled={auth.supervisorid}
+            disabled={authenticatedUser.supervisorid}
             onClick={handleSort}
             text='Без группировки'
           />
           <Button
             id='sort-responsible'
             className=''
-            disabled={auth.supervisorid}
+            disabled={authenticatedUser.supervisorid}
             onClick={handleSort}
             text='По ответственным'
           />

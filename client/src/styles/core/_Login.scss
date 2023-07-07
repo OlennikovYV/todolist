@@ -31,7 +31,7 @@
   position: absolute;
   left: 5px;
   top: 33px;
-  color: $black;
+  color: $gray-dark;
   font-size: 20px;
   -webkit-transition: 0.2s;
   transition: 0.2s;
@@ -50,6 +50,10 @@
 .errmsg {
   text-align: center;
   color: #ff6060;
+}
+
+.offscreen {
+  display: none;
 }
 
 .error {

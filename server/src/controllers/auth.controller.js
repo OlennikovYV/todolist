@@ -29,14 +29,17 @@ exports.signin = (req, res) => {
         });
       }
 
-      // TODO! вернуть объект {success, user, message}
       res.status(200).send({
-        id: user.id,
-        firstname: user.firstname,
-        lastname: user.lastname,
-        fathername: user.fathername,
-        login: user.login,
-        supervisorid: user.supervisorid,
+        success: true,
+        authenticatedUser: {
+          id: user.id,
+          firstname: user.firstname,
+          lastname: user.lastname,
+          fathername: user.fathername,
+          login: user.login,
+          supervisorid: user.supervisorid,
+        },
+        message: "Аутентификация успешна!",
       });
     })
     .catch((err) => {

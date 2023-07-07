@@ -1,7 +1,5 @@
 import React, { useRef, useState, useEffect, useContext } from "react";
 import { Navigate } from "react-router-dom";
-import axios from "axios";
-import { useLocalStorage } from "react-use";
 
 import AuthContext from "../context/AuthProvider";
 
@@ -9,75 +7,36 @@ import FormWrapper from "../components/FormWrapper";
 import Button from "../components/Button";
 
 function Login() {
-  const { setAuth, setAuthenticated } = useContext(AuthContext);
-  const [valueStrorage, setValueStorage] = useLocalStorage("user", "{}");
+  const { isAuthenticated, error, message, signIn, signInFromCache } =
+    useContext(AuthContext);
 
   const userRef = useRef();
-  const errRef = useRef();
+  const errorRef = useRef();
 
   const [user, setUser] = useState("");
-  const [pwd, setPwd] = useState("");
-  const [errMsg, setErrMsg] = useState("");
-  const [success, setSuccess] = useState(false);
+  const [password, setPassword] = useState("");
 
   useEffect(() => {
-    userRef.current.focus();
-  }, []);
+    const userDataCache = JSON.parse(localStorage.getItem("user"));
 
-  useEffect(() => {
-    if (valueStrorage.id) {
-      setAuth(valueStrorage);
-      setAuthenticated(true);
-      setSuccess(true);
+    if (userDataCache) {
+      signInFromCache(userDataCache);
     }
-  }, [valueStrorage.id, setAuth, setAuthenticated, valueStrorage]);
-
-  useEffect(() => {
-    setErrMsg("");
-  }, [user, pwd]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    try {
-      const response = await axios.post(
-        "http://localhost:3001/api/auth",
-        {
-          login: user,
-          password: pwd,
-        },
-        {
-          headers: {
-            "Content-Type": "application/x-www-form-urlencoded",
-          },
-        }
-      );
+    signIn(user, password);
 
-      const { ...userData } = response.data;
-
-      setAuth(userData);
-      setValueStorage(userData);
-
-      setUser("");
-      setPwd("");
-
-      setAuthenticated(true);
-      setSuccess(true);
-    } catch (err) {
-      if (err.response?.status === 404) {
-        setErrMsg("Пользователь не найден.");
-      } else if (err.response?.status === 401) {
-        setErrMsg("Неверный пароль.");
-      } else {
-        setErrMsg("Неизвестная ошибка.");
-      }
-      errRef.current.focus();
-    }
+    // setUser("");
+    // setPassword("");
   };
 
   return (
     <>
-      {success ? (
+      {isAuthenticated ? (
         <Navigate to='/task' replace={true} />
       ) : (
         <div className='container-login'>
@@ -106,8 +65,8 @@ function Login() {
                 <input
                   type='password'
                   id='password'
-                  onChange={(e) => setPwd(e.target.value)}
-                  value={pwd}
+                  onChange={(e) => setPassword(e.target.value)}
+                  value={password}
                   required
                 />
                 <label className='login-password' htmlFor='password'>
@@ -118,9 +77,11 @@ function Login() {
               <Button className='login' text='Войти' />
             </FormWrapper>
             <div className='error'>
-              <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"}>
-                {errMsg}
-              </p>{" "}
+              {error ? (
+                <p ref={errorRef} className={error ? "errmsg" : "offscreen"}>
+                  {message}
+                </p>
+              ) : null}
             </div>
           </section>
         </div>

@@ -24,7 +24,7 @@ function EditTask({ task, onClose }) {
   const responsibleidRef = useRef();
   const statusRef = useRef();
 
-  const { auth } = useContext(AuthContext);
+  const { authenticatedUser } = useContext(AuthContext);
   const { priorities, updateTask } = useContext(globalTaskContext);
 
   const {
@@ -49,12 +49,11 @@ function EditTask({ task, onClose }) {
       completion_at: moment(completion_atRef.current.value)._d,
       priorityId: id,
       status: statusRef.current.value,
-      creatorid: auth.id,
+      creatorid: authenticatedUser.id,
       responsibleid: responsibleidRef.current.value,
     };
 
     updateTask(task.id, data);
-    // console.log(data);
 
     onClose();
   }
@@ -91,7 +90,7 @@ function EditTask({ task, onClose }) {
               <input
                 className='caption'
                 defaultValue={task.caption}
-                disabled={auth.supervisorid ? true : false}
+                disabled={authenticatedUser.supervisorid ? true : false}
                 ref={captionRef}
               ></input>
             </section>
@@ -112,7 +111,7 @@ function EditTask({ task, onClose }) {
                     (priority) => priority.id === task.priorityId
                   )[0].caption
                 }
-                disabled={auth.supervisorid ? true : false}
+                disabled={authenticatedUser.supervisorid ? true : false}
                 onChange={handleChangePriority}
                 ref={priorityRef}
               >

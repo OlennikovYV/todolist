@@ -24,7 +24,7 @@ function NewTask({ onClose }) {
   const responsibleidRef = useRef();
   const statusRef = useRef();
 
-  const { auth } = useContext(AuthContext);
+  const { authenticatedUser } = useContext(AuthContext);
   const { priorities, addTask } = useContext(globalTaskContext);
 
   const {
@@ -50,7 +50,7 @@ function NewTask({ onClose }) {
       completion_at: moment(createDataTime).add(period, "days")._d,
       priorityId: id,
       status: statusRef.current.value,
-      creatorid: auth.id,
+      creatorid: authenticatedUser.id,
       responsibleid: responsibleidRef.current.value,
     };
 

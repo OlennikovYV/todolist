@@ -1,8 +1,9 @@
 export const initialStateTask = {
-  tasks: [],
-  priorities: [],
   error: null,
+  loading: false,
+  priorities: [],
   success: null,
+  tasks: [],
 };
 
 export const ReducerTask = (state, action) => {
@@ -49,6 +50,11 @@ export const ReducerTask = (state, action) => {
       return {
         ...state,
         error: action.payload,
+      };
+    case "SET_STATUS_LOADING":
+      return {
+        ...state,
+        loading: action.payload,
       };
     default:
       return state;

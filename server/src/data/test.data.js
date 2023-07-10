@@ -142,7 +142,7 @@ const taskList = [
     description: "Описание 6",
     completion_at: addDaysToСurrentDate(8),
     create_at: substractDaysFromСurrentDate(7),
-    update_at: substractDaysFromСurrentDate(7),
+    update_at: currentDate,
     priorityId: 3,
     status: "выполняется",
     creatorid: 1,

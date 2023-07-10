@@ -17,12 +17,13 @@ function TaskList() {
   const [modal, setModal] = useState(false);
 
   const {
+    loading,
     message,
     taskList,
     getAllTasks,
     getPriorities,
-    sortUpdateAt,
     sortResponsibleId,
+    sortUpdateAt,
   } = useContext(GlobalTaskContext);
 
   const { authenticatedUser, logout } = useContext(AuthContext);
@@ -69,7 +70,6 @@ function TaskList() {
         <Button
           className='log-out'
           onClick={() => {
-            localStorage.clear();
             logout();
           }}
           text='Выйти'
@@ -120,21 +120,27 @@ function TaskList() {
       <div className='task-list'>
         <TaskListHeader />
 
-        <div className='list'>
-          {taskList.length ? (
-            taskList.map((task) => (
-              <Task
-                key={task.id}
-                task={task}
-                selectedGroupDate={selectedGroupDate}
-              />
-            ))
-          ) : (
-            <div className='task' align={"center"}>
-              <span className='notask'>{message}</span>
-            </div>
-          )}
-        </div>
+        {loading ? (
+          <div className='task' align={"center"}>
+            <span className='notask'>Загрузка списка задач</span>
+          </div>
+        ) : (
+          <div className='list'>
+            {taskList.length ? (
+              taskList.map((task) => (
+                <Task
+                  key={task.id}
+                  task={task}
+                  selectedGroupDate={selectedGroupDate}
+                />
+              ))
+            ) : (
+              <div className='task' align={"center"}>
+                <span className='notask'>{message}</span>
+              </div>
+            )}
+          </div>
+        )}
       </div>
     </div>
   );

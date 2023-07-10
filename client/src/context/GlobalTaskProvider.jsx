@@ -6,33 +6,35 @@ const GlobalTaskContext = createContext({});
 
 export const GlobalTaskProvider = ({ children }) => {
   const {
-    success,
     error,
+    loading,
     message,
-    taskList,
     priorities,
-    getAllTasks,
+    success,
+    taskList,
     addTask,
-    updateTask,
+    getAllTasks,
     getPriorities,
-    sortUpdateAt,
     sortResponsibleId,
+    sortUpdateAt,
+    updateTask,
   } = ActionTask();
 
   return (
     <GlobalTaskContext.Provider
       value={{
-        success,
         error,
+        loading,
         message,
-        taskList,
         priorities,
-        getAllTasks,
+        success,
+        taskList,
         addTask,
-        updateTask,
+        getAllTasks,
         getPriorities,
-        sortUpdateAt,
         sortResponsibleId,
+        sortUpdateAt,
+        updateTask,
       }}
     >
       {children}

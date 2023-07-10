@@ -9,6 +9,8 @@ const ActionTask = () => {
   const [state, dispatch] = useReducer(ReducerTask, initialStateTask);
 
   async function getAllTasks(authenticationID) {
+    dispatch({ type: "SET_STATUS_LOADING", payload: true });
+
     try {
       const response = await axios.get(
         `http://localhost:3001/api/task/${authenticationID}`
@@ -25,10 +27,14 @@ const ActionTask = () => {
         type: "TASK_ERROR",
         payload: err.response.data.error,
       });
+    } finally {
+      dispatch({ type: "SET_STATUS_LOADING", payload: false });
     }
   }
 
   async function addTask(data) {
+    dispatch({ type: "SET_STATUS_LOADING", payload: true });
+
     try {
       const response = await axios.post(`http://localhost:3001/api/task/add`, {
         transaction: data,
@@ -43,12 +49,16 @@ const ActionTask = () => {
         type: "TASK_ERROR",
         payload: err.response.data.error,
       });
+    } finally {
+      dispatch({ type: "SET_STATUS_LOADING", payload: false });
     }
   }
 
   async function updateTask(id, data) {
     const taskList = state.tasks.slice(0);
     const index = taskList.findIndex((task) => task.id === id);
+
+    dispatch({ type: "SET_STATUS_LOADING", payload: true });
 
     try {
       const response = await axios.put(
@@ -69,10 +79,14 @@ const ActionTask = () => {
         type: "TASK_ERROR",
         payload: err.response.data.error,
       });
+    } finally {
+      dispatch({ type: "SET_STATUS_LOADING", payload: false });
     }
   }
 
   async function getPriorities() {
+    dispatch({ type: "SET_STATUS_LOADING", payload: true });
+
     try {
       const response = await axios.get(
         `http://localhost:3001/api/reference/priorities`
@@ -87,6 +101,8 @@ const ActionTask = () => {
         type: "TASK_ERROR",
         payload: err.response.data.error,
       });
+    } finally {
+      dispatch({ type: "SET_STATUS_LOADING", payload: false });
     }
   }
 
@@ -113,17 +129,18 @@ const ActionTask = () => {
   }
 
   return {
-    success: state.success,
     error: state.error,
+    loading: state.loading,
     message: state.message,
-    taskList: state.tasks,
     priorities: state.priorities,
-    getAllTasks,
+    success: state.success,
+    taskList: state.tasks,
     addTask,
-    updateTask,
+    getAllTasks,
     getPriorities,
-    sortUpdateAt,
     sortResponsibleId,
+    sortUpdateAt,
+    updateTask,
   };
 };
 

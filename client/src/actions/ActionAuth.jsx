@@ -7,6 +7,8 @@ const ActionAuth = () => {
   const [state, dispatch] = useReducer(ReducerAuth, initialStateAuth);
 
   function logout() {
+    localStorage.clear();
+
     dispatch({
       type: "RESET_STATE",
       payload: null,

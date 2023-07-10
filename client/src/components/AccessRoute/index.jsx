@@ -3,7 +3,7 @@ import { Navigate, Outlet } from "react-router-dom";
 
 import AuthContext from "../../context/AuthProvider";
 
-function AccessRouter({ authenticated, redirectPath = "/signin", children }) {
+function AccessRouter({ redirectPath = "/signin", children }) {
   const { isAuthenticated } = useContext(AuthContext);
 
   if (!isAuthenticated) {

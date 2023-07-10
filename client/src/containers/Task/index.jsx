@@ -20,26 +20,28 @@ function Task({ task, selectedGroupDate }) {
 
   const {
     data: responsible,
-    loading,
+    loading: loadingResponsible,
     error,
   } = useAxiosGet(
     `http://localhost:3001/api/user/responsible/${task.responsibleid}`
   );
 
-  if (loading) return <></>;
+  if (loadingResponsible) return <></>;
   if (error) return <pre>{JSON.stringify(error, null, 2)}</pre>;
 
   function setColorTask() {
     if (task.status === "выполнена") {
       return "green";
-    } else if (
+    }
+
+    if (
       (task.status === "к выполнению" || task.status === "выполняется") &&
       new Date() - new Date(task.completion_at) > 0
     ) {
       return "red";
-    } else {
-      return "gray";
     }
+
+    return "gray";
   }
 
   function isShow() {

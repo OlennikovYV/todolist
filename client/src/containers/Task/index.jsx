@@ -1,7 +1,7 @@
 import React, { useState, useContext } from "react";
 import moment from "moment";
 
-import GlobalTaskContext from "../../context/GlobalTaskProvider";
+import GlobalContext from "../../context/GlobalProvider";
 
 import useAxiosGet from "../../hooks/fetch";
 
@@ -16,10 +16,10 @@ import { DATE_FORMAT } from "../../utils/common/constants";
 function Task({ task, selectedGroupDate }) {
   const [modal, setModal] = useState(false);
 
-  const { priorities } = useContext(GlobalTaskContext);
+  const { prioritiesList } = useContext(GlobalContext);
 
   const {
-    data: responsible,
+    data,
     loading: loadingResponsible,
     error,
   } = useAxiosGet(
@@ -107,7 +107,7 @@ function Task({ task, selectedGroupDate }) {
         <BorderInset />
         <div className='task__priority'>
           {
-            priorities.filter(
+            prioritiesList.filter(
               (priority) => priority.id === task["priorityId"]
             )[0].caption
           }
@@ -119,9 +119,9 @@ function Task({ task, selectedGroupDate }) {
         <BorderInset />
         <div className='task__fio'>
           {fioFormat(
-            responsible.user.lastname,
-            responsible.user.firstname,
-            responsible.user.fathername
+            data.responsible.lastname,
+            data.responsible.firstname,
+            data.responsible.fathername
           )}
         </div>
         <BorderInset />

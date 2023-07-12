@@ -1,14 +1,14 @@
 import React from "react";
 
-import { GlobalTaskProvider } from "../context/GlobalTaskProvider";
+import { GlobalProvider } from "../context/GlobalProvider";
 
 import TaskList from "../containers/TaskList";
 
 function Task() {
   return (
-    <GlobalTaskProvider>
+    <GlobalProvider>
       <TaskList />
-    </GlobalTaskProvider>
+    </GlobalProvider>
   );
 }
 

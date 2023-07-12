@@ -9,7 +9,7 @@ const ActionTask = () => {
   const [state, dispatch] = useReducer(ReducerTask, initialStateTask);
 
   async function getAllTasks(authenticationID) {
-    dispatch({ type: "SET_STATUS_LOADING", payload: true });
+    dispatch({ type: "SET_STATUS_LOADING", payload: { loadingTask: true } });
 
     try {
       const response = await axios.get(
@@ -20,20 +20,24 @@ const ActionTask = () => {
 
       dispatch({
         type: "GET_ALL_TASKS",
-        payload: response.data,
+        payload: {
+          successTask: response.data.successTask,
+          taskList: response.data.taskList,
+          messageTask: response.data.messageTask,
+        },
       });
     } catch (err) {
       dispatch({
         type: "TASK_ERROR",
-        payload: err.response.data.error,
+        payload: { errorTask: err.response.data.errorTask },
       });
     } finally {
-      dispatch({ type: "SET_STATUS_LOADING", payload: false });
+      dispatch({ type: "SET_STATUS_LOADING", payload: { loadingTask: false } });
     }
   }
 
   async function addTask(data) {
-    dispatch({ type: "SET_STATUS_LOADING", payload: true });
+    dispatch({ type: "SET_STATUS_LOADING", payload: { loadingTask: true } });
 
     try {
       const response = await axios.post(`http://localhost:3001/api/task/add`, {
@@ -42,23 +46,27 @@ const ActionTask = () => {
 
       dispatch({
         type: "ADD_TASK",
-        payload: response.data.record,
+        payload: {
+          successTask: response.data.successTask,
+          record: response.data.record,
+          messageTask: response.data.messageTask,
+        },
       });
     } catch (err) {
       dispatch({
         type: "TASK_ERROR",
-        payload: err.response.data.error,
+        payload: { errorTask: err.response.data.errorTask },
       });
     } finally {
-      dispatch({ type: "SET_STATUS_LOADING", payload: false });
+      dispatch({ type: "SET_STATUS_LOADING", payload: { loadingTask: false } });
     }
   }
 
   async function updateTask(id, data) {
-    const taskList = state.tasks.slice(0);
+    const taskList = state.taskList.slice(0);
     const index = taskList.findIndex((task) => task.id === id);
 
-    dispatch({ type: "SET_STATUS_LOADING", payload: true });
+    dispatch({ type: "SET_STATUS_LOADING", payload: { loadingTask: true } });
 
     try {
       const response = await axios.put(
@@ -72,69 +80,73 @@ const ActionTask = () => {
 
       dispatch({
         type: "UPDATE_TASK",
-        payload: taskList,
+        payload: { taskList: taskList },
       });
     } catch (err) {
       dispatch({
         type: "TASK_ERROR",
-        payload: err.response.data.error,
+        payload: { errorTask: err.response.data.errorTask },
       });
     } finally {
-      dispatch({ type: "SET_STATUS_LOADING", payload: false });
+      dispatch({ type: "SET_STATUS_LOADING", payload: { loadingTask: false } });
     }
   }
 
   async function getPriorities() {
-    dispatch({ type: "SET_STATUS_LOADING", payload: true });
+    dispatch({ type: "SET_STATUS_LOADING", payload: { loadingTask: true } });
 
     try {
       const response = await axios.get(
-        `http://localhost:3001/api/reference/priorities`
+        `http://localhost:3001/api/task/priorities`
       );
 
       dispatch({
         type: "GET_PRIORITIES",
-        payload: response.data,
+        payload: {
+          successTask: response.data.successTask,
+          prioritiesList: response.data.prioritiesList,
+          messageTask: response.data.messageTask,
+        },
       });
     } catch (err) {
       dispatch({
         type: "TASK_ERROR",
-        payload: err.response.data.error,
+        payload: { errorTask: err.response.data.errorTask },
       });
     } finally {
-      dispatch({ type: "SET_STATUS_LOADING", payload: false });
+      dispatch({ type: "SET_STATUS_LOADING", payload: { loadingTask: false } });
     }
   }
 
   function sortUpdateAt() {
-    const tasks = state.tasks.slice(0);
+    const taskLis = state.taskLis.slice(0);
 
-    sortByFieldDate(tasks, "update_at");
+    sortByFieldDate(taskLis, "update_at");
 
     dispatch({
       type: "SORT_UPDATE-AT",
-      payload: tasks,
+      payload: { taskLis: taskLis },
     });
   }
 
   function sortResponsibleId() {
-    const tasks = state.tasks.slice(0);
+    const taskList = state.taskLis.slice(0);
 
-    sortByFieldNumber(tasks, "responsibleid");
+    sortByFieldNumber(taskList, "responsibleid");
 
     dispatch({
       type: "SORT_RESPONSIBLEID",
-      payload: tasks,
+      payload: { taskList: taskList },
     });
   }
 
   return {
-    error: state.error,
-    loading: state.loading,
-    message: state.message,
-    priorities: state.priorities,
-    success: state.success,
-    taskList: state.tasks,
+    errorTask: state.error,
+    loadingTask: state.loading,
+    messageTask: state.message,
+    prioritiesList: state.prioritiesList,
+    successTask: state.success,
+    taskList: state.taskList,
     addTask,
     getAllTasks,
     getPriorities,

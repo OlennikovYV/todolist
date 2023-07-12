@@ -4,7 +4,7 @@ import moment from "moment";
 import useAxiosGet from "../../hooks/fetch";
 
 import AuthContext from "../../context/AuthProvider";
-import globalTaskContext from "../../context/GlobalTaskProvider";
+import globalContext from "../../context/GlobalProvider";
 
 import HeaderModal from "../../components/HeaderModal";
 import FooterModal from "../../components/FooterModal";
@@ -25,7 +25,7 @@ function EditTask({ task, onClose }) {
   const statusRef = useRef();
 
   const { authenticatedUser } = useContext(AuthContext);
-  const { priorities, updateTask } = useContext(globalTaskContext);
+  const { priorities, updateTask } = useContext(globalContext);
 
   const {
     data: responsible,

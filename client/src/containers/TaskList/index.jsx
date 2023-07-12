@@ -1,6 +1,6 @@
 import React, { useState, useContext, useEffect } from "react";
 
-import GlobalTaskContext from "../../context/GlobalTaskProvider";
+import GlobalContext from "../../context/GlobalProvider";
 import AuthContext from "../../context/AuthProvider";
 
 import Modal from "../../containers/Modal";
@@ -17,14 +17,14 @@ function TaskList() {
   const [modal, setModal] = useState(false);
 
   const {
-    loading,
-    message,
+    loadingTask,
+    messageTask,
     taskList,
     getAllTasks,
     getPriorities,
     sortResponsibleId,
     sortUpdateAt,
-  } = useContext(GlobalTaskContext);
+  } = useContext(GlobalContext);
 
   const { authenticatedUser, logout } = useContext(AuthContext);
 
@@ -120,7 +120,7 @@ function TaskList() {
       <div className='task-list'>
         <TaskListHeader />
 
-        {loading ? (
+        {loadingTask ? (
           <div className='task' align={"center"}>
             <span className='notask'>Загрузка списка задач</span>
           </div>
@@ -136,7 +136,7 @@ function TaskList() {
               ))
             ) : (
               <div className='task' align={"center"}>
-                <span className='notask'>{message}</span>
+                <span className='notask'>{messageTask}</span>
               </div>
             )}
           </div>

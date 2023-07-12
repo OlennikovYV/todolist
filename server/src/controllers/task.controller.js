@@ -15,9 +15,9 @@ exports.taskList = async (req, res) => {
   }).then((user) => {
     if (!user) {
       return res.status(200).send({
-        success: false,
+        successTask: false,
         taskList: [],
-        message: "Пользователь не найден!",
+        messageTask: "Пользователь не найден!",
       });
     }
 
@@ -37,23 +37,23 @@ exports.taskList = async (req, res) => {
       .then((task) => {
         if (task && !task.length) {
           return res.status(200).send({
-            success: true,
+            successTask: true,
             taskList: [],
-            message: "Нет задач для выполнения",
+            messageTask: "Нет задач для выполнения",
           });
         }
 
         res.status(200).send({
-          success: true,
+          successTask: true,
           taskList: task,
-          message: "Список задач успешно получен",
+          messageTask: "Список задач успешно получен",
         });
       })
       .catch((err) => {
         res.status(500).send({
-          success: false,
-          error: err.message,
-          message: "Ошибка получения списка задач",
+          successTask: false,
+          errorTask: err.message,
+          messageTask: "Ошибка получения списка задач",
         });
       });
   } else {
@@ -72,23 +72,23 @@ exports.taskList = async (req, res) => {
       .then((task) => {
         if (task && !task.length) {
           return res.status(200).send({
-            success: true,
+            successTask: true,
             taskList: [],
-            message: "Нет задач для выполнения",
+            messageTask: "Нет задач для выполнения",
           });
         }
 
         res.status(200).send({
-          success: true,
+          successTask: true,
           taskList: task,
-          message: "Список задач успешно получен",
+          messageTask: "Список задач успешно получен",
         });
       })
       .catch((err) => {
         res.status(500).send({
-          success: false,
-          error: err.message,
-          message: "Ошибка получения списка задач",
+          successTask: false,
+          errorTask: err.message,
+          messageTask: "Ошибка получения списка задач",
         });
       });
   }
@@ -100,16 +100,16 @@ exports.addTask = async (req, res) => {
   Task.create(transaction)
     .then((record) => {
       return res.status(200).send({
-        success: true,
+        successTask: true,
         record: record,
-        message: "Запись успешно добавлена",
+        messageTask: "Запись успешно добавлена",
       });
     })
     .catch((err) => {
       return res.status(500).json({
-        success: false,
-        error: err.message,
-        message: "Невозможно добавить запись в базу данных",
+        successTask: false,
+        errorTask: err.message,
+        messageTask: "Невозможно добавить запись в базу данных",
       });
     });
 };
@@ -130,24 +130,24 @@ exports.updateTask = async (req, res) => {
 
       if (!countUpdateRecord) {
         return res.status(200).send({
-          success: false,
-          message: "Запись не найдена",
+          successTask: false,
+          messageTask: "Запись не найдена",
         });
       }
 
       updatedEntry = entry[1][0];
 
       return res.status(200).send({
-        success: true,
+        successTask: true,
         record: updatedEntry,
-        message: "Запись успешно обновлена",
+        messageTask: "Запись успешно обновлена",
       });
     })
     .catch((err) => {
       return res.status(500).json({
-        success: false,
-        error: err.message,
-        message: "Невозможно обновить запись в базе данных",
+        successTask: false,
+        errorTask: err.message,
+        messageTask: "Невозможно обновить запись в базе данных",
       });
     });
 };
@@ -159,23 +159,23 @@ exports.prioritiesList = async (req, res) => {
     .then((list) => {
       if (!list) {
         return res.status(200).send({
-          success: false,
+          successTask: false,
           prioritiesList: [],
-          message: "Справочник приоритетов пуст!",
+          messageTask: "Справочник приоритетов пуст!",
         });
       }
 
       res.status(200).send({
-        success: true,
+        successTask: true,
         prioritiesList: list,
-        message: "Справочник приоритетов успешно получен.",
+        messageTask: "Справочник приоритетов успешно получен.",
       });
     })
     .catch((err) => {
       res.status(500).send({
-        success: false,
-        error: err.message,
-        message: "Ошибка сервера при получении справочника приоритетов",
+        successTask: false,
+        errorTask: err.message,
+        messageTask: "Ошибка сервера при получении справочника приоритетов",
       });
     });
 };

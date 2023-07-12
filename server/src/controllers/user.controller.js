@@ -18,22 +18,23 @@ exports.getResponsible = async (req, res) => {
     .then((user) => {
       if (!user) {
         return res.status(404).send({
-          success: true,
-          message: "Пользователь не найден!",
+          successUser: true,
+          responsible: null,
+          messageUser: "Пользователь не найден!",
         });
       }
 
       res.status(200).send({
-        success: true,
-        user: user,
-        message: `Ответственный ${user.login}.`,
+        successUser: true,
+        responsible: user,
+        messageUser: `Ответственный ${user.login}.`,
       });
     })
     .catch((err) => {
       res.status(500).send({
-        success: false,
+        successUser: false,
         error: err.message,
-        message: "Ошибка сервера при получении ответственного",
+        messageUser: "Ошибка сервера при получении ответственного",
       });
     });
 };
@@ -53,23 +54,23 @@ exports.getResponsibleList = async (_, res) => {
     .then((user) => {
       if (!user) {
         return res.status(200).send({
-          success: true,
-          list: [],
-          message: "Список пуст!",
+          messageUser: "Список пуст!",
+          responsibleList: [],
+          successUser: true,
         });
       }
 
       res.status(200).send({
-        success: true,
-        list: [...user],
-        message: `Ответственный ${user.login}.`,
+        messageUser: `Ответственный ${user.login}.`,
+        responsibleList: [...user],
+        successUser: true,
       });
     })
     .catch((err) => {
       res.status(500).send({
-        success: false,
-        error: err.message,
-        message: "Ошибка сервера при получении списка ответственных",
+        errorUser: err.message,
+        messageUser: "Ошибка сервера при получении списка ответственных",
+        successUser: false,
       });
     });
 };

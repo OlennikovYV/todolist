@@ -19,7 +19,7 @@ export const ReducerTask = (state, action) => {
       return {
         ...state,
         successTask: action.payload.success,
-        taskList: [...state.tasks, action.payload.record],
+        taskList: [...state.taskList, action.payload.record],
         messageTask: action.payload.message,
       };
     case "UPDATE_TASK":
@@ -32,7 +32,12 @@ export const ReducerTask = (state, action) => {
     case "SORT_UPDATE-AT":
       return {
         ...state,
-        taskList: action.payload.tasks,
+        taskList: action.payload.taskList,
+      };
+    case "SORT_RESPONSIBLEID":
+      return {
+        ...state,
+        taskList: action.payload.taskList,
       };
     case "GET_PRIORITIES":
       return {
@@ -40,11 +45,6 @@ export const ReducerTask = (state, action) => {
         successTask: action.payload.success,
         prioritiesList: action.payload.prioritiesList,
         messageTask: action.payload.message,
-      };
-    case "SORT_RESPONSIBLEID":
-      return {
-        ...state,
-        taskList: action.payload,
       };
     case "TASK_ERROR":
       return {

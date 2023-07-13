@@ -119,18 +119,18 @@ const ActionTask = () => {
   }
 
   function sortUpdateAt() {
-    const taskLis = state.taskLis.slice(0);
+    const taskList = state.taskList.slice(0);
 
-    sortByFieldDate(taskLis, "update_at");
+    sortByFieldDate(taskList, "update_at");
 
     dispatch({
       type: "SORT_UPDATE-AT",
-      payload: { taskLis: taskLis },
+      payload: { taskList: taskList },
     });
   }
 
   function sortResponsibleId() {
-    const taskList = state.taskLis.slice(0);
+    const taskList = state.taskList.slice(0);
 
     sortByFieldNumber(taskList, "responsibleid");
 

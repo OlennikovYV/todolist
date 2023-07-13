@@ -25,19 +25,17 @@ function EditTask({ task, onClose }) {
   const statusRef = useRef();
 
   const { authenticatedUser } = useContext(AuthContext);
-  const { priorities, updateTask } = useContext(globalContext);
+  const { prioritiesList, updateTask } = useContext(globalContext);
 
-  const {
-    data: responsible,
-    loading,
-    error,
-  } = useAxiosGet(`http://localhost:3001/api/user/responsible`);
+  const { data, loading, error } = useAxiosGet(
+    `http://localhost:3001/api/user/responsible`
+  );
 
   function handleSubmit(event) {
     event.preventDefault();
 
     let data;
-    const { id } = priorities.filter(
+    const { id } = prioritiesList.filter(
       (priority) => priority.caption === priorityRef.current.value
     )[0];
 
@@ -60,7 +58,7 @@ function EditTask({ task, onClose }) {
 
   function handleChangePriority() {
     const createDataTime = moment(create_atRef.current.value).format();
-    const { period } = priorities.filter(
+    const { period } = prioritiesList.filter(
       (priority) => priority.caption === priorityRef.current.value
     )[0];
 
@@ -107,7 +105,7 @@ function EditTask({ task, onClose }) {
               <div className='title'>Приоритет:</div>
               <select
                 defaultValue={
-                  priorities.filter(
+                  prioritiesList.filter(
                     (priority) => priority.id === task.priorityId
                   )[0].caption
                 }
@@ -115,7 +113,7 @@ function EditTask({ task, onClose }) {
                 onChange={handleChangePriority}
                 ref={priorityRef}
               >
-                {priorities.map((priority) => (
+                {prioritiesList.map((priority) => (
                   <option key={priority.id} value={priority.caption}>
                     {priority.caption}
                   </option>
@@ -147,7 +145,7 @@ function EditTask({ task, onClose }) {
                 onChange={() => {}}
                 ref={responsibleidRef}
               >
-                {responsible.list.map((data) => (
+                {data.responsibleList.map((data) => (
                   <option value={data.id} key={data.id}>
                     {fioFormat(data.lastname, data.firstname, data.fathername)}
                   </option>

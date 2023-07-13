@@ -25,20 +25,18 @@ function NewTask({ onClose }) {
   const statusRef = useRef();
 
   const { authenticatedUser } = useContext(AuthContext);
-  const { priorities, addTask } = useContext(globalContext);
+  const { prioritiesList, addTask } = useContext(globalContext);
 
-  const {
-    data: responsible,
-    loading,
-    error,
-  } = useAxiosGet(`http://localhost:3001/api/user/responsible`);
+  const { data, loading, error } = useAxiosGet(
+    `http://localhost:3001/api/user/responsible`
+  );
 
   function handleSubmit(event) {
     event.preventDefault();
 
     let data;
     const createDataTime = moment(create_atRef.current.value)._d;
-    const { id, period } = priorities.filter(
+    const { id, period } = prioritiesList.filter(
       (priority) => priority.caption === priorityRef.current.value
     )[0];
 
@@ -61,7 +59,7 @@ function NewTask({ onClose }) {
 
   function handleChangePriority() {
     const createDataTime = moment(create_atRef.current.value).format();
-    const { period } = priorities.filter(
+    const { period } = prioritiesList.filter(
       (priority) => priority.caption === priorityRef.current.value
     )[0];
 
@@ -103,11 +101,11 @@ function NewTask({ onClose }) {
             <section>
               <div className='title'>Приоритет:</div>
               <select
-                defaultValue={priorities[0].caption}
+                defaultValue={prioritiesList[0].caption}
                 onChange={handleChangePriority}
                 ref={priorityRef}
               >
-                {priorities.map((priority) => (
+                {prioritiesList.map((priority) => (
                   <option key={priority.id} value={priority.caption}>
                     {priority.caption}
                   </option>
@@ -135,10 +133,10 @@ function NewTask({ onClose }) {
             <section className='container-responsible'>
               <div className='title'>Ответственный:</div>
               <select
-                defaultValue={responsible.list[0].id}
+                defaultValue={data.responsibleList[0].id}
                 ref={responsibleidRef}
               >
-                {responsible.list.map((data) => (
+                {data.responsibleList.map((data) => (
                   <option value={data.id} key={data.id}>
                     {fioFormat(data.lastname, data.firstname, data.fathername)}
                   </option>

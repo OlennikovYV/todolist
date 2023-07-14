@@ -89,13 +89,7 @@ function Task({ task, selectedGroupDate }) {
   }
 
   function checkTask() {
-    let totalClass = "hidden";
-
-    if (isShow()) {
-      totalClass = `task ${setColorTask()}`;
-    }
-
-    return totalClass;
+    return isShow() ? `task ${setColorTask()}` : "hidden";
   }
 
   return (

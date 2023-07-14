@@ -36,9 +36,12 @@ const ActionUser = () => {
 
   async function getResponsible(responsibleId) {
     try {
-      const response = await axios.get(`/api/user/responsible/:id`, {
-        transaction: responsibleId,
-      });
+      const response = await axios.get(
+        `http://localhost:3001/api/user/responsible/${responsibleId}`,
+        {
+          transaction: responsibleId,
+        }
+      );
 
       dispatch({
         type: "GET_RESPONSIBLE",

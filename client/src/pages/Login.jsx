@@ -29,9 +29,6 @@ function Login() {
     e.preventDefault();
 
     signIn(user, password);
-
-    // setUser("");
-    // setPassword("");
   };
 
   return (

@@ -1,9 +1,9 @@
 import React from "react";
 
-function Caption(props) {
+function Text(props) {
   const { className, text } = props;
 
   return <div className={className}>{text}</div>;
 }
 
-export default Caption;
+export default Text;

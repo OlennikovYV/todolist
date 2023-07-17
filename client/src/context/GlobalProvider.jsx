@@ -1,7 +1,6 @@
 import { createContext } from "react";
 
 import ActionTask from "../actions/ActionTask";
-import ActionUser from "../actions/ActionUser";
 
 const GlobalContext = createContext({});
 
@@ -20,15 +19,6 @@ export const GlobalProvider = ({ children }) => {
     sortUpdateAt,
     updateTask,
   } = ActionTask();
-  const {
-    errorUser,
-    messageUser,
-    responsible,
-    responsibleList,
-    successUser,
-    getResponsible,
-    getResponsibleList,
-  } = ActionUser();
 
   return (
     <GlobalContext.Provider
@@ -46,14 +36,6 @@ export const GlobalProvider = ({ children }) => {
         sortResponsibleId,
         sortUpdateAt,
         updateTask,
-        // ReducerUser
-        errorUser,
-        messageUser,
-        responsible,
-        responsibleList,
-        successUser,
-        getResponsible,
-        getResponsibleList,
       }}
     >
       {children}

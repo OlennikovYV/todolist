@@ -9,6 +9,7 @@ import Modal from "../Modal";
 import EditTask from "../EditTask";
 
 import BorderInset from "../../components/BorderInset";
+import Text from "../../components/Text";
 
 import { fioFormat } from "../../utils/formatField";
 import { DATE_FORMAT } from "../../utils/common/constants";
@@ -17,6 +18,17 @@ function Task({ task, selectedGroupDate }) {
   const [modal, setModal] = useState(false);
 
   const { prioritiesList } = useContext(GlobalContext);
+
+  const viewPriority = () =>
+    prioritiesList.filter((priority) => priority.id === task["priorityId"])[0]
+      .caption;
+  const viewDateComplete = () => moment(task.completion_at).format(DATE_FORMAT);
+  const viewFio = () =>
+    fioFormat(
+      data.responsible.lastname,
+      data.responsible.firstname,
+      data.responsible.fathername
+    );
 
   const {
     data,
@@ -95,31 +107,17 @@ function Task({ task, selectedGroupDate }) {
   return (
     <>
       <div className={checkTask()} onDoubleClick={() => setModal(true)}>
-        <label className='task__id'>{task.id}</label>
+        <Text className='task__id' text={task.id} />
         <BorderInset />
-        <div className='task__caption'>{task.caption}</div>
+        <Text className='task__caption' text={task.caption} />
         <BorderInset />
-        <div className='task__priority'>
-          {
-            prioritiesList.filter(
-              (priority) => priority.id === task["priorityId"]
-            )[0].caption
-          }
-        </div>
+        <Text className='task__priority' text={viewPriority()} />
         <BorderInset />
-        <div className='task__date-complete'>
-          {moment(task.completion_at).format(DATE_FORMAT)}
-        </div>
+        <Text className='task__date-complete' text={viewDateComplete()} />
         <BorderInset />
-        <div className='task__fio'>
-          {fioFormat(
-            data.responsible.lastname,
-            data.responsible.firstname,
-            data.responsible.fathername
-          )}
-        </div>
+        <Text className='task__fio' text={viewFio()} />
         <BorderInset />
-        <span className='task__status'>{task.status}</span>
+        <Text className='task__status' text={task.status} />
       </div>
 
       <Modal isVisible={modal} onClose={() => setModal(false)}>

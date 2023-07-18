@@ -1,3 +1,4 @@
+// Палитра цветов
 $black: rgba(16, 16, 16);
 $black-alpha: rgba(16, 16, 16, 0.3);
 $black-light: rgb(68, 68, 68);
@@ -9,3 +10,18 @@ $green-light: HoneyDew;
 $green: LimeGreen;
 $purple-alpha: rgba(170, 170, 190, 0.4);
 $red-light: MistyRose;
+
+// Цвет фона задачи в списке
+$task-background-expired: $red-light;
+$task-background-completed: $green-light;
+$task-background-other: $gray-light;
+// Цвет текста задачи в списке
+$task-text-color: $black-light;
+// Цвет текста сообщения при пустом списке
+$no-task-text-color: $green;
+
+// Цвет оформления полей ввода текста, даты, выбора
+$placeholder-color: $black-light;
+
+// z индекс окон
+$z-indexModal: 9;

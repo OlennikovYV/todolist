@@ -122,7 +122,7 @@ function TaskList() {
 
         {loadingTask ? (
           <div className='task' align={"center"}>
-            <span className='notask'>Загрузка списка задач</span>
+            <span className='task-loading-message'>Загрузка списка задач</span>
           </div>
         ) : (
           <div className='list'>
@@ -136,7 +136,7 @@ function TaskList() {
               ))
             ) : (
               <div className='task' align={"center"}>
-                <span className='notask'>{messageTask}</span>
+                <span className='no-task-message'>{messageTask}</span>
               </div>
             )}
           </div>

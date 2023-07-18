@@ -21,9 +21,9 @@ const ActionTask = () => {
       dispatch({
         type: "GET_ALL_TASKS",
         payload: {
+          messageTask: response.data.messageTask,
           successTask: response.data.successTask,
           taskList: response.data.taskList,
-          messageTask: response.data.messageTask,
         },
       });
     } catch (err) {
@@ -47,9 +47,9 @@ const ActionTask = () => {
       dispatch({
         type: "ADD_TASK",
         payload: {
-          successTask: response.data.successTask,
-          record: response.data.record,
           messageTask: response.data.messageTask,
+          record: response.data.record,
+          successTask: response.data.successTask,
         },
       });
     } catch (err) {
@@ -80,7 +80,11 @@ const ActionTask = () => {
 
       dispatch({
         type: "UPDATE_TASK",
-        payload: { taskList: taskList },
+        payload: {
+          messageTask: response.data.messageTask,
+          taskList: taskList,
+          successTask: response.data.successTask,
+        },
       });
     } catch (err) {
       dispatch({
@@ -143,7 +147,7 @@ const ActionTask = () => {
   return {
     errorTask: state.error,
     loadingTask: state.loading,
-    messageTask: state.message,
+    messageTask: state.messageTask,
     prioritiesList: state.prioritiesList,
     successTask: state.success,
     taskList: state.taskList,

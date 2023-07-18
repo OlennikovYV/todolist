@@ -55,25 +55,25 @@
   overflow: hidden;
   user-select: none;
 
-  & .notask {
+  & .no-task-message {
     width: 100%;
     color: $green;
     text-align: center;
   }
 
-  &.green {
-    color: $black-light;
-    background: $green-light;
+  &.task-status-completed {
+    color: $task-text-color;
+    background: $task-background-completed;
   }
 
-  &.red {
-    color: $black-light;
-    background: $red-light;
+  &.task-status-expired {
+    color: $task-text-color;
+    background: $task-background-expired;
   }
 
-  &.gray {
-    color: $black-light;
-    background: $gray-light;
+  &.task-status-other {
+    color: $task-text-color;
+    background: $task-background-other;
   }
 
   &__id {

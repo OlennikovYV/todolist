@@ -43,17 +43,17 @@ function Task({ task, selectedGroupDate }) {
 
   function setColorTask() {
     if (task.status === "выполнена") {
-      return "green";
+      return "task-status-completed";
     }
 
     if (
       (task.status === "к выполнению" || task.status === "выполняется") &&
       new Date() - new Date(task.completion_at) > 0
     ) {
-      return "red";
+      return "task-status-expired";
     }
 
-    return "gray";
+    return "task-status-other";
   }
 
   function isShow() {

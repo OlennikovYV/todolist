@@ -12,6 +12,12 @@ textarea {
   outline: none;
 }
 
+input::placeholder,
+textarea::placeholder {
+  color: $placeholder-color;
+  opacity: 0.3;
+}
+
 .bg-color_disabled-input {
   background-color: $gray-light;
 }

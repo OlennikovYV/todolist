@@ -6,7 +6,7 @@
   left: 0;
   right: 0;
   width: 100%;
-  z-index: 9;
+  z-index: $z-indexModal;
   background-color: rgba(0, 0, 0, 0.3);
   animation-name: appear;
   animation-duration: 200ms;

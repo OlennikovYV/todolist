@@ -13,21 +13,21 @@ export const ReducerTask = (state, action) => {
         ...state,
         successTask: action.payload.success,
         taskList: action.payload.taskList,
-        messageTask: action.payload.message,
+        messageTask: action.payload.messageTask,
       };
     case "ADD_TASK":
       return {
         ...state,
         successTask: action.payload.success,
         taskList: [...state.taskList, action.payload.record],
-        messageTask: action.payload.message,
+        messageTask: action.payload.messageTask,
       };
     case "UPDATE_TASK":
       return {
         ...state,
         successTask: action.payload.success,
         taskList: [...action.payload.taskList],
-        messageTask: action.payload.message,
+        messageTask: action.payload.messageTask,
       };
     case "SORT_UPDATE-AT":
       return {
@@ -44,7 +44,7 @@ export const ReducerTask = (state, action) => {
         ...state,
         successTask: action.payload.success,
         prioritiesList: action.payload.prioritiesList,
-        messageTask: action.payload.message,
+        messageTask: action.payload.messageTask,
       };
     case "TASK_ERROR":
       return {

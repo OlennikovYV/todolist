@@ -3,7 +3,7 @@ import moment from "moment";
 
 import GlobalContext from "../../context/GlobalProvider";
 
-import useAxiosGet from "../../hooks/fetch";
+import useAxiosGet from "../../hooks/useAxiosGet";
 
 import Modal from "../Modal";
 import EditTask from "../EditTask";

@@ -3,11 +3,14 @@ import React, { useState, useContext, useEffect } from "react";
 import GlobalContext from "../../context/GlobalProvider";
 import AuthContext from "../../context/AuthProvider";
 
+import useCheckServerConnection from "../../hooks/useCheckServerConnection";
+
 import Modal from "../../containers/Modal";
 import NewTask from "../NewTask";
 import Task from "../Task";
 
 import Button from "../../components/Button";
+import StatusNetwork from "../../components/StatusNetwork";
 import TaskListHeader from "../../components/TaskListHeader";
 
 import { fioFormat } from "../../utils/formatField";
@@ -15,6 +18,7 @@ import { fioFormat } from "../../utils/formatField";
 function TaskList() {
   const [selectedGroupDate, setSelectedGroupDate] = useState("future");
   const [modal, setModal] = useState(false);
+  const isOnline = useCheckServerConnection();
 
   const {
     loadingTask,
@@ -57,16 +61,17 @@ function TaskList() {
   return (
     <div className='container-task-list'>
       <div className='panel-header'>
-        <span className='account-name'>
+        <StatusNetwork isOnline={isOnline} />
+        <div className='account-name'>
           {authenticatedUser.supervisorid ? "сотрудник" : "руководитель"}
-        </span>
-        <span className='account-name'>
+        </div>
+        <div className='account-name'>
           {fioFormat(
             authenticatedUser.lastname,
             authenticatedUser.firstname,
             authenticatedUser.fathername
           )}
-        </span>
+        </div>
         <Button
           className='log-out'
           onClick={() => {

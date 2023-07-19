@@ -1,0 +1,14 @@
+.modal-message {
+  padding: 16px;
+  border: 3px solid;
+
+  &.info {
+    background: $green-light;
+    border-color: darken($green-light, 15%);
+  }
+
+  &.error {
+    background: $red-light;
+    border-color: darken($red-light, 15%);
+  }
+}

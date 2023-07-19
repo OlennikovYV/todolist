@@ -1,0 +1,21 @@
+.network {
+  margin-left: 0;
+  margin-right: auto;
+  padding: 3px;
+
+  & span {
+    padding: 4px;
+    border: 1px solid;
+    border-radius: 3px;
+  }
+
+  & .online {
+    border-color: darken($green-light, 15%);
+    background-color: $green-light;
+  }
+
+  & .offline {
+    border-color: darken($red-light, 15%);
+    background-color: $red-light;
+  }
+}

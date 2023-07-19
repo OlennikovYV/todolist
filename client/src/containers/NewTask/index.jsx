@@ -1,7 +1,7 @@
 import React, { useContext, useRef } from "react";
 import moment from "moment";
 
-import useAxiosGet from "../../hooks/fetch";
+import useAxiosGet from "../../hooks/useAxiosGet";
 
 import AuthContext from "../../context/AuthProvider";
 import globalContext from "../../context/GlobalProvider";
@@ -9,6 +9,7 @@ import globalContext from "../../context/GlobalProvider";
 import HeaderModal from "../../components/HeaderModal";
 import FooterModal from "../../components/FooterModal";
 import FormWrapper from "../../components/FormWrapper";
+import ModalMessage from "../../components/ModalMessage";
 
 import { fioFormat } from "../../utils/formatField";
 import { DATE_FORMAT } from "../../utils/common/constants";
@@ -68,8 +69,15 @@ function NewTask({ onClose }) {
       .format("YYYY-MM-DD HH:mm:ss");
   }
 
-  if (loading) return <></>;
-  if (error) return <pre>{JSON.stringify(error, null, 2)}</pre>;
+  if (loading)
+    return <ModalMessage message={"Загрузка ..."} typeClass={"info"} />;
+  if (error)
+    return (
+      <ModalMessage
+        message={`Ошибка: ${JSON.stringify(error.message, null, 2)}`}
+        typeClass={"error"}
+      />
+    );
 
   return (
     <>

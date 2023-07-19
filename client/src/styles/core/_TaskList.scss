@@ -9,16 +9,18 @@
 }
 
 .panel-header {
+  @include flex;
+  justify-content: space-between;
+  align-items: center;
   width: 90%;
   margin-top: 8px;
-  text-align: right;
 
   & .account-name {
     margin-right: 16px;
     color: $black-light;
   }
 
-  &.log-out {
+  & .log-out {
     margin-top: 0;
     margin-right: 0;
   }

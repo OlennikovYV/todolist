@@ -73,9 +73,9 @@ function Login() {
 
               <Button className='login' text='Войти' />
             </FormWrapper>
-            <div className='error'>
+            <div className='login-error'>
               {error ? (
-                <p ref={errorRef} className={error ? "errmsg" : "offscreen"}>
+                <p ref={errorRef} className={error ? "message" : "hidden"}>
                   {message}
                 </p>
               ) : null}

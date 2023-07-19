@@ -14,8 +14,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 db.sequelize.sync({ force: true }).then(() => initData());
 
-app.get("/", (req, res) => {
-  res.json({ message: `Server running on port ${PORT}` });
+app.get("/", (_, res) => {
+  res.status(200).send({});
 });
 
 require("./routes/auth.routes")(app);

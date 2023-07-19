@@ -47,16 +47,16 @@
   font-size: 12px;
 }
 
-.errmsg {
+.login-error {
   text-align: center;
   color: #ff6060;
-}
 
-.offscreen {
-  display: none;
-}
+  & .error {
+    height: 20px;
+    padding: 5px;
+  }
 
-.error {
-  height: 20px;
-  padding: 5px;
+  & .offscreen {
+    display: none;
+  }
 }

@@ -5,6 +5,8 @@ const sequelize = new Sequelize(config.DB, config.USER, config.PASSWORD, {
   host: config.HOST,
   dialect: config.dialect,
   operatorsAliases: false,
+  // Время выполнения операций в логе
+  benchmark: true,
   pool: {
     max: config.pool.max,
     min: config.pool.min,

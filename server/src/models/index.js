@@ -4,7 +4,7 @@ const { Sequelize } = require("sequelize");
 const sequelize = new Sequelize(config.DB, config.USER, config.PASSWORD, {
   host: config.HOST,
   dialect: config.dialect,
-  operatorsAliases: false,
+  operatorsAliases: 0,
   // Время выполнения операций в логе
   benchmark: true,
   pool: {
@@ -22,12 +22,11 @@ db.sequelize = sequelize;
 
 db.user = require("./user/user.model.js")(sequelize, Sequelize);
 db.task = require("./task/task.model.js")(sequelize, Sequelize);
-db.priorities = require("./priority/priorities.model.js")(sequelize, Sequelize);
+db.priority = require("./priority/priority.model.js")(sequelize, Sequelize);
 
-db.priorities.hasMany(db.task, {
+db.priority.hasMany(db.task, {
   foreignKey: "priorityId",
-  as: "priority",
 });
-db.task.belongsTo(db.priorities);
+db.task.belongsTo(db.priority);
 
 module.exports = db;

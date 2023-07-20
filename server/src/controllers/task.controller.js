@@ -1,7 +1,7 @@
 const db = require("../models");
 const Task = db.task;
 const User = db.user;
-const Priorities = db.priorities;
+const Priority = db.priority;
 
 exports.taskList = async (req, res) => {
   const id = req.params.id;
@@ -26,12 +26,7 @@ exports.taskList = async (req, res) => {
 
   if (isSupervisor) {
     Task.findAll({
-      include: [
-        {
-          model: Priorities,
-          as: "priority",
-        },
-      ],
+      include: Priority,
       raw: true,
     })
       .then((task) => {
@@ -61,12 +56,7 @@ exports.taskList = async (req, res) => {
       where: {
         responsibleid: id,
       },
-      include: [
-        {
-          model: Priorities,
-          as: "priority",
-        },
-      ],
+      include: Priority,
       raw: true,
     })
       .then((task) => {
@@ -153,7 +143,7 @@ exports.updateTask = async (req, res) => {
 };
 
 exports.prioritiesList = async (req, res) => {
-  await Priorities.findAll({
+  await Priority.findAll({
     raw: true,
   })
     .then((list) => {

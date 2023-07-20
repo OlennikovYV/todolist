@@ -1,6 +1,6 @@
 module.exports = (sequelize, Sequelize) => {
-  const Priorities = sequelize.define(
-    "priorities",
+  const Priority = sequelize.define(
+    "priority",
     {
       id: {
         type: Sequelize.INTEGER,
@@ -34,8 +34,9 @@ module.exports = (sequelize, Sequelize) => {
     },
     {
       timestamps: false,
+      freezeTableName: true,
     }
   );
 
-  return Priorities;
+  return Priority;
 };

@@ -1,12 +1,12 @@
 const db = require("../models");
 const User = db.user;
 const Task = db.task;
-const Priorities = db.priorities;
+const Priority = db.priority;
 
 const dataList = require("./test.data");
 
 function fillTestPriorities() {
-  Priorities.bulkCreate(dataList.priorityList, { returning: true });
+  Priority.bulkCreate(dataList.priorityList, { returning: true });
 }
 
 function fillTestUsers() {

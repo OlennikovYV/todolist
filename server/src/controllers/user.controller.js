@@ -1,7 +1,7 @@
 const { Op } = require("sequelize");
 
-const db = require("../models");
-const User = db.user;
+const sequelize = require("../models");
+const User = sequelize.models.user;
 
 exports.getResponsible = async (req, res) => {
   const id = req.params.id;

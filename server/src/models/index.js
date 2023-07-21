@@ -1,5 +1,6 @@
 const config = require("../config/db.config.js");
 const { Sequelize } = require("sequelize");
+const { applyExtraSetup } = require("./extra-setup");
 
 const sequelize = new Sequelize(config.DB, config.USER, config.PASSWORD, {
   host: config.HOST,
@@ -15,18 +16,18 @@ const sequelize = new Sequelize(config.DB, config.USER, config.PASSWORD, {
   },
 });
 
-const db = {};
+const modelDefiners = [
+  require("./user/user.model.js"),
+  require("./task/task.model.js"),
+  require("./priority/priority.model.js"),
+];
 
-db.Sequelize = Sequelize;
-db.sequelize = sequelize;
+for (const modelDefiner of modelDefiners) {
+  modelDefiner(sequelize, Sequelize);
+}
 
-db.user = require("./user/user.model.js")(sequelize, Sequelize);
-db.task = require("./task/task.model.js")(sequelize, Sequelize);
-db.priority = require("./priority/priority.model.js")(sequelize, Sequelize);
+// Дополнительные настройки после определения моделей
+// Такие как добавление ассоциаций
+applyExtraSetup(sequelize);
 
-db.priority.hasMany(db.task, {
-  foreignKey: "priorityId",
-});
-db.task.belongsTo(db.priority);
-
-module.exports = db;
+module.exports = sequelize;

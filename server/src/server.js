@@ -2,7 +2,7 @@ const express = require("express");
 const cors = require("cors");
 const bodyParser = require("body-parser");
 
-const db = require("./models");
+const sequelize = require("./models");
 const initData = require("./data");
 
 const PORT = process.env.PORT || 3001;
@@ -12,7 +12,7 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-db.sequelize.sync({ force: true }).then(() => initData());
+sequelize.sync({ force: true }).then(() => initData());
 
 app.get("/", (_, res) => {
   res.status(200).send({});

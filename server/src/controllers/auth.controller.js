@@ -1,6 +1,6 @@
-const db = require("../models");
+const sequelize = require("../models");
 const bcrypt = require("bcryptjs");
-const User = db.user;
+const User = sequelize.models.user;
 
 exports.signin = (req, res) => {
   User.findOne({

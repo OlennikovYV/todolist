@@ -1,7 +1,7 @@
-const db = require("../models");
-const Task = db.task;
-const User = db.user;
-const Priority = db.priority;
+const sequelize = require("../models");
+const Task = sequelize.models.task;
+const User = sequelize.models.user;
+const Priority = sequelize.models.priority;
 
 exports.taskList = async (req, res) => {
   const id = req.params.id;

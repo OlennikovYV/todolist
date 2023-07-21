@@ -1,7 +1,7 @@
-const db = require("../models");
-const User = db.user;
-const Task = db.task;
-const Priority = db.priority;
+const sequelize = require("../models");
+const User = sequelize.models.user;
+const Task = sequelize.models.task;
+const Priority = sequelize.models.priority;
 
 const dataList = require("./test.data");
 

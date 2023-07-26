@@ -2,7 +2,7 @@ function applyExtraSetup(sequelize) {
   const { priority, task } = sequelize.models;
 
   priority.hasMany(task, {
-    foreignKey: "priorityId",
+    as: "priority",
   });
   task.belongsTo(priority);
 }

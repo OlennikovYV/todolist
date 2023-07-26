@@ -11,7 +11,6 @@ exports.taskList = async (req, res) => {
     where: {
       id: id,
     },
-    raw: true,
   }).then((user) => {
     if (!user) {
       return res.status(200).send({
@@ -26,8 +25,7 @@ exports.taskList = async (req, res) => {
 
   if (isSupervisor) {
     Task.findAll({
-      include: Priority,
-      raw: true,
+      include: [{ model: Priority, as: "priority" }],
     })
       .then((task) => {
         if (task && !task.length) {
@@ -56,8 +54,7 @@ exports.taskList = async (req, res) => {
       where: {
         responsibleid: id,
       },
-      include: Priority,
-      raw: true,
+      include: [{ model: Priority, as: "priority" }],
     })
       .then((task) => {
         if (task && !task.length) {
@@ -143,9 +140,7 @@ exports.updateTask = async (req, res) => {
 };
 
 exports.prioritiesList = async (req, res) => {
-  await Priority.findAll({
-    raw: true,
-  })
+  await Priority.findAll()
     .then((list) => {
       if (!list) {
         return res.status(200).send({

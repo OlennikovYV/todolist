@@ -3,11 +3,12 @@ const bcrypt = require("bcryptjs");
 const User = sequelize.models.user;
 
 exports.signin = (req, res) => {
+  const { login, password } = req.body;
+
   User.findOne({
     where: {
-      login: req.body.login,
+      login: login,
     },
-    raw: true,
   })
     .then((user) => {
       if (!user) {
@@ -17,10 +18,7 @@ exports.signin = (req, res) => {
         });
       }
 
-      var passwordIsValid = bcrypt.compareSync(
-        req.body.password,
-        user.password
-      );
+      var passwordIsValid = bcrypt.compareSync(password, user.password);
 
       if (!passwordIsValid) {
         return res.status(401).send({

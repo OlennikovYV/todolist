@@ -13,7 +13,6 @@ exports.getResponsible = async (req, res) => {
     attributes: {
       exclude: ["password"],
     },
-    raw: true,
   })
     .then((user) => {
       if (!user) {
@@ -49,7 +48,6 @@ exports.getResponsibleList = async (_, res) => {
     attributes: {
       exclude: ["password"],
     },
-    raw: true,
   })
     .then((user) => {
       if (!user) {

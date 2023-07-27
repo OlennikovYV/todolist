@@ -7,7 +7,7 @@ function useCheckServerConnection() {
   useEffect(() => {
     const checkNetwork = setInterval(() => {
       axios
-        .get("http://localhost:3001/")
+        .get("http://localhost:3001/api/echo")
         .then(() => !isOnline && setIsOnline(true))
         .catch(() => isOnline && setIsOnline(false));
 

@@ -1,5 +1,8 @@
+const Router = require("express");
+const router = new Router();
+
 const controller = require("../controllers/auth.controller");
 
-module.exports = function (app) {
-  app.post("/api/auth", controller.signin);
-};
+router.post("/", controller.signin);
+
+module.exports = router;

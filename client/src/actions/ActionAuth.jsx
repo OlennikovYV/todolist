@@ -53,13 +53,12 @@ const ActionAuth = () => {
           error: null,
         },
       });
-    } catch (err) {
-      let message = err.response.data.message;
+    } catch (error) {
+      let message = error.response.data.message;
 
       dispatch({
         type: "TASK_ERROR",
         payload: {
-          error: true,
           message: message,
         },
       });
@@ -79,10 +78,10 @@ const ActionAuth = () => {
           success: true,
         },
       });
-    } catch (err) {
+    } catch (error) {
       dispatch({
         type: "TASK_ERROR",
-        payload: err.response.data.error,
+        payload: error.message,
       });
     }
   }

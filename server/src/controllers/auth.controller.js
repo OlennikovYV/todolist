@@ -1,8 +1,11 @@
-const sequelize = require("../models");
 const bcrypt = require("bcryptjs");
+
+const sequelize = require("../models");
+const ApiError = require("../error/api.error");
+
 const User = sequelize.models.user;
 
-exports.signin = (req, res) => {
+exports.signin = (req, res, next) => {
   const { login, password } = req.body;
 
   User.findOne({
@@ -12,19 +15,13 @@ exports.signin = (req, res) => {
   })
     .then((user) => {
       if (!user) {
-        return res.status(401).send({
-          success: true,
-          message: "Пользователь не найден!",
-        });
+        return next(ApiError.Unauthorized("Пользователь не найден!"));
       }
 
       var passwordIsValid = bcrypt.compareSync(password, user.password);
 
       if (!passwordIsValid) {
-        return res.status(401).send({
-          success: true,
-          message: "Неверный пароль!",
-        });
+        return next(ApiError.Unauthorized("Неверный пароль!"));
       }
 
       res.status(200).send({
@@ -40,11 +37,7 @@ exports.signin = (req, res) => {
         message: "Аутентификация успешна!",
       });
     })
-    .catch((err) => {
-      res.status(500).send({
-        success: false,
-        error: err.message,
-        message: "Ошибка сервера при входе",
-      });
+    .catch((error) => {
+      return next(ApiError.Unauthorized(error.message));
     });
 };

@@ -32,12 +32,7 @@ export const ReducerAuth = (state, action) => {
     case "TASK_ERROR":
       return {
         ...state,
-        authenticatedUser: null,
-        isAuthenticated: false,
-        error: action.payload.error,
         message: action.payload.message,
-        status: action.payload.status,
-        success: null,
       };
     default:
       return state;

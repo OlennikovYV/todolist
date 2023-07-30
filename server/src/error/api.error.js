@@ -1,17 +1,9 @@
-class ApiError extends Error {
-  constructor(status, message) {
-    super();
-    this.status = status;
-    this.message = message;
-  }
-
-  static Unauthorized(message) {
-    return new ApiError(401, message);
-  }
-
-  static Internal(message) {
-    return new ApiError(401, message);
-  }
+function ApiError(status, message) {
+  this.status = status;
+  this.message = message;
 }
+
+ApiError.Unauthorized = (message) => new ApiError(401, message);
+ApiError.Internal = (message) => new ApiError(500, message);
 
 module.exports = ApiError;

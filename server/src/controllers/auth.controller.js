@@ -38,6 +38,6 @@ exports.signin = (req, res, next) => {
       });
     })
     .catch((error) => {
-      return next(ApiError.Unauthorized(error.message));
+      return next(ApiError.Internal(error.message));
     });
 };

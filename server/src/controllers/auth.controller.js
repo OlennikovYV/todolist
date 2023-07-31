@@ -18,14 +18,11 @@ exports.signin = (req, res, next) => {
         return next(ApiError.Unauthorized("Пользователь не найден!"));
       }
 
-      var passwordIsValid = bcrypt.compareSync(password, user.password);
-
-      if (!passwordIsValid) {
+      if (!bcrypt.compareSync(password, user.password)) {
         return next(ApiError.Unauthorized("Неверный пароль!"));
       }
 
       res.status(200).send({
-        success: true,
         authenticatedUser: {
           id: user.id,
           firstname: user.firstname,

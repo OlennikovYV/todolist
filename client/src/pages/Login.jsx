@@ -73,14 +73,14 @@ function Login() {
 
               <Button className='login' text='Войти' />
             </FormWrapper>
-            <div className='login-error'>
-              {error ? (
-                <p ref={errorRef} className={error ? "message" : "hidden"}>
-                  {message}
-                </p>
-              ) : null}
-            </div>
           </section>
+          <div className='login-error'>
+            {error ? (
+              <p ref={errorRef} className={error ? "message" : "hidden"}>
+                {message}
+              </p>
+            ) : null}
+          </div>{" "}
         </div>
       )}
     </>

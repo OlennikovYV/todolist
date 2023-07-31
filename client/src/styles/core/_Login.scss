@@ -1,5 +1,5 @@
 .container-login {
-  display: flex;
+  @include flex-column;
   justify-content: center;
   align-items: center;
   margin: 0 auto;
@@ -48,8 +48,10 @@
 }
 
 .login-error {
-  text-align: center;
+  width: 500px;
+  height: 16px;
   color: #ff6060;
+  text-align: center;
 
   & .error {
     height: 20px;

@@ -4,7 +4,6 @@ export const initialStateAuth = {
   error: null,
   message: null,
   status: null,
-  success: null,
 };
 
 export const ReducerAuth = (state, action) => {
@@ -17,21 +16,13 @@ export const ReducerAuth = (state, action) => {
         error: action.payload.error,
         message: action.payload.message,
         status: action.payload.status,
-        success: action.payload.success,
       };
     case "RESET_STATE":
-      return {
-        ...state,
-        authenticatedUser: null,
-        isAuthenticated: false,
-        error: null,
-        message: null,
-        status: null,
-        success: null,
-      };
+      return initialStateAuth;
     case "TASK_ERROR":
       return {
         ...state,
+        error: true,
         message: action.payload.message,
       };
     default:

@@ -80,6 +80,7 @@ function TaskList() {
           text='Выйти'
         />
       </div>
+
       <div className='menu'>
         <div className='control'>
           <Button onClick={() => setModal(true)} text='Создать задачу' />
@@ -122,6 +123,7 @@ function TaskList() {
           <NewTask onClose={() => setModal(false)} />
         </Modal>
       </div>
+
       <div className='task-list'>
         <TaskListHeader />
 

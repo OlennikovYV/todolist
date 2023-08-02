@@ -1,1 +1,1 @@
-exports.echo = (_, res) => res.status(200).send({});
+exports.echo = (_, res) => res.status(200).json({});

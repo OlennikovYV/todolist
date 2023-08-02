@@ -22,7 +22,7 @@ exports.signin = (req, res, next) => {
         return next(ApiError.Unauthorized("Неверный пароль!"));
       }
 
-      res.status(200).send({
+      res.status(200).json({
         authenticatedUser: {
           id: user.id,
           firstname: user.firstname,

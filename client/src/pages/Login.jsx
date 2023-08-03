@@ -34,7 +34,7 @@ function Login() {
   return (
     <>
       {isAuthenticated ? (
-        <Navigate to='/task' replace={true} />
+        <Navigate to='/main-task' replace={true} />
       ) : (
         <div className='container-login'>
           <section className='form-login'>

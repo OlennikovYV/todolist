@@ -9,7 +9,10 @@ const ActionTask = () => {
   const [state, dispatch] = useReducer(ReducerTask, initialStateTask);
 
   async function getAllTasks(authenticationID) {
-    dispatch({ type: "SET_STATUS_LOADING", payload: { loadingTask: true } });
+    dispatch({
+      type: "SET_STATUS_LOADING",
+      payload: { loadingTask: true },
+    });
 
     try {
       const response = await axios.get(
@@ -32,12 +35,18 @@ const ActionTask = () => {
         payload: { errorTask: err.response.data.errorTask },
       });
     } finally {
-      dispatch({ type: "SET_STATUS_LOADING", payload: { loadingTask: false } });
+      dispatch({
+        type: "SET_STATUS_LOADING",
+        payload: { loadingTask: false },
+      });
     }
   }
 
   async function addTask(data) {
-    dispatch({ type: "SET_STATUS_LOADING", payload: { loadingTask: true } });
+    dispatch({
+      type: "SET_STATUS_LOADING",
+      payload: { loadingTask: true },
+    });
 
     try {
       const response = await axios.post(`http://localhost:3001/api/task/add`, {
@@ -58,7 +67,10 @@ const ActionTask = () => {
         payload: { errorTask: err.response.data.errorTask },
       });
     } finally {
-      dispatch({ type: "SET_STATUS_LOADING", payload: { loadingTask: false } });
+      dispatch({
+        type: "SET_STATUS_LOADING",
+        payload: { loadingTask: false },
+      });
     }
   }
 
@@ -66,7 +78,10 @@ const ActionTask = () => {
     const taskList = state.taskList.slice(0);
     const index = taskList.findIndex((task) => task.id === id);
 
-    dispatch({ type: "SET_STATUS_LOADING", payload: { loadingTask: true } });
+    dispatch({
+      type: "SET_STATUS_LOADING",
+      payload: { loadingTask: true },
+    });
 
     try {
       const response = await axios.put(
@@ -92,12 +107,18 @@ const ActionTask = () => {
         payload: { errorTask: err.response.data.errorTask },
       });
     } finally {
-      dispatch({ type: "SET_STATUS_LOADING", payload: { loadingTask: false } });
+      dispatch({
+        type: "SET_STATUS_LOADING",
+        payload: { loadingTask: false },
+      });
     }
   }
 
   async function getPriorities() {
-    dispatch({ type: "SET_STATUS_LOADING", payload: { loadingTask: true } });
+    dispatch({
+      type: "SET_STATUS_LOADING",
+      payload: { loadingTask: true },
+    });
 
     try {
       const response = await axios.get(
@@ -118,7 +139,10 @@ const ActionTask = () => {
         payload: { errorTask: err.response.data.errorTask },
       });
     } finally {
-      dispatch({ type: "SET_STATUS_LOADING", payload: { loadingTask: false } });
+      dispatch({
+        type: "SET_STATUS_LOADING",
+        payload: { loadingTask: false },
+      });
     }
   }
 
@@ -146,7 +170,7 @@ const ActionTask = () => {
 
   return {
     errorTask: state.error,
-    loadingTask: state.loading,
+    loadingTask: state.loadingTask,
     messageTask: state.messageTask,
     prioritiesList: state.prioritiesList,
     successTask: state.success,

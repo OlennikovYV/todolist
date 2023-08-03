@@ -15,8 +15,6 @@ import { fioFormat } from "../../utils/formatField";
 import { DATE_FORMAT } from "../../utils/common/constants";
 
 function NewTask({ onClose }) {
-  const formId = "create-task";
-
   const captionRef = useRef();
   const descriptionRef = useRef();
   const priorityRef = useRef();
@@ -86,7 +84,7 @@ function NewTask({ onClose }) {
         <div className='modal-content'>
           <FormWrapper
             className='form-task'
-            id={formId}
+            id={"create-task"}
             onSubmit={handleSubmit}
           >
             <section>
@@ -171,7 +169,7 @@ function NewTask({ onClose }) {
         isShow={true}
         onOk={handleSubmit}
         onCancel={onClose}
-        id={formId}
+        id={"create-task"}
       />
     </>
   );

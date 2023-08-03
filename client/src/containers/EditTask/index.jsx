@@ -15,8 +15,6 @@ import { fioFormat } from "../../utils/formatField";
 import { DATE_FORMAT } from "../../utils/common/constants";
 
 function EditTask({ task, onClose }) {
-  const formId = "edit-task";
-
   const captionRef = useRef();
   const descriptionRef = useRef();
   const priorityRef = useRef();
@@ -88,7 +86,7 @@ function EditTask({ task, onClose }) {
         <div className='modal-content'>
           <FormWrapper
             className='form-task'
-            id={formId}
+            id={"edit-task"}
             onSubmit={handleSubmit}
           >
             <section>
@@ -180,7 +178,7 @@ function EditTask({ task, onClose }) {
         isShow={true}
         onOk={handleSubmit}
         onCancel={onClose}
-        id={formId}
+        id={"edit-task"}
       />
     </>
   );

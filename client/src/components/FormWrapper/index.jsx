@@ -1,16 +1,15 @@
 import React from "react";
 
 function FormWrapper(props) {
+  const { className, id, onSubmit, children } = props;
   return (
     <>
       <form
-        className={
-          props?.className ? " formWrapper " + props.className : "formWrapper"
-        }
-        id={props?.id ? props.id : ""}
-        onSubmit={props?.onSubmit ? props.onSubmit : null}
+        className={className ? " formWrapper " + className : "formWrapper"}
+        id={id ? id : ""}
+        onSubmit={onSubmit ? onSubmit : null}
       >
-        {props?.children}
+        {children}
       </form>
     </>
   );

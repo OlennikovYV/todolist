@@ -1,0 +1,20 @@
+.footer {
+  display: flex;
+  width: 90%;
+  padding: 6px;
+}
+
+.account {
+  @include flex;
+  justify-content: space-between;
+  align-items: center;
+
+  &__name {
+    margin-right: 16px;
+    color: $black-light;
+  }
+
+  &__name:last-child {
+    margin-right: 0;
+  }
+}

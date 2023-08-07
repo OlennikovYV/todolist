@@ -3,17 +3,13 @@ import React, { useState, useContext, useEffect } from "react";
 import GlobalContext from "../context/GlobalProvider";
 import AuthContext from "../context/AuthProvider";
 
-import useCheckServerConnection from "../hooks/useCheckServerConnection";
-
 import Modal from "../containers/Modal";
 import NewTask from "../containers/NewTask";
 import TaskList from "../containers/TaskList";
 
 import Button from "../components/Button";
-import StatusNetwork from "../components/StatusNetwork";
 import TaskListHeader from "../components/TaskListHeader";
-
-import { fioFormat } from "../utils/formatField";
+import Footer from "../components/Footer";
 
 function MainTask() {
   const {
@@ -28,7 +24,6 @@ function MainTask() {
 
   const [selectedGroupDate, setSelectedGroupDate] = useState("future");
   const [modal, setModal] = useState(false);
-  const isOnline = useCheckServerConnection();
 
   const { authenticatedUser, logout } = useContext(AuthContext);
 
@@ -60,27 +55,6 @@ function MainTask() {
 
   return (
     <div className='container-task-list'>
-      <div className='panel-header'>
-        <StatusNetwork isOnline={isOnline} />
-        <div className='account-name'>
-          {authenticatedUser.supervisorid ? "сотрудник" : "руководитель"}
-        </div>
-        <div className='account-name'>
-          {fioFormat(
-            authenticatedUser.lastname,
-            authenticatedUser.firstname,
-            authenticatedUser.fathername
-          )}
-        </div>
-        <Button
-          className='log-out'
-          onClick={() => {
-            logout();
-          }}
-          text='Выйти'
-        />
-      </div>
-
       <div className='menu'>
         <div className='control'>
           <Button onClick={() => setModal(true)} text='Создать задачу' />
@@ -118,6 +92,12 @@ function MainTask() {
             text='По ответственным'
           />
         </div>
+        <Button
+          onClick={() => {
+            logout();
+          }}
+          text='Выйти'
+        />
 
         <Modal isVisible={modal} onClose={() => setModal(false)}>
           <NewTask onClose={() => setModal(false)} />
@@ -133,6 +113,8 @@ function MainTask() {
           selectedGroupDate={selectedGroupDate}
         />
       </div>
+
+      <Footer />
     </div>
   );
 }

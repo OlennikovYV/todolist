@@ -1,29 +1,8 @@
 .container-task-list {
   @include flex-column;
-  justify-content: flex-start;
   align-items: center;
-  margin: 0 auto;
-  width: 100vw;
-  min-height: 100vh;
+  height: 100vh;
   background-color: $blue-light;
-}
-
-.panel-header {
-  @include flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 90%;
-  margin-top: 8px;
-
-  & .account-name {
-    margin-right: 16px;
-    color: $black-light;
-  }
-
-  & .log-out {
-    margin-top: 0;
-    margin-right: 0;
-  }
 }
 
 .menu {
@@ -31,6 +10,7 @@
   flex-direction: row;
   justify-content: space-between;
   width: 90%;
+  height: 36px;
   margin-top: 8px;
   padding-left: 0;
 
@@ -40,8 +20,11 @@
 }
 
 .task-list {
+  flex: 1;
   width: 90%;
   margin-top: 8px;
+  overflow: hidden;
+  overflow-y: auto;
 }
 
 .task {

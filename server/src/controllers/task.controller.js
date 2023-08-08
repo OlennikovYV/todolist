@@ -4,80 +4,69 @@ const User = sequelize.models.user;
 const Priority = sequelize.models.priority;
 
 exports.taskList = async (req, res) => {
-  const id = req.params.id;
+  let { id, page, limit, sort, order } = req.params;
+  let offset = page * limit - limit;
   let isSupervisor = true;
+  let task;
 
-  await User.findOne({
-    where: {
-      id: id,
-    },
-  }).then((user) => {
-    if (!user) {
+  console.log(req.params);
+
+  try {
+    await User.findOne({
+      where: {
+        id: id,
+      },
+    }).then((user) => {
+      if (!user) {
+        return res.status(200).json({
+          successTask: false,
+          taskList: [],
+          messageTask: "Пользователь не найден!",
+        });
+      }
+
+      user.supervisorid ? (isSupervisor = false) : (isSupervisor = true);
+    });
+
+    if (isSupervisor) {
+      task = await Task.findAndCountAll({
+        include: [{ model: Priority, as: "priority" }],
+        order: [[sort, order]],
+        limit,
+        offset,
+      });
+    } else {
+      task = await Task.findAndCountAll({
+        where: {
+          responsibleid: id,
+        },
+        include: [{ model: Priority, as: "priority" }],
+        order: [[sort, order]],
+        limit,
+        offset,
+      });
+    }
+    if (task.rows && !task.rows.length) {
       return res.status(200).json({
-        successTask: false,
-        taskList: [],
-        messageTask: "Пользователь не найден!",
+        countTask: task.count,
+        messageTask: "Нет задач для выполнения",
+        successTask: true,
+        taskList: task.rows,
       });
     }
 
-    user.supervisorid ? (isSupervisor = false) : (isSupervisor = true);
-  });
-
-  if (isSupervisor) {
-    Task.findAll({
-      include: [{ model: Priority, as: "priority" }],
-    })
-      .then((task) => {
-        if (task && !task.length) {
-          return res.status(200).json({
-            successTask: true,
-            taskList: [],
-            messageTask: "Нет задач для выполнения",
-          });
-        }
-
-        res.status(200).json({
-          successTask: true,
-          taskList: task,
-          messageTask: "Список задач успешно получен",
-        });
-      })
-      .catch((err) => {
-        res.status(500).json({
-          successTask: false,
-          errorTask: err.message,
-          messageTask: "Ошибка получения списка задач",
-        });
-      });
-  } else {
-    Task.findAll({
-      where: {
-        responsibleid: id,
-      },
-      include: [{ model: Priority, as: "priority" }],
-    })
-      .then((task) => {
-        if (task && !task.length) {
-          return res.status(200).json({
-            successTask: true,
-            taskList: [],
-            messageTask: "Нет задач для выполнения",
-          });
-        }
-
-        res.status(200).json({
-          successTask: true,
-          taskList: task,
-          messageTask: "Список задач успешно получен",
-        });
-      })
-      .catch((err) => {
-        res.status(500).json({
-          successTask: false,
-          errorTask: err.message,
-          messageTask: "Ошибка получения списка задач",
-        });
-      });
+    res.status(200).json({
+      countTask: task.count,
+      messageTask: "Список задач успешно получен",
+      successTask: true,
+      taskList: task.rows,
+    });
+  } catch (err) {
+    res.status(500).json({
+      successTask: false,
+      errorTask: err.message,
+      messageTask: "Ошибка получения списка задач",
+    });
   }
 };
 

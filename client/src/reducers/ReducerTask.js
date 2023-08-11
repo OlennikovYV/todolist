@@ -1,7 +1,12 @@
 export const initialStateTask = {
+  currentPage: 1,
+  displayPeriodName: "all",
   errorTask: null,
+  limitPage: 50,
   loadingTask: false,
   prioritiesList: [],
+  sortFieldName: "id",
+  sortOrder: "ASC",
   successTask: null,
   taskList: [],
 };
@@ -29,15 +34,16 @@ export const ReducerTask = (state, action) => {
         taskList: [...action.payload.taskList],
         messageTask: action.payload.messageTask,
       };
-    case "SORT_UPDATE-AT":
+    case "SET_DISPLAY_PERIOD":
       return {
         ...state,
-        taskList: action.payload.taskList,
+        displayPeriodName: action.payload.displayPeriodName,
       };
-    case "SORT_RESPONSIBLEID":
+    case "SET_SORT_FIELD_NAME":
       return {
         ...state,
-        taskList: action.payload.taskList,
+        sortFieldName: action.payload.sortFieldName,
+        sortOrder: action.payload.sortOrder,
       };
     case "GET_PRIORITIES":
       return {

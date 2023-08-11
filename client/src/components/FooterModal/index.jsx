@@ -2,7 +2,8 @@ import React from "react";
 
 import Button from "../Button";
 
-function FooterModal({ isShow, onOk, onCancel, formId = "" }) {
+function FooterModal(props) {
+  const { isShow, onOk, onCancel, formId = "" } = props;
   return (
     isShow && (
       <footer className='modal-footer'>

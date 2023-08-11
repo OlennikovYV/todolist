@@ -6,17 +6,20 @@ const GlobalContext = createContext({});
 
 export const GlobalProvider = ({ children }) => {
   const {
+    displayPeriodName,
     errorTask,
     loadingTask,
     messageTask,
     prioritiesList,
+    sortFieldName,
+    sortOrder,
     successTask,
     taskList,
     addTask,
     getAllTasks,
     getPriorities,
-    sortResponsibleId,
-    sortUpdateAt,
+    setDisplayPeriodName,
+    setSortFieldName,
     updateTask,
   } = ActionTask();
 
@@ -24,17 +27,20 @@ export const GlobalProvider = ({ children }) => {
     <GlobalContext.Provider
       value={{
         // ReducerTask
+        displayPeriodName,
         errorTask,
         loadingTask,
         messageTask,
         prioritiesList,
+        sortFieldName,
+        sortOrder,
         successTask,
         taskList,
         addTask,
         getAllTasks,
         getPriorities,
-        sortResponsibleId,
-        sortUpdateAt,
+        setDisplayPeriodName,
+        setSortFieldName,
         updateTask,
       }}
     >

@@ -3,23 +3,28 @@ import axios from "axios";
 
 import { initialStateTask, ReducerTask } from "../reducers/ReducerTask.js";
 
-import { sortByFieldDate, sortByFieldNumber } from "../utils/sortByField";
-
 const ActionTask = () => {
   const [state, dispatch] = useReducer(ReducerTask, initialStateTask);
 
   async function getAllTasks(authenticationID) {
+    const params = {
+      id: authenticationID,
+      displayPeriodName: state.displayPeriodName,
+      limit: state.limitPage,
+      page: state.currentPage,
+      sortOrder: state.sortOrder,
+      sortFieldName: state.sortFieldName,
+    };
+
     dispatch({
       type: "SET_STATUS_LOADING",
       payload: { loadingTask: true },
     });
 
     try {
-      const response = await axios.get(
-        `http://localhost:3001/api/task/${authenticationID}`
-      );
-
-      sortByFieldDate(response.data.taskList, "update_at");
+      const response = await axios.get(`http://localhost:3001/api/task/`, {
+        params,
+      });
 
       dispatch({
         type: "GET_ALL_TASKS",
@@ -32,7 +37,7 @@ const ActionTask = () => {
     } catch (err) {
       dispatch({
         type: "TASK_ERROR",
-        payload: { errorTask: err.response.data.errorTask },
+        payload: { errorTask: err.message },
       });
     } finally {
       dispatch({
@@ -114,6 +119,23 @@ const ActionTask = () => {
     }
   }
 
+  function setDisplayPeriodName(period) {
+    dispatch({
+      type: "SET_DISPLAY_PERIOD",
+      payload: { displayPeriodName: period },
+    });
+  }
+
+  function setSortFieldName(sortFieldName, sortOrder) {
+    dispatch({
+      type: "SET_SORT_FIELD_NAME",
+      payload: {
+        sortFieldName: sortFieldName,
+        sortOrder: sortOrder,
+      },
+    });
+  }
+
   async function getPriorities() {
     dispatch({
       type: "SET_STATUS_LOADING",
@@ -136,7 +158,7 @@ const ActionTask = () => {
     } catch (err) {
       dispatch({
         type: "TASK_ERROR",
-        payload: { errorTask: err.response.data.errorTask },
+        payload: { errorTask: err.message },
       });
     } finally {
       dispatch({
@@ -146,40 +168,21 @@ const ActionTask = () => {
     }
   }
 
-  function sortUpdateAt() {
-    const taskList = state.taskList.slice(0);
-
-    sortByFieldDate(taskList, "update_at");
-
-    dispatch({
-      type: "SORT_UPDATE-AT",
-      payload: { taskList: taskList },
-    });
-  }
-
-  function sortResponsibleId() {
-    const taskList = state.taskList.slice(0);
-
-    sortByFieldNumber(taskList, "responsibleid");
-
-    dispatch({
-      type: "SORT_RESPONSIBLEID",
-      payload: { taskList: taskList },
-    });
-  }
-
   return {
+    displayPeriodName: state.displayPeriodName,
     errorTask: state.error,
     loadingTask: state.loadingTask,
     messageTask: state.messageTask,
     prioritiesList: state.prioritiesList,
+    sortFieldName: state.sortFieldName,
+    sortOrder: state.sortOrder,
     successTask: state.success,
     taskList: state.taskList,
     addTask,
     getAllTasks,
     getPriorities,
-    sortResponsibleId,
-    sortUpdateAt,
+    setDisplayPeriodName,
+    setSortFieldName,
     updateTask,
   };
 };

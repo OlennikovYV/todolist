@@ -3,7 +3,7 @@ import React from "react";
 import Task from "../Task";
 import TaskListMessage from "../../components/TaskListMessage";
 
-function TaskList({ loadingTask, taskList, messageTask, selectedGroupDate }) {
+function TaskList({ loadingTask, taskList, messageTask }) {
   return (
     <>
       {loadingTask ? (
@@ -11,13 +11,7 @@ function TaskList({ loadingTask, taskList, messageTask, selectedGroupDate }) {
       ) : (
         <div className='list'>
           {taskList.length ? (
-            taskList.map((task) => (
-              <Task
-                key={task.id}
-                task={task}
-                selectedGroupDate={selectedGroupDate}
-              />
-            ))
+            taskList.map((task) => <Task key={task.id} task={task} />)
           ) : (
             <TaskListMessage message={messageTask} />
           )}

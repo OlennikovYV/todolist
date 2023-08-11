@@ -1,15 +1,31 @@
+const moment = require("moment");
+const { Op, json } = require("sequelize");
 const sequelize = require("../models");
 const Task = sequelize.models.task;
 const User = sequelize.models.user;
 const Priority = sequelize.models.priority;
 
 exports.taskList = async (req, res) => {
-  let { id, page, limit, sort, order } = req.params;
-  let offset = page * limit - limit;
+  let { displayPeriodName, id, limit, sortOrder, page, sortFieldName } =
+    req.query;
   let isSupervisor = true;
-  let task;
+  let offset, options;
 
-  console.log(req.params);
+  page = page || 1;
+  limit = limit || 10;
+  sortOrder = sortOrder || "ASC";
+  sortFieldName = sortFieldName || "id";
+  offset = page * limit - limit;
+
+  options = {
+    id,
+    isSupervisor,
+    limit,
+    displayPeriodName,
+    offset,
+    sortOrder,
+    sortFieldName,
+  };
 
   try {
     await User.findOne({
@@ -28,38 +44,22 @@ exports.taskList = async (req, res) => {
       user.supervisorid ? (isSupervisor = false) : (isSupervisor = true);
     });
 
-    if (isSupervisor) {
-      task = await Task.findAndCountAll({
-        include: [{ model: Priority, as: "priority" }],
-        order: [[sort, order]],
-        limit,
-        offset,
-      });
-    } else {
-      task = await Task.findAndCountAll({
-        where: {
-          responsibleid: id,
-        },
-        include: [{ model: Priority, as: "priority" }],
-        order: [[sort, order]],
-        limit,
-        offset,
-      });
-    }
-    if (task.rows && !task.rows.length) {
+    const { count, rows } = await getWhereOptions(options);
+
+    if (rows && !rows.length) {
       return res.status(200).json({
-        countTask: task.count,
+        countTask: count,
         messageTask: "Нет задач для выполнения",
         successTask: true,
-        taskList: task.rows,
+        taskList: rows,
       });
     }
 
     res.status(200).json({
-      countTask: task.count,
+      countTask: count,
       messageTask: "Список задач успешно получен",
       successTask: true,
-      taskList: task.rows,
+      taskList: rows,
     });
   } catch (err) {
     res.status(500).json({
@@ -153,3 +153,102 @@ exports.prioritiesList = async (req, res) => {
       });
     });
 };
+
+async function getWhereOptions(options) {
+  const {
+    id,
+    isSupervisor,
+    limit,
+    displayPeriodName,
+    offset,
+    sortOrder,
+    sortFieldName,
+  } = options;
+
+  const startPeriod = moment().hour(0).minutes(0).seconds(0).milliseconds(0);
+  const periodOneDay = moment(startPeriod).add(1, "days");
+  const periodWeek = moment(startPeriod).add(7, "days");
+  let rangePeriod, expiriedTask;
+  let filtredOptions, filtredResponsible;
+
+  switch (displayPeriodName) {
+    case "now":
+    case "week":
+    case "future":
+      expiriedTask = {
+        [Op.and]: [
+          {
+            completion_at: {
+              [Op.lt]: startPeriod,
+            },
+          },
+          {
+            status: ["к выполнению", "выполняется"],
+          },
+        ],
+      };
+      break;
+    case "all":
+      expiriedTask = null;
+      break;
+    default:
+      throw Error("Неверный период!");
+  }
+
+  switch (displayPeriodName) {
+    case "now":
+      rangePeriod = {
+        [Op.and]: [
+          {
+            completion_at: {
+              [Op.gte]: startPeriod,
+              [Op.lt]: periodOneDay,
+            },
+          },
+        ],
+      };
+      break;
+    case "week":
+      rangePeriod = {
+        [Op.and]: [
+          {
+            completion_at: {
+              [Op.gte]: startPeriod,
+              [Op.lt]: periodWeek,
+            },
+          },
+        ],
+      };
+      break;
+    case "future":
+      rangePeriod = {
+        completion_at: {
+          [Op.gte]: startPeriod,
+        },
+      };
+      break;
+    case "all":
+      rangePeriod = null;
+      break;
+    default:
+      throw Error("Неверный период!");
+  }
+
+  filtredResponsible = !isSupervisor && { responsibleid: id };
+
+  filtredOptions =
+    !rangePeriod && !expiriedTask
+      ? {}
+      : { [Op.or]: [expiriedTask, rangePeriod] };
+
+  return Task.findAndCountAll({
+    include: [{ model: Priority, as: "priority" }],
+    where: {
+      ...filtredResponsible,
+      ...filtredOptions,
+    },
+    order: [[sortFieldName, sortOrder]],
+    limit,
+    offset,
+  });
+}

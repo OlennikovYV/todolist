@@ -13,16 +13,15 @@ import Footer from "../components/Footer";
 
 function MainTask() {
   const {
+    displayPeriodName,
     loadingTask,
     messageTask,
     taskList,
     getAllTasks,
     getPriorities,
-    sortResponsibleId,
-    sortUpdateAt,
+    setDisplayPeriodName,
   } = useContext(GlobalContext);
 
-  const [selectedGroupDate, setSelectedGroupDate] = useState("future");
   const [modal, setModal] = useState(false);
 
   const { authenticatedUser, logout } = useContext(AuthContext);
@@ -33,25 +32,10 @@ function MainTask() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  function handleSort(event) {
-    const buttonUpdateAt = document.getElementById("sort-update-at");
-    const buttonResponsible = document.getElementById("sort-responsible");
-
-    switch (event.target.id) {
-      case "sort-update-at":
-        sortUpdateAt();
-        buttonUpdateAt.classList.add("active");
-        buttonResponsible.classList.remove("active");
-        break;
-      case "sort-responsible":
-        sortResponsibleId();
-        buttonUpdateAt.classList.remove("active");
-        buttonResponsible.classList.add("active");
-        break;
-      default:
-        return;
-    }
-  }
+  useEffect(() => {
+    getAllTasks(authenticatedUser.id);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [displayPeriodName]);
 
   return (
     <div className='container-task-list'>
@@ -69,29 +53,15 @@ function MainTask() {
         <div className='menu__filter'>
           <select
             defaultValue='all'
-            onChange={(event) => setSelectedGroupDate(event.target.value)}
+            onChange={(event) => setDisplayPeriodName(event.target.value)}
           >
+            <option value='all'>Все</option>
             <option value='future'>На будующее</option>
             <option value='week'>На неделю</option>
             <option value='now'>На сегодня</option>
           </select>
         </div>
-        <div className='menu__sort'>
-          <Button
-            id='sort-update-at'
-            className='active'
-            disabled={authenticatedUser.supervisorid}
-            onClick={handleSort}
-            text='Без группировки'
-          />
-          <Button
-            id='sort-responsible'
-            className=''
-            disabled={authenticatedUser.supervisorid}
-            onClick={handleSort}
-            text='По ответственным'
-          />
-        </div>
+
         <Button
           onClick={() => {
             logout();
@@ -110,7 +80,6 @@ function MainTask() {
           loadingTask={loadingTask}
           taskList={taskList}
           messageTask={messageTask}
-          selectedGroupDate={selectedGroupDate}
         />
       </div>
 

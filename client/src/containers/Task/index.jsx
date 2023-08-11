@@ -14,7 +14,7 @@ import Text from "../../components/Text";
 import { fioFormat } from "../../utils/formatField";
 import { DATE_FORMAT } from "../../utils/common/constants";
 
-function Task({ task, selectedGroupDate }) {
+function Task({ task }) {
   const [modal, setModal] = useState(false);
 
   const { prioritiesList } = useContext(GlobalContext);
@@ -56,52 +56,8 @@ function Task({ task, selectedGroupDate }) {
     return "task-status-other";
   }
 
-  function isShow() {
-    let endPeriod;
-    let isDateInPeriod;
-
-    const checkDate = moment(task.completion_at);
-    const startPeriod = moment().hour(0).minutes(0).seconds(0).milliseconds(0);
-    const periodOneDay = moment(startPeriod).add(1, "days");
-    const periodWeek = moment(startPeriod).add(7, "days");
-    const isExpired = checkDate.isBefore(startPeriod);
-
-    if (isExpired) {
-      if (task.status === "к выполнению" || task.status === "выполняется") {
-        return true;
-      } else {
-        return false;
-      }
-    }
-
-    if (selectedGroupDate === "future") {
-      if (checkDate.isAfter(startPeriod)) {
-        return true;
-      }
-    }
-
-    switch (selectedGroupDate) {
-      case "week":
-        endPeriod = periodWeek;
-        break;
-      case "now":
-        endPeriod = periodOneDay;
-        break;
-      default:
-        throw new Error("Неверный период");
-    }
-
-    isDateInPeriod = checkDate.isBetween(startPeriod, endPeriod);
-
-    if (isDateInPeriod) {
-      return true;
-    } else {
-      return false;
-    }
-  }
-
   function checkTask() {
-    return isShow() ? `task ${setColorTask()}` : "hidden";
+    return `task ${setColorTask()}`;
   }
 
   return (

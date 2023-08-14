@@ -8,15 +8,11 @@ import NewTask from "../containers/NewTask";
 import TaskList from "../containers/TaskList";
 
 import Button from "../components/Button";
-import TaskListHeader from "../components/TaskListHeader";
 import Footer from "../components/Footer";
 
 function MainTask() {
   const {
     displayPeriodName,
-    loadingTask,
-    messageTask,
-    taskList,
     getAllTasks,
     getPriorities,
     setDisplayPeriodName,
@@ -74,14 +70,7 @@ function MainTask() {
         </Modal>
       </div>
 
-      <div className='task-list'>
-        <TaskListHeader />
-        <TaskList
-          loadingTask={loadingTask}
-          taskList={taskList}
-          messageTask={messageTask}
-        />
-      </div>
+      <TaskList />
 
       <Footer />
     </div>

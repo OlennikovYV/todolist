@@ -11,29 +11,4 @@
   font-size: 16px;
   overflow: hidden;
   user-select: none;
-
-  &__id {
-    min-width: 36px;
-    text-align: end;
-  }
-
-  &__caption {
-    min-width: 150px;
-  }
-
-  &__priority {
-    min-width: 110px;
-  }
-
-  &__date-complete {
-    min-width: 210px;
-  }
-
-  &__fio {
-    min-width: 200px;
-  }
-
-  &__status {
-    min-width: 150px;
-  }
 }

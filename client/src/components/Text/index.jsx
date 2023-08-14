@@ -1,12 +1,18 @@
 import React from "react";
 
+import BorderInset from "../BorderInset";
+
 function Text(props) {
-  const { className, text, onClick } = props;
+  const { borderInset = false, className, text, onClick } = props;
+  const classNames = `text ${className}`.trimEnd();
 
   return (
-    <div className={className} onClick={onClick}>
-      {text}
-    </div>
+    <>
+      <div className={classNames} onClick={onClick}>
+        {text}
+      </div>
+      {borderInset && <BorderInset />}
+    </>
   );
 }
 

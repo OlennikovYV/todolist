@@ -8,7 +8,6 @@ import useAxiosGet from "../../hooks/useAxiosGet";
 import Modal from "../Modal";
 import EditTask from "../EditTask";
 
-import BorderInset from "../../components/BorderInset";
 import Text from "../../components/Text";
 
 import { fioFormat } from "../../utils/formatField";
@@ -39,41 +38,44 @@ function Task({ task }) {
   );
 
   if (loadingResponsible) return <></>;
-  if (error) return <pre>{JSON.stringify(error, null, 2)}</pre>;
+  if (error) return <pre>{JSON.stringify(error.message, null, 2)}</pre>;
 
   function setColorTask() {
     if (task.status === "выполнена") {
-      return "task-status-completed";
+      return "task status-completed";
     }
 
     if (
       (task.status === "к выполнению" || task.status === "выполняется") &&
       new Date() - new Date(task.completion_at) > 0
     ) {
-      return "task-status-expired";
+      return "task status-expired";
     }
 
-    return "task-status-other";
-  }
-
-  function checkTask() {
-    return `task ${setColorTask()}`;
+    return "task status-other";
   }
 
   return (
     <>
-      <div className={checkTask()} onDoubleClick={() => setModal(true)}>
-        <Text className='task__id' text={task.id} />
-        <BorderInset />
-        <Text className='task__caption' text={task.caption} />
-        <BorderInset />
-        <Text className='task__priority' text={viewPriority()} />
-        <BorderInset />
-        <Text className='task__date-complete' text={viewDateComplete()} />
-        <BorderInset />
-        <Text className='task__fio' text={viewFio()} />
-        <BorderInset />
-        <Text className='task__status' text={task.status} />
+      <div className={setColorTask()} onDoubleClick={() => setModal(true)}>
+        <Text className='text id' text={task.id} borderInset={true} />
+        <Text className='text caption' text={task.caption} borderInset={true} />
+        <Text
+          className='text priorityId'
+          text={viewPriority()}
+          borderInset={true}
+        />
+        <Text
+          className='text completion_at'
+          text={viewDateComplete()}
+          borderInset={true}
+        />
+        <Text
+          className='text responsibleid'
+          text={viewFio()}
+          borderInset={true}
+        />
+        <Text className='text status' text={task.status} />
       </div>
 
       <Modal isVisible={modal} onClose={() => setModal(false)}>

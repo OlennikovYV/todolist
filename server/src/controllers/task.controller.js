@@ -1,11 +1,13 @@
 const moment = require("moment");
-const { Op, json } = require("sequelize");
+const { Op } = require("sequelize");
 const sequelize = require("../models");
 const Task = sequelize.models.task;
 const User = sequelize.models.user;
 const Priority = sequelize.models.priority;
 
 exports.taskList = async (req, res) => {
+  const directionsSort = ["ASC", "DESC"];
+  const fieldsSort = Object.keys(Task.getAttributes());
   let { displayPeriodName, id, limit, sortOrder, page, sortFieldName } =
     req.query;
   let isSupervisor = true;
@@ -13,8 +15,8 @@ exports.taskList = async (req, res) => {
 
   page = page || 1;
   limit = limit || 10;
-  sortOrder = sortOrder || "ASC";
-  sortFieldName = sortFieldName || "id";
+  sortOrder = directionsSort.includes(sortOrder) ? sortOrder : "ASC";
+  sortFieldName = fieldsSort.includes(sortFieldName) ? sortFieldName : "id";
   offset = page * limit - limit;
 
   options = {
@@ -44,7 +46,7 @@ exports.taskList = async (req, res) => {
       user.supervisorid ? (isSupervisor = false) : (isSupervisor = true);
     });
 
-    const { count, rows } = await getWhereOptions(options);
+    const { count, rows } = await queryTaskList(options);
 
     if (rows && !rows.length) {
       return res.status(200).json({
@@ -154,7 +156,7 @@ exports.prioritiesList = async (req, res) => {
     });
 };
 
-async function getWhereOptions(options) {
+async function queryTaskList(options) {
   const {
     id,
     isSupervisor,

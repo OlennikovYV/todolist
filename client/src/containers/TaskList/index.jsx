@@ -1,11 +1,18 @@
-import React from "react";
+import React, { useContext } from "react";
+
+import GlobalContext from "../../context/GlobalProvider";
 
 import Task from "../Task";
+import TaskListHeader from "../../components/TaskListHeader";
 import TaskListMessage from "../../components/TaskListMessage";
 
-function TaskList({ loadingTask, taskList, messageTask }) {
+function TaskList() {
+  const { loadingTask, messageTask, taskList } = useContext(GlobalContext);
+
   return (
-    <>
+    <div className='task-list'>
+      <TaskListHeader />
+
       {loadingTask ? (
         <TaskListMessage message={"Загрузка списка задач"} />
       ) : (
@@ -17,7 +24,7 @@ function TaskList({ loadingTask, taskList, messageTask }) {
           )}
         </div>
       )}
-    </>
+    </div>
   );
 }
 

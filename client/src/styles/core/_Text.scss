@@ -1,0 +1,26 @@
+.text {
+  &.id {
+    min-width: 36px;
+    text-align: end;
+  }
+
+  &.caption {
+    min-width: 150px;
+  }
+
+  &.priorityId {
+    min-width: 90px;
+  }
+
+  &.completion_at {
+    min-width: 150px;
+  }
+
+  &.responsibleid {
+    min-width: 200px;
+  }
+
+  &.status {
+    min-width: 115px;
+  }
+}

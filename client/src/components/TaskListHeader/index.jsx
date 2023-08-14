@@ -3,7 +3,6 @@ import React, { useContext, useEffect } from "react";
 import GlobalContext from "../../context/GlobalProvider";
 import AuthContext from "../../context/AuthProvider";
 
-import BorderInset from "../BorderInset";
 import Text from "../Text";
 
 function TaskListHeader() {
@@ -26,34 +25,38 @@ function TaskListHeader() {
 
   return (
     <div className='header'>
-      <Text className='header__id' text='№' onClick={() => sortByField("id")} />
-      <BorderInset />
       <Text
-        className='header__caption'
+        className='id'
+        text='№'
+        onClick={() => sortByField("id")}
+        borderInset={true}
+      />
+      <Text
+        className='caption'
         text='Заголовок'
         onClick={() => sortByField("caption")}
+        borderInset={true}
       />
-      <BorderInset />
       <Text
-        className='header__priority'
+        className='priorityId'
         text='Приоритет'
         onClick={() => sortByField("priorityId")}
+        borderInset={true}
       />
-      <BorderInset />
       <Text
-        className='header__date-complete'
+        className='completion_at'
         text='Дата окончания'
         onClick={() => sortByField("completion_at")}
+        borderInset={true}
       />
-      <BorderInset />
       <Text
-        className='header__fio'
+        className='responsibleid'
         text='Ф.И.О.'
         onClick={() => sortByField("responsibleid")}
+        borderInset={true}
       />
-      <BorderInset />
       <Text
-        className='header__status'
+        className='status'
         text='Статус'
         onClick={() => sortByField("status")}
       />

@@ -1,6 +1,6 @@
 import { createContext } from "react";
 
-import ActionAuth from "../actions/ActionAuth";
+import ActionAuth from "./actions/ActionAuth";
 
 const AuthContext = createContext({});
 

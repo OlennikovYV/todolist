@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 
 import AuthContext from "../../context/AuthProvider";
+import GlobalContext from "../../context/GlobalProvider";
 
 import StatusNetwork from "../StatusNetwork";
 
@@ -10,17 +11,22 @@ import { fioFormat } from "../../utils/formatField";
 
 function Footer() {
   const { authenticatedUser } = useContext(AuthContext);
+  const { taskList } = useContext(GlobalContext);
+
   const isOnline = useCheckServerConnection();
 
   return (
     <div className='footer'>
       <StatusNetwork isOnline={isOnline} />
 
+      <div className='count-task'>
+        <span>{`Всего зачач: ${taskList.length}`}</span>
+      </div>
+
       <div className='account'>
         <span className='account__name'>
           {authenticatedUser.supervisorid ? "сотрудник" : "руководитель"}
         </span>
-        &ensp;
         <span className='account__name'>
           {fioFormat(
             authenticatedUser.lastname,

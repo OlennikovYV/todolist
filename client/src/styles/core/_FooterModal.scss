@@ -1,5 +1,5 @@
 .modal-footer {
-  @include flex-end;
+  @include flex-row-end;
   width: 100%;
   border-top: 1px solid #dbdbdb;
 }

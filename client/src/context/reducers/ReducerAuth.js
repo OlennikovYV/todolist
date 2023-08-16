@@ -1,3 +1,5 @@
+import { SIGN_IN, RESET_STATE, TASK_ERROR } from "../constants";
+
 export const initialStateAuth = {
   authenticatedUser: null,
   isAuthenticated: false,
@@ -8,7 +10,7 @@ export const initialStateAuth = {
 
 export const ReducerAuth = (state, action) => {
   switch (action.type) {
-    case "SIGN_IN":
+    case SIGN_IN:
       return {
         ...state,
         authenticatedUser: action.payload.authenticatedUser,
@@ -17,9 +19,9 @@ export const ReducerAuth = (state, action) => {
         message: action.payload.message,
         status: action.payload.status,
       };
-    case "RESET_STATE":
+    case RESET_STATE:
       return initialStateAuth;
-    case "TASK_ERROR":
+    case TASK_ERROR:
       return {
         ...state,
         error: true,

@@ -2,7 +2,8 @@ const bcrypt = require("bcryptjs");
 const moment = require("moment");
 
 const currentDate = moment().format();
-const addDaysToСurrentDate = (day) => moment().add(day, "days").format();
+const addDaysToСurrentDate = (day) =>
+  moment(currentDate).add(day, "days").format();
 const substractDaysFromСurrentDate = (day) =>
   moment().subtract(day, "days").format();
 
@@ -30,13 +31,14 @@ const priorityList = [
   },
 ];
 
+const salt = bcrypt.genSaltSync(8);
 const userList = [
   {
     firstname: "Юрий",
     lastname: "Оленников",
     fathername: "Викторович",
     login: "OlennikovYV",
-    password: bcrypt.hashSync("pass1", bcrypt.genSaltSync(8)),
+    password: bcrypt.hashSync("pass1", salt),
     supervisorid: null,
   },
   {
@@ -44,7 +46,7 @@ const userList = [
     lastname: "Соколов",
     fathername: "Петрович",
     login: "SokolovSP",
-    password: bcrypt.hashSync("pass2", 8),
+    password: bcrypt.hashSync("pass2", salt),
     supervisorid: null,
   },
   {
@@ -52,7 +54,7 @@ const userList = [
     lastname: "Иванов",
     fathername: "Иванович",
     login: "IvanovII",
-    password: bcrypt.hashSync("pass3", 8),
+    password: bcrypt.hashSync("pass3", salt),
     supervisorid: 1,
   },
   {
@@ -60,7 +62,7 @@ const userList = [
     lastname: "Николаев",
     fathername: "Юрьевич",
     login: "NikolaevDY",
-    password: bcrypt.hashSync("pass4", 8),
+    password: bcrypt.hashSync("pass4", salt),
     supervisorid: 1,
   },
   {
@@ -68,7 +70,7 @@ const userList = [
     lastname: "Ефимов",
     fathername: "Павлович",
     login: "EfimofPP",
-    password: bcrypt.hashSync("pass5", 8),
+    password: bcrypt.hashSync("pass5", salt),
     supervisorid: 2,
   },
   {
@@ -76,7 +78,7 @@ const userList = [
     lastname: "Петров",
     fathername: "Иванович",
     login: "PetrovII",
-    password: bcrypt.hashSync("pass6", 8),
+    password: bcrypt.hashSync("pass6", salt),
     supervisorid: 2,
   },
 ];
@@ -89,7 +91,7 @@ const taskList = [
     create_at: substractDaysFromСurrentDate(16),
     update_at: substractDaysFromСurrentDate(1),
     priorityId: 3,
-    status: "выполнена",
+    status: "отменена",
     creatorid: 1,
     responsibleid: 3,
   },
@@ -174,9 +176,9 @@ const taskList = [
     caption: "Задача 9",
     description: "Описание 9",
     completion_at: currentDate,
-    create_at: substractDaysFromСurrentDate(1),
+    create_at: substractDaysFromСurrentDate(6),
     update_at: currentDate,
-    priorityId: 1,
+    priorityId: 2,
     status: "выполнена",
     creatorid: 1,
     responsibleid: 3,

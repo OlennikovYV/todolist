@@ -1,0 +1,10 @@
+export const ADD_TASK = "ADD_TASK";
+export const GET_ALL_TASKS = "GET_ALL_TASKS";
+export const GET_PRIORITIES = "GET_PRIORITIES";
+export const RESET_STATE = "RESET_STATE";
+export const SET_DISPLAY_PERIOD = "SET_DISPLAY_PERIOD";
+export const SET_SORT_FIELD_NAME = "SET_SORT_FIELD_NAME";
+export const SET_STATUS_LOADING = "SET_STATUS_LOADING";
+export const SIGN_IN = "SIGN_IN";
+export const TASK_ERROR = "TASK_ERROR";
+export const UPDATE_TASK = "UPDATE_TASK";

@@ -1,3 +1,14 @@
+import {
+  GET_ALL_TASKS,
+  ADD_TASK,
+  UPDATE_TASK,
+  SET_DISPLAY_PERIOD,
+  SET_SORT_FIELD_NAME,
+  GET_PRIORITIES,
+  TASK_ERROR,
+  SET_STATUS_LOADING,
+} from "../constants";
+
 export const initialStateTask = {
   currentPage: 1,
   displayPeriodName: "all",
@@ -13,51 +24,51 @@ export const initialStateTask = {
 
 export const ReducerTask = (state, action) => {
   switch (action.type) {
-    case "GET_ALL_TASKS":
+    case GET_ALL_TASKS:
       return {
         ...state,
         successTask: action.payload.success,
         taskList: action.payload.taskList,
         messageTask: action.payload.messageTask,
       };
-    case "ADD_TASK":
+    case ADD_TASK:
       return {
         ...state,
         successTask: action.payload.success,
         taskList: [...state.taskList, action.payload.record],
         messageTask: action.payload.messageTask,
       };
-    case "UPDATE_TASK":
+    case UPDATE_TASK:
       return {
         ...state,
         successTask: action.payload.success,
         taskList: [...action.payload.taskList],
         messageTask: action.payload.messageTask,
       };
-    case "SET_DISPLAY_PERIOD":
+    case SET_DISPLAY_PERIOD:
       return {
         ...state,
         displayPeriodName: action.payload.displayPeriodName,
       };
-    case "SET_SORT_FIELD_NAME":
+    case SET_SORT_FIELD_NAME:
       return {
         ...state,
         sortFieldName: action.payload.sortFieldName,
         sortOrder: action.payload.sortOrder,
       };
-    case "GET_PRIORITIES":
+    case GET_PRIORITIES:
       return {
         ...state,
         successTask: action.payload.success,
         prioritiesList: action.payload.prioritiesList,
         messageTask: action.payload.messageTask,
       };
-    case "TASK_ERROR":
+    case TASK_ERROR:
       return {
         ...state,
         errorTask: action.payload,
       };
-    case "SET_STATUS_LOADING":
+    case SET_STATUS_LOADING:
       return {
         ...state,
         loadingTask: action.payload.loadingTask,

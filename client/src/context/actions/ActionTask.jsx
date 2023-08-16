@@ -3,6 +3,17 @@ import axios from "axios";
 
 import { initialStateTask, ReducerTask } from "../reducers/ReducerTask.js";
 
+import {
+  GET_ALL_TASKS,
+  ADD_TASK,
+  UPDATE_TASK,
+  SET_DISPLAY_PERIOD,
+  SET_SORT_FIELD_NAME,
+  GET_PRIORITIES,
+  TASK_ERROR,
+  SET_STATUS_LOADING,
+} from "../constants";
+
 const ActionTask = () => {
   const [state, dispatch] = useReducer(ReducerTask, initialStateTask);
 
@@ -17,7 +28,7 @@ const ActionTask = () => {
     };
 
     dispatch({
-      type: "SET_STATUS_LOADING",
+      type: SET_STATUS_LOADING,
       payload: { loadingTask: true },
     });
 
@@ -27,7 +38,7 @@ const ActionTask = () => {
       });
 
       dispatch({
-        type: "GET_ALL_TASKS",
+        type: GET_ALL_TASKS,
         payload: {
           messageTask: response.data.messageTask,
           successTask: response.data.successTask,
@@ -36,12 +47,12 @@ const ActionTask = () => {
       });
     } catch (err) {
       dispatch({
-        type: "TASK_ERROR",
+        type: TASK_ERROR,
         payload: { errorTask: err.message },
       });
     } finally {
       dispatch({
-        type: "SET_STATUS_LOADING",
+        type: SET_STATUS_LOADING,
         payload: { loadingTask: false },
       });
     }
@@ -49,7 +60,7 @@ const ActionTask = () => {
 
   async function addTask(data) {
     dispatch({
-      type: "SET_STATUS_LOADING",
+      type: SET_STATUS_LOADING,
       payload: { loadingTask: true },
     });
 
@@ -59,7 +70,7 @@ const ActionTask = () => {
       });
 
       dispatch({
-        type: "ADD_TASK",
+        type: ADD_TASK,
         payload: {
           messageTask: response.data.messageTask,
           record: response.data.record,
@@ -68,12 +79,12 @@ const ActionTask = () => {
       });
     } catch (err) {
       dispatch({
-        type: "TASK_ERROR",
+        type: TASK_ERROR,
         payload: { errorTask: err.response.data.errorTask },
       });
     } finally {
       dispatch({
-        type: "SET_STATUS_LOADING",
+        type: SET_STATUS_LOADING,
         payload: { loadingTask: false },
       });
     }
@@ -84,7 +95,7 @@ const ActionTask = () => {
     const index = taskList.findIndex((task) => task.id === id);
 
     dispatch({
-      type: "SET_STATUS_LOADING",
+      type: SET_STATUS_LOADING,
       payload: { loadingTask: true },
     });
 
@@ -99,7 +110,7 @@ const ActionTask = () => {
       taskList[index] = response.data.record;
 
       dispatch({
-        type: "UPDATE_TASK",
+        type: UPDATE_TASK,
         payload: {
           messageTask: response.data.messageTask,
           taskList: taskList,
@@ -108,12 +119,12 @@ const ActionTask = () => {
       });
     } catch (err) {
       dispatch({
-        type: "TASK_ERROR",
+        type: TASK_ERROR,
         payload: { errorTask: err.response.data.errorTask },
       });
     } finally {
       dispatch({
-        type: "SET_STATUS_LOADING",
+        type: SET_STATUS_LOADING,
         payload: { loadingTask: false },
       });
     }
@@ -121,14 +132,14 @@ const ActionTask = () => {
 
   function setDisplayPeriodName(period) {
     dispatch({
-      type: "SET_DISPLAY_PERIOD",
+      type: SET_DISPLAY_PERIOD,
       payload: { displayPeriodName: period },
     });
   }
 
   function setSortFieldName(sortFieldName, sortOrder) {
     dispatch({
-      type: "SET_SORT_FIELD_NAME",
+      type: SET_SORT_FIELD_NAME,
       payload: {
         sortFieldName: sortFieldName,
         sortOrder: sortOrder,
@@ -138,7 +149,7 @@ const ActionTask = () => {
 
   async function getPriorities() {
     dispatch({
-      type: "SET_STATUS_LOADING",
+      type: SET_STATUS_LOADING,
       payload: { loadingTask: true },
     });
 
@@ -148,7 +159,7 @@ const ActionTask = () => {
       );
 
       dispatch({
-        type: "GET_PRIORITIES",
+        type: GET_PRIORITIES,
         payload: {
           successTask: response.data.successTask,
           prioritiesList: response.data.prioritiesList,
@@ -157,12 +168,12 @@ const ActionTask = () => {
       });
     } catch (err) {
       dispatch({
-        type: "TASK_ERROR",
+        type: TASK_ERROR,
         payload: { errorTask: err.message },
       });
     } finally {
       dispatch({
-        type: "SET_STATUS_LOADING",
+        type: SET_STATUS_LOADING,
         payload: { loadingTask: false },
       });
     }

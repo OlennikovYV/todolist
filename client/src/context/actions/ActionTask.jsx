@@ -10,7 +10,7 @@ import {
   SET_DISPLAY_PERIOD,
   SET_SORT_FIELD_NAME,
   GET_PRIORITIES,
-  TASK_ERROR,
+  ERROR,
   SET_STATUS_LOADING,
 } from "../constants";
 
@@ -47,7 +47,7 @@ const ActionTask = () => {
       });
     } catch (err) {
       dispatch({
-        type: TASK_ERROR,
+        type: ERROR,
         payload: { errorTask: err.message },
       });
     } finally {
@@ -79,7 +79,7 @@ const ActionTask = () => {
       });
     } catch (err) {
       dispatch({
-        type: TASK_ERROR,
+        type: ERROR,
         payload: { errorTask: err.response.data.errorTask },
       });
     } finally {
@@ -119,7 +119,7 @@ const ActionTask = () => {
       });
     } catch (err) {
       dispatch({
-        type: TASK_ERROR,
+        type: ERROR,
         payload: { errorTask: err.response.data.errorTask },
       });
     } finally {
@@ -168,7 +168,7 @@ const ActionTask = () => {
       });
     } catch (err) {
       dispatch({
-        type: TASK_ERROR,
+        type: ERROR,
         payload: { errorTask: err.message },
       });
     } finally {

@@ -1,10 +1,20 @@
 import { createContext } from "react";
 
+import ActionPage from "./actions/ActionPage";
 import ActionTask from "./actions/ActionTask";
 
 const GlobalContext = createContext({});
 
 export const GlobalProvider = ({ children }) => {
+  const {
+    currentPage,
+    limitPage,
+    totalPage,
+    setCurrentPage,
+    setLimitPage,
+    setTotalPage,
+  } = ActionPage();
+
   const {
     displayPeriodName,
     errorTask,
@@ -26,6 +36,14 @@ export const GlobalProvider = ({ children }) => {
   return (
     <GlobalContext.Provider
       value={{
+        // ReducerPage
+        currentPage,
+        limitPage,
+        totalPage,
+        setCurrentPage,
+        setLimitPage,
+        setTotalPage,
+
         // ReducerTask
         displayPeriodName,
         errorTask,

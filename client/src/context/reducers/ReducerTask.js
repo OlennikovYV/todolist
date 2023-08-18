@@ -5,15 +5,13 @@ import {
   SET_DISPLAY_PERIOD,
   SET_SORT_FIELD_NAME,
   GET_PRIORITIES,
-  TASK_ERROR,
+  ERROR,
   SET_STATUS_LOADING,
 } from "../constants";
 
 export const initialStateTask = {
-  currentPage: 1,
   displayPeriodName: "all",
   errorTask: null,
-  limitPage: 50,
   loadingTask: false,
   prioritiesList: [],
   sortFieldName: "id",
@@ -63,7 +61,7 @@ export const ReducerTask = (state, action) => {
         prioritiesList: action.payload.prioritiesList,
         messageTask: action.payload.messageTask,
       };
-    case TASK_ERROR:
+    case ERROR:
       return {
         ...state,
         errorTask: action.payload,

@@ -3,7 +3,7 @@ import axios from "axios";
 
 import { initialStateAuth, ReducerAuth } from "../reducers/ReducerAuth";
 
-import { SIGN_IN, RESET_STATE, TASK_ERROR } from "../constants";
+import { SIGN_IN, RESET_STATE, ERROR } from "../constants";
 
 const ActionAuth = () => {
   const [state, dispatch] = useReducer(ReducerAuth, initialStateAuth);
@@ -51,7 +51,7 @@ const ActionAuth = () => {
         });
       } else {
         dispatch({
-          type: TASK_ERROR,
+          type: ERROR,
           payload: {
             message: response.data.message,
           },
@@ -61,7 +61,7 @@ const ActionAuth = () => {
       let message = error.response.data.message;
 
       dispatch({
-        type: TASK_ERROR,
+        type: ERROR,
         payload: {
           message: message,
         },
@@ -82,7 +82,7 @@ const ActionAuth = () => {
       });
     } catch (error) {
       dispatch({
-        type: TASK_ERROR,
+        type: ERROR,
         payload: {
           message: error.message,
         },

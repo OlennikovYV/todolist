@@ -1,4 +1,4 @@
-import { SIGN_IN, RESET_STATE, TASK_ERROR } from "../constants";
+import { SIGN_IN, RESET_STATE, ERROR } from "../constants";
 
 export const initialStateAuth = {
   authenticatedUser: null,
@@ -21,7 +21,7 @@ export const ReducerAuth = (state, action) => {
       };
     case RESET_STATE:
       return initialStateAuth;
-    case TASK_ERROR:
+    case ERROR:
       return {
         ...state,
         error: true,

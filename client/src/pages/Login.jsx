@@ -1,14 +1,14 @@
 import React, { useRef, useState, useEffect, useContext } from "react";
 import { Navigate } from "react-router-dom";
 
-import AuthContext from "../context/AuthProvider";
+import GlobalContext from "../context/GlobalProvider";
 
 import FormWrapper from "../components/FormWrapper";
 import Button from "../components/Button";
 
 function Login() {
   const { isAuthenticated, error, message, signIn, signInFromCache } =
-    useContext(AuthContext);
+    useContext(GlobalContext);
 
   const userRef = useRef();
   const errorRef = useRef();
@@ -80,7 +80,7 @@ function Login() {
                 {message}
               </p>
             ) : null}
-          </div>{" "}
+          </div>
         </div>
       )}
     </>

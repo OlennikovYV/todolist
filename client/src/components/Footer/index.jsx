@@ -1,6 +1,5 @@
 import React, { useContext } from "react";
 
-import AuthContext from "../../context/AuthProvider";
 import GlobalContext from "../../context/GlobalProvider";
 
 import StatusNetwork from "../StatusNetwork";
@@ -10,8 +9,7 @@ import useCheckServerConnection from "../../hooks/useCheckServerConnection";
 import { fioFormat } from "../../utils/formatField";
 
 function Footer() {
-  const { authenticatedUser } = useContext(AuthContext);
-  const { taskList } = useContext(GlobalContext);
+  const { authenticatedUser, taskList } = useContext(GlobalContext);
 
   const isOnline = useCheckServerConnection();
 

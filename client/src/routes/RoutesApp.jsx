@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { Route, Routes } from "react-router-dom";
 
-import AuthContext from "../context/AuthProvider";
+import GlobalContext from "../context/GlobalProvider";
 
 import AccessRouter from "../components/AccessRoute";
 import MainTask from "../pages/MainTask.jsx";
@@ -9,7 +9,7 @@ import Error from "../pages/Error.jsx";
 import Login from "../pages/Login.jsx";
 
 function RoutesApp() {
-  const { authenticated } = useContext(AuthContext);
+  const { authenticated } = useContext(GlobalContext);
 
   return (
     <Routes>

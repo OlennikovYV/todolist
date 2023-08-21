@@ -3,7 +3,6 @@ import moment from "moment";
 
 import useAxiosGet from "../../hooks/useAxiosGet";
 
-import AuthContext from "../../context/AuthProvider";
 import globalContext from "../../context/GlobalProvider";
 
 import HeaderModal from "../../components/HeaderModal";
@@ -23,8 +22,8 @@ function NewTask({ onClose }) {
   const responsibleidRef = useRef();
   const statusRef = useRef();
 
-  const { authenticatedUser } = useContext(AuthContext);
-  const { prioritiesList, addTask } = useContext(globalContext);
+  const { authenticatedUser, prioritiesList, addTask } =
+    useContext(globalContext);
 
   const { data, loading, error } = useAxiosGet(
     `http://localhost:3001/api/user/responsible`

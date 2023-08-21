@@ -8,21 +8,27 @@ const Priority = sequelize.models.priority;
 exports.taskList = async (req, res) => {
   const directionsSort = ["ASC", "DESC"];
   const fieldsSort = Object.keys(Task.getAttributes());
-  let { displayPeriodName, id, limit, sortOrder, page, sortFieldName } =
-    req.query;
+  let {
+    currentPage,
+    displayPeriodName,
+    id,
+    limitPage,
+    sortOrder,
+    sortFieldName,
+  } = req.query;
   let isSupervisor = true;
   let offset, options;
 
-  page = page || 1;
-  limit = limit || 10;
+  currentPage = currentPage || 1;
+  limitPage = limitPage || 10;
   sortOrder = directionsSort.includes(sortOrder) ? sortOrder : "ASC";
   sortFieldName = fieldsSort.includes(sortFieldName) ? sortFieldName : "id";
-  offset = page * limit - limit;
+  offset = currentPage * limitPage - limitPage;
 
   options = {
     id,
     isSupervisor,
-    limit,
+    limitPage,
     displayPeriodName,
     offset,
     sortOrder,
@@ -160,7 +166,7 @@ async function queryTaskList(options) {
   const {
     id,
     isSupervisor,
-    limit,
+    limitPage,
     displayPeriodName,
     offset,
     sortOrder,
@@ -250,7 +256,7 @@ async function queryTaskList(options) {
       ...filtredOptions,
     },
     order: [[sortFieldName, sortOrder]],
-    limit,
+    limit: limitPage,
     offset,
   });
 }

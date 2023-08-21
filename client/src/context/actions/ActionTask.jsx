@@ -19,10 +19,10 @@ const ActionTask = () => {
 
   async function getAllTasks(authenticationID) {
     const params = {
-      id: authenticationID,
+      currentPage: state.currentPage,
       displayPeriodName: state.displayPeriodName,
-      limit: state.limitPage,
-      page: state.currentPage,
+      id: authenticationID,
+      limitPage: state.limitPage,
       sortOrder: state.sortOrder,
       sortFieldName: state.sortFieldName,
     };

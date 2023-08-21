@@ -1,14 +1,17 @@
 import React, { useContext, useEffect } from "react";
 
 import GlobalContext from "../../context/GlobalProvider";
-import AuthContext from "../../context/AuthProvider";
 
 import Text from "../Text";
 
 function TaskListHeader() {
-  const { sortFieldName, sortOrder, getAllTasks, setSortFieldName } =
-    useContext(GlobalContext);
-  const { authenticatedUser } = useContext(AuthContext);
+  const {
+    authenticatedUser,
+    sortFieldName,
+    sortOrder,
+    getAllTasks,
+    setSortFieldName,
+  } = useContext(GlobalContext);
 
   useEffect(() => {
     getAllTasks(authenticatedUser.id);

@@ -1,11 +1,22 @@
 import { createContext } from "react";
 
+import ActionAuth from "./actions/ActionAuth";
 import ActionPage from "./actions/ActionPage";
 import ActionTask from "./actions/ActionTask";
 
 const GlobalContext = createContext({});
 
 export const GlobalProvider = ({ children }) => {
+  const {
+    isAuthenticated,
+    authenticatedUser,
+    error,
+    message,
+    logout,
+    signIn,
+    signInFromCache,
+  } = ActionAuth();
+
   const {
     currentPage,
     limitPage,
@@ -36,6 +47,15 @@ export const GlobalProvider = ({ children }) => {
   return (
     <GlobalContext.Provider
       value={{
+        // Reducer Auth
+        isAuthenticated,
+        authenticatedUser,
+        error,
+        message,
+        logout,
+        signIn,
+        signInFromCache,
+
         // ReducerPage
         currentPage,
         limitPage,

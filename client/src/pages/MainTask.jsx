@@ -1,7 +1,6 @@
 import React, { useState, useContext, useEffect } from "react";
 
 import GlobalContext from "../context/GlobalProvider";
-import AuthContext from "../context/AuthProvider";
 
 import Modal from "../containers/Modal";
 import NewTask from "../containers/NewTask";
@@ -12,6 +11,8 @@ import Footer from "../components/Footer";
 
 function MainTask() {
   const {
+    authenticatedUser,
+    logout,
     displayPeriodName,
     getAllTasks,
     getPriorities,
@@ -19,8 +20,6 @@ function MainTask() {
   } = useContext(GlobalContext);
 
   const [modal, setModal] = useState(false);
-
-  const { authenticatedUser, logout } = useContext(AuthContext);
 
   useEffect(() => {
     getPriorities();

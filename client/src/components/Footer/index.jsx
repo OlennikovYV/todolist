@@ -9,7 +9,8 @@ import useCheckServerConnection from "../../hooks/useCheckServerConnection";
 import { fioFormat } from "../../utils/formatField";
 
 function Footer() {
-  const { authenticatedUser, taskList } = useContext(GlobalContext);
+  const { authenticatedUser, countAllTask, taskList } =
+    useContext(GlobalContext);
 
   const isOnline = useCheckServerConnection();
 
@@ -18,7 +19,7 @@ function Footer() {
       <StatusNetwork isOnline={isOnline} />
 
       <div className='count-task'>
-        <span>{`Всего зачач: ${taskList.length}`}</span>
+        <span>{`Всего задач: ${countAllTask}`}</span>
       </div>
 
       <div className='account'>

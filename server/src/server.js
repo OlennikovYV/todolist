@@ -14,8 +14,8 @@ const app = express();
 sequelize.sync({ force: true }).then(() => initData());
 
 app.use(cors());
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 app.use("/public", express.static(path.join(__dirname, "files")));
 
 // Монтирование маршрутов

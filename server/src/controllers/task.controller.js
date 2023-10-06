@@ -56,7 +56,7 @@ exports.taskList = async (req, res) => {
 
     if (rows && !rows.length) {
       return res.status(200).json({
-        countTask: count,
+        countAllTask: count,
         messageTask: "Нет задач для выполнения",
         successTask: true,
         taskList: rows,
@@ -64,7 +64,7 @@ exports.taskList = async (req, res) => {
     }
 
     res.status(200).json({
-      countTask: count,
+      countAllTask: count,
       messageTask: "Список задач успешно получен",
       successTask: true,
       taskList: rows,

@@ -10,6 +10,7 @@ import {
 } from "../constants";
 
 export const initialStateTask = {
+  countAllTask: 0,
   displayPeriodName: "all",
   errorTask: null,
   loadingTask: false,
@@ -25,6 +26,7 @@ export const ReducerTask = (state, action) => {
     case GET_ALL_TASKS:
       return {
         ...state,
+        countAllTask: action.payload.countAllTask,
         successTask: action.payload.success,
         taskList: action.payload.taskList,
         messageTask: action.payload.messageTask,
@@ -33,7 +35,6 @@ export const ReducerTask = (state, action) => {
       return {
         ...state,
         successTask: action.payload.success,
-        taskList: [...state.taskList, action.payload.record],
         messageTask: action.payload.messageTask,
       };
     case UPDATE_TASK:

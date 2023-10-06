@@ -27,6 +27,7 @@ export const GlobalProvider = ({ children }) => {
   } = ActionPage();
 
   const {
+    countAllTask,
     displayPeriodName,
     errorTask,
     loadingTask,
@@ -65,6 +66,7 @@ export const GlobalProvider = ({ children }) => {
         setTotalPage,
 
         // ReducerTask
+        countAllTask,
         displayPeriodName,
         errorTask,
         loadingTask,

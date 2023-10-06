@@ -2,7 +2,7 @@ import { SET_CURRENT_PAGE, SET_LIMIT_PAGE, SET_TOTAL_PAGE } from "../constants";
 
 export const initialStatePage = {
   currentPage: 1,
-  limitPage: 50,
+  limitPage: 10,
   totalPage: 0,
 };
 

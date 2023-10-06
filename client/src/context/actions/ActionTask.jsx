@@ -36,10 +36,11 @@ const ActionTask = () => {
       const response = await axios.get(`http://localhost:3001/api/task/`, {
         params,
       });
-
+      console.log(response.data);
       dispatch({
         type: GET_ALL_TASKS,
         payload: {
+          countAllTask: response.data.countAllTask,
           messageTask: response.data.messageTask,
           successTask: response.data.successTask,
           taskList: response.data.taskList,
@@ -73,7 +74,7 @@ const ActionTask = () => {
         type: ADD_TASK,
         payload: {
           messageTask: response.data.messageTask,
-          record: response.data.record,
+          // record: response.data.record,
           successTask: response.data.successTask,
         },
       });
@@ -180,6 +181,7 @@ const ActionTask = () => {
   }
 
   return {
+    countAllTask: state.countAllTask,
     displayPeriodName: state.displayPeriodName,
     errorTask: state.error,
     loadingTask: state.loadingTask,

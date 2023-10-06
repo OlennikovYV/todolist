@@ -22,14 +22,14 @@ function NewTask({ onClose }) {
   const responsibleidRef = useRef();
   const statusRef = useRef();
 
-  const { authenticatedUser, prioritiesList, addTask } =
+  const { authenticatedUser, prioritiesList, addTask, getAllTasks } =
     useContext(globalContext);
 
   const { data, loading, error } = useAxiosGet(
     `http://localhost:3001/api/user/responsible`
   );
 
-  function handleSubmit(event) {
+  async function handleSubmit(event) {
     event.preventDefault();
 
     let data;
@@ -50,7 +50,8 @@ function NewTask({ onClose }) {
       responsibleid: responsibleidRef.current.value,
     };
 
-    addTask(data);
+    await addTask(data);
+    await getAllTasks(authenticatedUser.id);
 
     onClose();
   }
